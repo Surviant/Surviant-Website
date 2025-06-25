@@ -110,20 +110,20 @@ export default function ContactSection() {
     {
       icon: <Mail className="h-6 w-6" />,
       title: "Email",
-      details: "hello@surviant.com",
-      link: "mailto:hello@surviant.com",
+      details: "Inquiries@surviantllc.com",
+      link: "mailto:Inquiries@surviantllc.com",
     },
     {
       icon: <Phone className="h-6 w-6" />,
       title: "Phone",
-      details: "+1 (555) 123-4567",
-      link: "tel:+15551234567",
+      details: "+1 (510) 513-9544",
+      link: "tel:+15105139544",
     },
     {
       icon: <MapPin className="h-6 w-6" />,
       title: "Office",
-      details: "123 Innovation Drive, San Francisco, CA",
-      link: "https://maps.google.com/?q=123+Innovation+Drive,+San+Francisco,+CA",
+      details: "1148 Greenbrook Drive, Danville, CA",
+      link: "https://maps.google.com/?q=1148+Greenbrook+Drive,+Danville,+CA",
     },
   ]
 

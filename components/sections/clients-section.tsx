@@ -89,24 +89,7 @@ export default function ClientsSection() {
 
         {/* Client Logos */}
         <div className="mb-20 overflow-hidden">
-          <div className="flex flex-wrap justify-center gap-8">
-            {clients.map((client, index) => (
-              <motion.div
-                key={index}
-                className="w-32 h-16 relative bg-gray-800 rounded flex items-center justify-center overflow-hidden"
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <Image
-                  src={client.logo || "/placeholder.svg"}
-                  alt={`${client.name} logo`}
-                  fill
-                  className="object-contain p-2"
-                />
-              </motion.div>
-            ))}
-          </div>
+          
         </div>
 
         {/* Testimonials */}
