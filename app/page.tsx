@@ -4,10 +4,8 @@ import { useState, useEffect, useRef } from "react"
 import Navigation from "@/components/navigation"
 import HomeSection from "@/components/sections/home-section"
 import ServicesSection from "@/components/services-section"
-import WorkSection from "@/components/sections/work-section"
 import AboutSection from "@/components/sections/about-section"
 import ContactSection from "@/components/sections/contact-section"
-import ClientsSection from "@/components/sections/clients-section"
 import TechnologiesSection from "@/components/sections/technologies-section"
 import NoiseBackground from "@/components/ui/noise-background"
 import ParticleBackground from "@/components/ui/particle-background"
@@ -24,8 +22,6 @@ export default function Home() {
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({
     home: null,
     services: null,
-    work: null,
-    clients: null,
     technologies: null,
     about: null,
     contact: null,
@@ -34,8 +30,6 @@ export default function Home() {
   const sections = [
     { id: "home", label: "HOME" },
     { id: "services", label: "SERVICES" },
-    { id: "work", label: "WORK" },
-    { id: "clients", label: "CLIENTS" },
     { id: "technologies", label: "TECHNOLOGIES" },
     { id: "about", label: "ABOUT" },
     { id: "contact", label: "CONTACT" },
@@ -197,16 +191,6 @@ export default function Home() {
           {/* Services Section */}
           <div ref={(el) => (sectionRefs.current.services = el)} className="min-h-screen">
             <ServicesSection />
-          </div>
-
-          {/* Work Section */}
-          <div ref={(el) => (sectionRefs.current.work = el)} className="min-h-screen">
-            <WorkSection />
-          </div>
-
-          {/* Clients Section */}
-          <div ref={(el) => (sectionRefs.current.clients = el)} className="min-h-screen">
-            <ClientsSection />
           </div>
 
           {/* Technologies Section */}

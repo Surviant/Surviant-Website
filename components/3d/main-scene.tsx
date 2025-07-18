@@ -147,8 +147,6 @@ function SectionElements({ activeSection, scrollY }: { activeSection: string; sc
   // Section-specific 3D elements
   const homeGroup = useRef<THREE.Group>(null)
   const servicesGroup = useRef<THREE.Group>(null)
-  const workGroup = useRef<THREE.Group>(null)
-  const clientsGroup = useRef<THREE.Group>(null)
   const technologiesGroup = useRef<THREE.Group>(null)
   const aboutGroup = useRef<THREE.Group>(null)
   const contactGroup = useRef<THREE.Group>(null)
@@ -157,8 +155,6 @@ function SectionElements({ activeSection, scrollY }: { activeSection: string; sc
   useEffect(() => {
     if (homeGroup.current) homeGroup.current.visible = activeSection === "home"
     if (servicesGroup.current) servicesGroup.current.visible = activeSection === "services"
-    if (workGroup.current) workGroup.current.visible = activeSection === "work"
-    if (clientsGroup.current) clientsGroup.current.visible = activeSection === "clients"
     if (technologiesGroup.current) technologiesGroup.current.visible = activeSection === "technologies"
     if (aboutGroup.current) aboutGroup.current.visible = activeSection === "about"
     if (contactGroup.current) contactGroup.current.visible = activeSection === "contact"
@@ -175,10 +171,6 @@ function SectionElements({ activeSection, scrollY }: { activeSection: string; sc
 
     if (servicesGroup.current) {
       servicesGroup.current.rotation.z = Math.sin(time * 0.1) * 0.1
-    }
-
-    if (workGroup.current) {
-      workGroup.current.rotation.x = Math.sin(time * 0.15) * 0.1
     }
   })
 
@@ -249,81 +241,7 @@ function SectionElements({ activeSection, scrollY }: { activeSection: string; sc
         </group>
       </group>
 
-      <group ref={workGroup} position={[0, -20, -5]} visible={activeSection === "work"}>
-        {/* Work section 3D elements */}
-        <Float speed={1.2} rotationIntensity={0.5} floatIntensity={0.5}>
-          <Sphere args={[3, 32, 32]} position={[0, 0, 0]}>
-            <MeshTransmissionMaterial
-              backside
-              backsideThickness={0.5}
-              thickness={0.5}
-              distortionScale={0.2}
-              temporalDistortion={0.2}
-              transmissionSampler
-              resolution={256}
-              color="#ec4899"
-            />
-          </Sphere>
-        </Float>
-
-        <group position={[0, 0, 0]}>
-          {Array.from({ length: 12 }).map((_, i) => {
-            const angle = (i / 12) * Math.PI * 2
-            const radius = 5
-            const x = Math.cos(angle) * radius
-            const y = Math.sin(angle) * radius
-
-            return (
-              <Float key={i} speed={0.8} rotationIntensity={0.4} floatIntensity={0.4} position={[x, y, 0]}>
-                <Torus args={[0.5, 0.2, 16, 32]}>
-                  <meshStandardMaterial
-                    color={new THREE.Color().setHSL(i * 0.08 + 0.2, 0.8, 0.5)}
-                    emissive={new THREE.Color().setHSL(i * 0.08 + 0.2, 0.8, 0.2)}
-                    emissiveIntensity={0.5}
-                    metalness={0.8}
-                    roughness={0.2}
-                  />
-                </Torus>
-              </Float>
-            )
-          })}
-        </group>
-      </group>
-
-      <group ref={clientsGroup} position={[0, -30, -5]} visible={activeSection === "clients"}>
-        {/* Clients section 3D elements */}
-        <Float speed={1} rotationIntensity={0.3} floatIntensity={0.3}>
-          <Torus args={[3, 1, 16, 100]} position={[0, 0, 0]} rotation={[Math.PI / 4, Math.PI / 6, 0]}>
-            <MeshDistortMaterial color="#3b82f6" speed={1.5} distort={0.2} metalness={0.9} roughness={0.1} />
-          </Torus>
-        </Float>
-
-        <group position={[0, 0, 0]}>
-          {Array.from({ length: 10 }).map((_, i) => {
-            const angle = (i / 10) * Math.PI * 2
-            const radius = 6
-            const x = Math.cos(angle) * radius
-            const y = Math.sin(angle) * radius * 0.5
-            const z = Math.sin(angle * 2) * 2
-
-            return (
-              <Float key={i} speed={1.5} rotationIntensity={0.7} floatIntensity={0.7} position={[x, y, z]}>
-                <Sphere args={[0.3, 16, 16]}>
-                  <MeshWobbleMaterial
-                    color={new THREE.Color().setHSL(i * 0.1 + 0.6, 0.8, 0.5)}
-                    factor={0.3}
-                    speed={0.6}
-                    metalness={0.8}
-                    roughness={0.2}
-                  />
-                </Sphere>
-              </Float>
-            )
-          })}
-        </group>
-      </group>
-
-      <group ref={technologiesGroup} position={[0, -40, -5]} visible={activeSection === "technologies"}>
+      <group ref={technologiesGroup} position={[0, -20, -5]} visible={activeSection === "technologies"}>
         {/* Technologies section 3D elements */}
         <Float speed={0.8} rotationIntensity={0.2} floatIntensity={0.2}>
           <Box args={[4, 4, 4]} position={[0, 0, 0]} rotation={[Math.PI / 4, Math.PI / 4, 0]}>
@@ -367,7 +285,7 @@ function SectionElements({ activeSection, scrollY }: { activeSection: string; sc
         </group>
       </group>
 
-      <group ref={aboutGroup} position={[0, -50, -5]} visible={activeSection === "about"}>
+      <group ref={aboutGroup} position={[0, -30, -5]} visible={activeSection === "about"}>
         {/* About section 3D elements */}
         <Float speed={0.6} rotationIntensity={0.2} floatIntensity={0.2}>
           <Dodecahedron args={[3, 0]} position={[0, 0, 0]}>
@@ -408,7 +326,7 @@ function SectionElements({ activeSection, scrollY }: { activeSection: string; sc
         </group>
       </group>
 
-      <group ref={contactGroup} position={[0, -60, -5]} visible={activeSection === "contact"}>
+      <group ref={contactGroup} position={[0, -40, -5]} visible={activeSection === "contact"}>
         {/* Contact section 3D elements */}
         <Float speed={1.3} rotationIntensity={0.6} floatIntensity={0.6}>
           <RoundedBox args={[4, 4, 4]} radius={0.5} position={[0, 0, 0]}>

@@ -7,9 +7,9 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Surviant Technologies | Digital Innovation Studio",
+  title: "Surviant Technologies | Intelligent Solutions",
   description:
-    "Transforming ideas into immersive digital experiences. We build exceptional web applications from wireframes to deployment.",
+    "Specializing in creating intelligent systems, from custom AI models to autonomous agents. We harness the power of artificial intelligence to drive innovation and business growth.",
   generator: "v0.dev",
   viewport: "width=device-width, initial-scale=1, maximum-scale=1",
 }

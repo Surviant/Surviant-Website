@@ -67,28 +67,22 @@ export default function HomeSection({ onExplore }: HomeSectionProps) {
         animate={controls}
         className="max-w-5xl mx-auto text-center z-10"
       >
-        <motion.div variants={itemVariants} className="mb-6">
-          <span className="inline-block py-1 px-3 border border-cyan-500/30 rounded-full text-cyan-500 text-xs tracking-wider mb-6">
-            DIGITAL INNOVATION STUDIO
-          </span>
-        </motion.div>
-
         <motion.h1
           variants={itemVariants}
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight"
+          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight pt-12"
         >
-          <span className="block">We Create</span>
+          <span className="block">We Build</span>
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600">
-            Immersive Digital Experiences
+            Intelligent Digital Solutions
           </span>
         </motion.h1>
 
         <motion.p
           variants={itemVariants}
-          className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-10"
+          className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-10 text-balance"
         >
-          Transforming ideas into exceptional digital products. From custom web applications to immersive 3D
-          experiences, we build technology that drives innovation and business growth.
+          We architect the future of digital interaction by building intelligent systems. We craft custom AI models and
+          autonomous agents that harness the power of artificial intelligence to drive innovation and business growth.
         </motion.p>
 
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -97,14 +91,14 @@ export default function HomeSection({ onExplore }: HomeSectionProps) {
             onClick={onExplore}
             className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white border-0 rounded-full px-6 sm:px-8"
           >
-            Explore Our Work
+            Explore Our AI Solutions
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
 
           <Button
             size={isMobile ? "default" : "lg"}
             variant="outline"
-            className="border-gray-700 text-white hover:bg-white/10 rounded-full px-6 sm:px-8"
+            className="border-gray-700 text-white hover:bg-white/10 rounded-full px-6 sm:px-8 bg-transparent"
           >
             Get in Touch
           </Button>

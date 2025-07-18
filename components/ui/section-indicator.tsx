@@ -12,8 +12,13 @@ export default function SectionIndicator({ activeSection, sections = [], onSecti
   // Find the index of the active section with proper error handling
   const activeSectionIndex = sections.length > 0 ? sections.findIndex((section) => section.id === activeSection) : 0
 
-  // If sections array is empty, don't render anything
-  if (sections.length === 0) return null
+  // Add this check at the beginning of the component
+  if (sections.length === 0) {
+    return null
+  }
+
+  // Ensure activeSectionIndex is not -1 before using it in calculations
+  const progressHeight = activeSectionIndex > -1 ? (activeSectionIndex / (sections.length - 1)) * 100 : 0
 
   return (
     <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-40 hidden lg:flex flex-col items-center space-y-4">
@@ -47,7 +52,7 @@ export default function SectionIndicator({ activeSection, sections = [], onSecti
         className="w-1 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full"
         initial={{ height: 0 }}
         animate={{
-          height: `${(activeSectionIndex / Math.max(1, sections.length - 1)) * 100}%`,
+          height: `${progressHeight}%`,
         }}
         transition={{ duration: 0.5 }}
       />

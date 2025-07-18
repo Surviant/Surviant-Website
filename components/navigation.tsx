@@ -30,8 +30,6 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
   const navItems = [
     { id: "home", label: "HOME" },
     { id: "services", label: "SERVICES" },
-    { id: "work", label: "WORK" },
-    { id: "clients", label: "CLIENTS" },
     { id: "technologies", label: "TECH" },
     { id: "about", label: "ABOUT" },
     { id: "contact", label: "CONTACT" },
@@ -95,7 +93,7 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
         transition={{ duration: 0.5, ease: "easeOut" }}
         role="banner"
       >
-        <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
+        <div className="container mx-auto px-4 md:px-6 flex justify-between items-center relative">
           <motion.div
             className="text-xl font-bold tracking-wider cursor-pointer"
             onClick={() => {
@@ -120,7 +118,11 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
           </motion.div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8" role="navigation" aria-label="Main navigation">
+          <nav
+            className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 space-x-8"
+            role="navigation"
+            aria-label="Main navigation"
+          >
             {navItems.map((item) => (
               <motion.button
                 key={item.id}
@@ -214,7 +216,7 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
                     whileTap={{ scale: 0.9 }}
                     aria-label="GitHub"
                   >
-                    <Button variant="outline" size="icon" className="rounded-full border-gray-700">
+                    <Button variant="outline" size="icon" className="rounded-full border-gray-700 bg-transparent">
                       <Github className="h-5 w-5" />
                     </Button>
                   </motion.a>
@@ -226,7 +228,7 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
                     whileTap={{ scale: 0.9 }}
                     aria-label="Twitter"
                   >
-                    <Button variant="outline" size="icon" className="rounded-full border-gray-700">
+                    <Button variant="outline" size="icon" className="rounded-full border-gray-700 bg-transparent">
                       <Twitter className="h-5 w-5" />
                     </Button>
                   </motion.a>
@@ -238,7 +240,7 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
                     whileTap={{ scale: 0.9 }}
                     aria-label="LinkedIn"
                   >
-                    <Button variant="outline" size="icon" className="rounded-full border-gray-700">
+                    <Button variant="outline" size="icon" className="rounded-full border-gray-700 bg-transparent">
                       <Linkedin className="h-5 w-5" />
                     </Button>
                   </motion.a>
