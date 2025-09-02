@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -11,7 +11,12 @@ export const metadata: Metadata = {
   description:
     "Specializing in creating intelligent systems, from custom AI models to autonomous agents. We harness the power of artificial intelligence to drive innovation and business growth.",
   generator: "v0.dev",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=1",
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 }
 
 export default function RootLayout({

@@ -1,16 +1,7 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import dynamic from "next/dynamic"
-import L from "leaflet"
-import "leaflet/dist/leaflet.css"
-
-// Dynamically import react-leaflet components to avoid SSR issues
-const MapContainer = dynamic(() => import("react-leaflet").then((mod) => mod.MapContainer), { ssr: false })
-const TileLayer = dynamic(() => import("react-leaflet").then((mod) => mod.TileLayer), { ssr: false })
-const Marker = dynamic(() => import("react-leaflet").then((mod) => mod.Marker), { ssr: false })
-const Popup = dynamic(() => import("react-leaflet").then((mod) => mod.Popup), { ssr: false })
-const Polyline = dynamic(() => import("react-leaflet").then((mod) => mod.Polyline), { ssr: false })
 
 interface LocationData {
   name: string
@@ -44,168 +35,20 @@ const locations: LocationData[] = [
   },
 ]
 
-// Custom animated marker component
-const AnimatedMarker = ({ location, isActive }: { location: LocationData; isActive: boolean }) => {
-  const markerRef = useRef<L.Marker>(null)
-
-  useEffect(() => {
-    if (markerRef.current) {
-      const marker = markerRef.current
-      const element = marker.getElement()
-      if (element) {
-        element.style.filter = isActive ? "drop-shadow(0 0 20px " + location.color + ")" : "none"
-        element.style.transform = isActive ? "scale(1.2)" : "scale(1)"
-        element.style.transition = "all 0.3s ease"
-      }
-    }
-  }, [isActive, location.color])
-
-  // Create custom icon
-  const customIcon = L.divIcon({
-    html: `
-      <div style="
-        width: 40px;
-        height: 40px;
-        background: ${location.color};
-        border: 3px solid white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 18px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        ${isActive ? `animation: pulse 2s infinite; box-shadow: 0 0 20px ${location.color};` : ""}
-      ">
-        ${location.flag}
-      </div>
-      <style>
-        @keyframes pulse {
-          0% { transform: scale(1); }
-          50% { transform: scale(1.1); }
-          100% { transform: scale(1); }
-        }
-      </style>
-    `,
-    className: "custom-marker",
-    iconSize: [40, 40],
-    iconAnchor: [20, 20],
-  })
-
-  return (
-    <Marker ref={markerRef} position={location.coords} icon={customIcon}>
-      <Popup>
-        <div className="p-2">
-          <h3 className="font-bold text-lg mb-2">
-            {location.flag} {location.name}
-          </h3>
-          <p className="text-sm text-gray-600 mb-2">Status: {isActive ? "🟢 Active Development" : "🔴 Off Hours"}</p>
-          <p className="text-xs text-gray-500">{location.activities}</p>
-        </div>
-      </Popup>
-    </Marker>
-  )
-}
-
-// Animated connection line component
-const AnimatedConnection = () => {
-  const [animationOffset, setAnimationOffset] = useState(0)
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setAnimationOffset((prev) => (prev + 1) % 20)
-    }, 100)
-    return () => clearInterval(interval)
-  }, [])
-
-  const connectionPath: [number, number][] = [
-    [37.7749, -122.4194], // California
-    [12.9716, 77.5946], // Bangalore
-  ]
-
-  return (
-    <Polyline
-      positions={connectionPath}
-      pathOptions={{
-        color: "#f39c12",
-        weight: 3,
-        opacity: 0.8,
-        dashArray: "10, 10",
-        dashOffset: animationOffset.toString(),
-      }}
-    />
-  )
-}
-
-// Particle animation overlay
-const ParticleOverlay = () => {
-  const [particles, setParticles] = useState<Array<{ id: number; lat: number; lng: number; progress: number }>>([])
-
-  useEffect(() => {
-    // Initialize particles
-    const initialParticles = Array.from({ length: 8 }, (_, i) => ({
-      id: i,
-      lat: 37.7749,
-      lng: -122.4194,
-      progress: Math.random(),
-    }))
-    setParticles(initialParticles)
-
-    const interval = setInterval(() => {
-      setParticles((prev) =>
-        prev.map((particle) => {
-          let newProgress = particle.progress + 0.01
-          if (newProgress > 1) newProgress = 0
-
-          // Interpolate between California and Bangalore
-          const startLat = 37.7749
-          const startLng = -122.4194
-          const endLat = 12.9716
-          const endLng = 77.5946
-
-          const lat = startLat + (endLat - startLat) * newProgress
-          const lng = startLng + (endLng - startLng) * newProgress
-
-          return {
-            ...particle,
-            lat,
-            lng,
-            progress: newProgress,
-          }
-        }),
-      )
-    }, 50)
-
-    return () => clearInterval(interval)
-  }, [])
-
-  return (
-    <>
-      {particles.map((particle) => {
-        const particleIcon = L.divIcon({
-          html: `<div style="
-            width: 6px;
-            height: 6px;
-            background: #f39c12;
-            border-radius: 50%;
-            box-shadow: 0 0 10px #f39c12;
-            opacity: ${Math.sin(particle.progress * Math.PI)};
-          "></div>`,
-          className: "particle-marker",
-          iconSize: [6, 6],
-          iconAnchor: [3, 3],
-        })
-
-        return <Marker key={particle.id} position={[particle.lat, particle.lng]} icon={particleIcon} />
-      })}
-    </>
-  )
-}
+// Dynamically import the map component with no SSR
+const DynamicMap = dynamic(() => import("./leaflet-map"), {
+  ssr: false,
+  loading: () => (
+    <div className="flex items-center justify-center h-[600px] bg-[#0a0a23] rounded-lg border border-gray-800">
+      <div className="text-white">Loading map...</div>
+    </div>
+  ),
+})
 
 export default function WorldMapVisualization({ className }: WorldMapVisualizationProps) {
   const [currentTimes, setCurrentTimes] = useState<Record<string, string>>({})
   const [isPlaying, setIsPlaying] = useState(true)
   const [speed, setSpeed] = useState(1)
-  const mapRef = useRef<L.Map>(null)
 
   // Check if location is in working hours
   const isWorkingHours = (timezone: string): boolean => {
@@ -248,16 +91,6 @@ export default function WorldMapVisualization({ className }: WorldMapVisualizati
     return () => clearInterval(interval)
   }, [])
 
-  // Fix for Leaflet default markers
-  useEffect(() => {
-    delete (L.Icon.Default.prototype as any)._getIconUrl
-    L.Icon.Default.mergeOptions({
-      iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png",
-      iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
-      shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png",
-    })
-  }, [])
-
   return (
     <div className={`relative w-full ${className}`}>
       {/* Header */}
@@ -272,32 +105,8 @@ export default function WorldMapVisualization({ className }: WorldMapVisualizati
       </div>
 
       {/* Map Container */}
-      <div className="relative rounded-lg overflow-hidden border border-gray-800" style={{ height: "600px" }}>
-        <MapContainer
-          center={[25, 0]}
-          zoom={2}
-          style={{ height: "100%", width: "100%" }}
-          zoomControl={false}
-          attributionControl={false}
-          ref={mapRef}
-        >
-          {/* Dark theme tile layer */}
-          <TileLayer
-            url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-            attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
-          />
-
-          {/* Location markers */}
-          {locations.map((location) => (
-            <AnimatedMarker key={location.name} location={location} isActive={isWorkingHours(location.timezone)} />
-          ))}
-
-          {/* Animated connection line */}
-          <AnimatedConnection />
-
-          {/* Particle overlay */}
-          {isPlaying && <ParticleOverlay />}
-        </MapContainer>
+      <div className="relative">
+        <DynamicMap locations={locations} isWorkingHours={isWorkingHours} isPlaying={isPlaying} speed={speed} />
 
         {/* Controls */}
         <div className="absolute top-4 right-4 flex gap-2 z-[1000]">
