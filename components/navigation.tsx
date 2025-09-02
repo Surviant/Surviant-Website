@@ -5,6 +5,7 @@ import { motion, AnimatePresence, Variants } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Github, Twitter, Linkedin, Menu, X, ChevronRight } from "lucide-react"
+import Image from "next/image"
 import { useMediaQuery } from "@/hooks/use-media-query"
 
 interface NavigationProps {
@@ -87,7 +88,7 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
       <motion.header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          scrolled || isMenuOpen ? "py-3 backdrop-blur-md bg-black/50" : "py-5",
+          scrolled || isMenuOpen ? "py-5 backdrop-blur-md bg-black/50" : "py-7",
         )}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
@@ -96,7 +97,7 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
       >
         <div className="container mx-auto px-4 md:px-6 flex justify-between items-center relative">
           <motion.div
-            className="text-xl font-bold tracking-wider cursor-pointer"
+            className="cursor-pointer"
             onClick={() => {
               onSectionChange("home")
               if (isMenuOpen) setIsMenuOpen(false)
@@ -114,13 +115,19 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
               }
             }}
           >
-            <span className="text-white">SURVI</span>
-            <span className="text-cyan-500">ANT</span>
+            <Image 
+              src="/surviant-logo.png" 
+              alt="Surviant Logo" 
+              width={240} 
+              height={240} 
+              className="h-24 w-auto object-contain" 
+              priority
+            />
           </motion.div>
 
           {/* Desktop Navigation */}
           <nav
-            className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 space-x-8"
+            className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 space-x-14"
             role="navigation"
             aria-label="Main navigation"
           >
@@ -129,7 +136,7 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
                 key={item.id}
                 onClick={() => onSectionChange(item.id)}
                 className={cn(
-                  "text-sm font-medium tracking-wider transition-colors relative py-2 px-1",
+                  "text-base font-bold tracking-wider transition-colors relative py-3 px-3 uppercase",
                   activeSection === item.id ? "text-white" : "text-gray-400 hover:text-white",
                 )}
                 whileHover={{ scale: 1.05 }}
