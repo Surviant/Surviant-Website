@@ -172,8 +172,9 @@ export default function TechnologiesSection() {
               {[
                 {
                   number: "01",
-                  title: "Discovery & Strategy",
-                  description: "We analyze your business needs and create a comprehensive digital strategy.",
+                  title: "Discovery & Strategic Planning",
+                  description:
+                    "We analyze your business needs, assess market fit, and create a comprehensive digital strategy and development roadmap.",
                   color: "from-cyan-500 to-blue-500",
                 },
                 {

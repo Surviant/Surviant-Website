@@ -210,6 +210,29 @@ export default function ContactSection() {
           </motion.div>
 
           <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mb-8 p-6 rounded-xl border border-gray-800 backdrop-blur-sm bg-black/20"
+          >
+            <h3 className="text-xl font-bold mb-4">Flexible Engagement Options</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="text-center">
+                <div className="text-cyan-500 font-medium mb-1">Payment Methods</div>
+                <div className="text-sm text-gray-400">Multiple options accepted</div>
+              </div>
+              <div className="text-center">
+                <div className="text-cyan-500 font-medium mb-1">Payment Schedules</div>
+                <div className="text-sm text-gray-400">Staggered payments available</div>
+              </div>
+              <div className="text-center">
+                <div className="text-cyan-500 font-medium mb-1">Equity Partnerships</div>
+                <div className="text-sm text-gray-400">For qualified startups</div>
+              </div>
+            </div>
+          </motion.div>
+
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}

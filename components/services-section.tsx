@@ -2,7 +2,20 @@
 
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
-import { Code, Layers, Database, Smartphone, Palette, Cpu, LineChart, BrainCircuit } from "lucide-react"
+import {
+  Code,
+  Layers,
+  Database,
+  Smartphone,
+  Palette,
+  Cpu,
+  LineChart,
+  BrainCircuit,
+  TrendingUp,
+  Cloud,
+  Zap,
+  Shield,
+} from "lucide-react"
 import { cn } from "@/lib/utils"
 import InteractiveCard from "@/components/ui/interactive-card"
 
@@ -11,6 +24,13 @@ export default function ServicesSection() {
   const isInView = useInView(ref, { once: true, amount: 0.2 })
 
   const services = [
+    {
+      icon: <TrendingUp className="h-6 w-6" />,
+      title: "Startup Strategy & Consulting",
+      description:
+        "Market validation, product-market fit assessment, funding roadmaps, and grant research to turn your idea into a scalable business.",
+      color: "from-emerald-500 to-teal-500",
+    },
     {
       icon: <Code className="h-6 w-6" />,
       title: "Frontend Development",
@@ -36,9 +56,31 @@ export default function ServicesSection() {
       color: "from-green-500 to-emerald-500",
     },
     {
+      icon: <Cloud className="h-6 w-6" />,
+      title: "Cloud & DevOps Solutions",
+      description:
+        "Scalable cloud infrastructure, CI/CD pipelines, containerization, and automated deployment systems for reliable, high-performance applications.",
+      color: "from-sky-500 to-blue-500",
+    },
+    {
+      icon: <Zap className="h-6 w-6" />,
+      title: "API Development & Integration",
+      description:
+        "Custom API development, third-party integrations, microservices architecture, and seamless system connectivity for complex digital ecosystems.",
+      color: "from-yellow-500 to-orange-500",
+    },
+    {
+      icon: <Shield className="h-6 w-6" />,
+      title: "Quality Assurance & Testing",
+      description:
+        "Comprehensive testing strategies, automated test suites, performance testing, and quality assurance to ensure robust, bug-free applications.",
+      color: "from-indigo-500 to-purple-500",
+    },
+    {
       icon: <Cpu className="h-6 w-6" />,
       title: "AI Solutions & Development",
-      description: "Building custom AI models, large language model applications, and intelligent automation systems.",
+      description:
+        "Custom AI models, large language model applications, and intelligent automation systems as part of your complete digital solution.",
       color: "from-amber-500 to-orange-500",
     },
     {
@@ -50,7 +92,8 @@ export default function ServicesSection() {
     {
       icon: <Layers className="h-6 w-6" />,
       title: "Full-Stack Solutions",
-      description: "End-to-end development from concept to deployment with comprehensive testing.",
+      description:
+        "End-to-end development from concept to deployment with comprehensive testing and enterprise-grade architecture.",
       color: "from-blue-500 to-indigo-500",
     },
     {

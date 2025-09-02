@@ -73,7 +73,7 @@ export default function HomeSection({ onExplore }: HomeSectionProps) {
         >
           <span className="block">We Build</span>
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600">
-            Intelligent Digital Solutions
+            Complete Digital Solutions
           </span>
         </motion.h1>
 
@@ -81,8 +81,8 @@ export default function HomeSection({ onExplore }: HomeSectionProps) {
           variants={itemVariants}
           className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-10 text-balance"
         >
-          We architect the future of digital interaction by building intelligent systems. We craft custom AI models and
-          autonomous agents that harness the power of artificial intelligence to drive innovation and business growth.
+          From startup strategy to AI-powered applications, we transform your digital vision into reality with our
+          global team's 24/7 development coverage.
         </motion.p>
 
         <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -91,7 +91,7 @@ export default function HomeSection({ onExplore }: HomeSectionProps) {
             onClick={onExplore}
             className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white border-0 rounded-full px-6 sm:px-8"
           >
-            Explore Our AI Solutions
+            View Our Services
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
 
@@ -100,7 +100,7 @@ export default function HomeSection({ onExplore }: HomeSectionProps) {
             variant="outline"
             className="border-gray-700 text-white hover:bg-white/10 rounded-full px-6 sm:px-8 bg-transparent"
           >
-            Get in Touch
+            Start Your Project
           </Button>
         </motion.div>
       </motion.div>

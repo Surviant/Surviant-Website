@@ -7,6 +7,8 @@ import ServicesSection from "@/components/services-section"
 import AboutSection from "@/components/sections/about-section"
 import ContactSection from "@/components/sections/contact-section"
 import TechnologiesSection from "@/components/sections/technologies-section"
+import GlobalCoverageSection from "@/components/sections/global-coverage-section"
+import PortfolioPreviewSection from "@/components/sections/portfolio-preview-section"
 import NoiseBackground from "@/components/ui/noise-background"
 import ParticleBackground from "@/components/ui/particle-background"
 import LoadingScreen from "@/components/loading-screen"
@@ -22,7 +24,9 @@ export default function Home() {
   const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({
     home: null,
     services: null,
+    coverage: null,
     technologies: null,
+    portfolio: null,
     about: null,
     contact: null,
   })
@@ -30,7 +34,9 @@ export default function Home() {
   const sections = [
     { id: "home", label: "HOME" },
     { id: "services", label: "SERVICES" },
-    { id: "technologies", label: "TECHNOLOGIES" },
+    { id: "coverage", label: "GLOBAL" },
+    { id: "technologies", label: "TECH" },
+    { id: "portfolio", label: "WORK" },
     { id: "about", label: "ABOUT" },
     { id: "contact", label: "CONTACT" },
   ]
@@ -153,7 +159,7 @@ export default function Home() {
   }
 
   return (
-    <main className="relative w-full h-screen overflow-hidden bg-black text-white">
+    <main className="relative w-full h-screen bg-black text-white">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <div className="w-full h-full bg-gradient-to-b from-black to-gray-900">
@@ -170,7 +176,7 @@ export default function Home() {
       <NoiseBackground opacity={0.03} />
 
       {/* Content Overlay */}
-      <div className="absolute inset-0 z-20 overflow-hidden">
+      <div className="absolute inset-0 z-20 flex flex-col">
         <Navigation
           activeSection={activeSection}
           onSectionChange={handleSectionChange}
@@ -181,32 +187,43 @@ export default function Home() {
         {/* Continuous scrolling container with all sections */}
         <div
           ref={contentRef}
-          className={cn("absolute inset-0 pt-24 overflow-auto scroll-smooth", isMenuOpen && "pointer-events-none")}
+          className={cn("h-full overflow-y-auto scroll-smooth", isMenuOpen && "pointer-events-none")}
+          style={{ paddingTop: "6rem" }} // 96px = 6rem for header height
         >
           {/* Home Section */}
-          <div ref={(el) => (sectionRefs.current.home = el)} className="min-h-screen">
+          <section ref={(el) => (sectionRefs.current.home = el)} className="min-h-screen">
             <HomeSection onExplore={() => handleSectionChange("services")} />
-          </div>
+          </section>
 
           {/* Services Section */}
-          <div ref={(el) => (sectionRefs.current.services = el)} className="min-h-screen">
+          <section ref={(el) => (sectionRefs.current.services = el)} className="min-h-screen">
             <ServicesSection />
-          </div>
+          </section>
+
+          {/* Global Coverage Section */}
+          <section ref={(el) => (sectionRefs.current.coverage = el)} className="min-h-screen">
+            <GlobalCoverageSection />
+          </section>
 
           {/* Technologies Section */}
-          <div ref={(el) => (sectionRefs.current.technologies = el)} className="min-h-screen">
+          <section ref={(el) => (sectionRefs.current.technologies = el)} className="min-h-screen">
             <TechnologiesSection />
-          </div>
+          </section>
+
+          {/* Portfolio Preview Section */}
+          <section ref={(el) => (sectionRefs.current.portfolio = el)} className="min-h-screen">
+            <PortfolioPreviewSection />
+          </section>
 
           {/* About Section */}
-          <div ref={(el) => (sectionRefs.current.about = el)} className="min-h-screen">
+          <section ref={(el) => (sectionRefs.current.about = el)} className="min-h-screen">
             <AboutSection />
-          </div>
+          </section>
 
           {/* Contact Section */}
-          <div ref={(el) => (sectionRefs.current.contact = el)} className="min-h-screen">
+          <section ref={(el) => (sectionRefs.current.contact = el)} className="min-h-screen">
             <ContactSection />
-          </div>
+          </section>
         </div>
       </div>
 

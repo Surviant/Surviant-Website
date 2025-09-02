@@ -99,24 +99,15 @@ export default function AboutSection() {
             </div>
 
             <div className="mt-8 p-6 rounded-xl bg-gradient-to-br from-cyan-500/10 to-purple-600/10 border border-gray-800">
-              <div className="flex items-start">
-                <div className="text-4xl font-bold text-cyan-500 mr-4">"</div>
-                <div>
-                  <p className="text-lg italic mb-4">
-                    We believe that exceptional digital experiences are born at the intersection of cutting-edge
-                    technology, intuitive design, and strategic thinking.
-                  </p>
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full overflow-hidden mr-3 bg-gray-800 flex items-center justify-center">
-                      <span className="text-gray-400 text-xs">S</span>
-                    </div>
-                    <div>
-                      <div className="font-medium">Srivant V</div>
-                      <div className="text-sm text-gray-400">Founder & CEO</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <h4 className="text-xl font-bold mb-4">Our Approach</h4>
+              <p className="text-gray-300 mb-4">
+                We combine Silicon Valley innovation with global efficiency. Our distributed team model allows us to
+                offer enterprise-quality development at competitive rates while maintaining 24/7 project momentum.
+              </p>
+              <p className="text-gray-300">
+                Whether you're a startup needing market validation or an enterprise requiring AI integration, we scale
+                our approach to your needs.
+              </p>
             </div>
           </motion.div>
 
@@ -130,7 +121,7 @@ export default function AboutSection() {
               { label: "Projects Completed", value: "150+" },
               { label: "Client Satisfaction", value: "98%" },
               { label: "Global Clients", value: "50+" },
-              { label: "Technologies Used", value: "30+" },
+              { label: "Faster Delivery", value: "30%" },
             ].map((stat, index) => (
               <div
                 key={index}
