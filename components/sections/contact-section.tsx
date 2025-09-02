@@ -147,42 +147,42 @@ export default function ContactSection() {
   }
 
   return (
-    <div className="min-h-screen py-20 px-4" ref={ref}>
-      <div className="container mx-auto max-w-7xl">
+    <div className="min-h-screen py-20 px-4 relative z-0 section-container flex items-center justify-center bg-gradient-to-b from-black to-gray-900" ref={ref}>
+      <div className="container mx-auto max-w-7xl section-content w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 relative z-10"
         >
           <span
-            className="inline-block py-1 px-3 border border-cyan-500/30 rounded-full text-cyan-500 text-xs tracking-wider mb-4"
+            className="inline-block py-1 px-3 border border-cyan-500/30 rounded-full text-cyan-500 text-xs tracking-wider mb-4 relative z-10 bg-cyan-900/10 backdrop-blur-sm shadow-sm"
             id="contact-heading"
           >
             GET IN TOUCH
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6" aria-labelledby="contact-heading">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 relative z-10" aria-labelledby="contact-heading">
             Let's Discuss Your <br />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600">
               Next Digital Project
             </span>
           </h2>
-          <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
             Have a project in mind? We'd love to hear about it. Get in touch with us and let's create something
             extraordinary together.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12 mx-auto max-w-6xl px-4">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="lg:col-span-2 space-y-6"
+            className="lg:col-span-5 lg:col-start-1 space-y-6"
           >
-            <div className="p-8 rounded-xl border border-gray-800 backdrop-blur-sm bg-black/20">
-              <h3 className="text-2xl font-bold mb-6">Let's Start a Conversation</h3>
-              <p className="text-gray-400 mb-8">
+            <div className="p-8 rounded-xl border border-cyan-900/30 backdrop-blur-sm bg-black/80 relative z-10 shadow-lg shadow-cyan-900/10 hover:shadow-cyan-800/20 transition-all duration-300">
+              <h3 className="text-2xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">Let's Start a Conversation</h3>
+              <p className="text-gray-300 mb-8 leading-relaxed">
                 Ready to transform your digital presence? Fill out the form and we'll get back to you within 24 hours.
               </p>
 
@@ -196,12 +196,12 @@ export default function ContactSection() {
                     className="flex items-center group"
                     aria-label={`Contact us via ${item.title}: ${item.details}`}
                   >
-                    <div className="w-12 h-12 rounded-full flex items-center justify-center bg-gradient-to-br from-cyan-500 to-blue-500 mr-4">
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center bg-gradient-to-br from-cyan-500 to-blue-500 mr-4 shadow-lg shadow-cyan-900/20">
                       {item.icon}
                     </div>
                     <div>
-                      <div className="text-sm text-gray-400 mb-1">{item.title}</div>
-                      <div className="font-medium group-hover:text-cyan-500 transition-colors">{item.details}</div>
+                      <div className="text-sm text-gray-300 mb-1">{item.title}</div>
+                      <div className="font-medium group-hover:text-cyan-400 transition-colors">{item.details}</div>
                     </div>
                   </a>
                 ))}
@@ -213,21 +213,21 @@ export default function ContactSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mb-8 p-6 rounded-xl border border-gray-800 backdrop-blur-sm bg-black/20"
+            className="lg:col-span-5 lg:col-start-1 mb-8 p-6 rounded-xl border border-cyan-900/30 backdrop-blur-sm bg-black/80 relative z-10 shadow-lg shadow-cyan-900/10 hover:shadow-cyan-800/20 transition-all duration-300"
           >
-            <h3 className="text-xl font-bold mb-4">Flexible Engagement Options</h3>
+            <h3 className="text-xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">Flexible Engagement Options</h3>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="text-center">
-                <div className="text-cyan-500 font-medium mb-1">Payment Methods</div>
-                <div className="text-sm text-gray-400">Multiple options accepted</div>
+                <div className="text-cyan-400 font-medium mb-1">Payment Methods</div>
+                <div className="text-sm text-gray-300">Multiple options accepted</div>
               </div>
               <div className="text-center">
-                <div className="text-cyan-500 font-medium mb-1">Payment Schedules</div>
-                <div className="text-sm text-gray-400">Staggered payments available</div>
+                <div className="text-cyan-400 font-medium mb-1">Payment Schedules</div>
+                <div className="text-sm text-gray-300">Staggered payments available</div>
               </div>
               <div className="text-center">
-                <div className="text-cyan-500 font-medium mb-1">Equity Partnerships</div>
-                <div className="text-sm text-gray-400">For qualified startups</div>
+                <div className="text-cyan-400 font-medium mb-1">Equity Partnerships</div>
+                <div className="text-sm text-gray-300">For qualified startups</div>
               </div>
             </div>
           </motion.div>
@@ -236,9 +236,9 @@ export default function ContactSection() {
             initial={{ opacity: 0, x: 20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="lg:col-span-3"
+            className="lg:col-span-7 lg:col-start-6"
           >
-            <div className="p-8 rounded-xl border border-gray-800 backdrop-blur-sm bg-black/20">
+            <div className="p-8 rounded-xl border border-cyan-900/30 backdrop-blur-sm bg-black/80 relative z-10 shadow-lg shadow-cyan-900/10 hover:shadow-cyan-800/20 transition-all duration-300">
               {formSubmitted ? (
                 <div className="text-center py-12">
                   <div className="w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center mx-auto mb-6">
@@ -259,7 +259,7 @@ export default function ContactSection() {
                 <form ref={formRef} onSubmit={handleSubmit} className="space-y-6" aria-label="Contact form" noValidate>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium">
+                      <label htmlFor="name" className="text-sm font-medium text-gray-200">
                         Your Name <span className="text-cyan-500">*</span>
                       </label>
                       <Input
@@ -269,7 +269,7 @@ export default function ContactSection() {
                         onChange={handleChange}
                         placeholder="John Doe"
                         required
-                        className="bg-black/50 border-gray-700 focus:border-cyan-500 h-12"
+                        className="bg-black/50 border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 h-12 relative z-10 rounded-lg"
                         aria-invalid={errors.name ? "true" : "false"}
                         aria-describedby={errors.name ? "name-error" : undefined}
                       />
@@ -280,7 +280,7 @@ export default function ContactSection() {
                       )}
                     </div>
                     <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium">
+                      <label htmlFor="email" className="text-sm font-medium text-gray-200">
                         Your Email <span className="text-cyan-500">*</span>
                       </label>
                       <Input
@@ -291,7 +291,7 @@ export default function ContactSection() {
                         onChange={handleChange}
                         placeholder="john@example.com"
                         required
-                        className="bg-black/50 border-gray-700 focus:border-cyan-500 h-12"
+                        className="bg-black/50 border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 h-12 relative z-10 rounded-lg"
                         aria-invalid={errors.email ? "true" : "false"}
                         aria-describedby={errors.email ? "email-error" : undefined}
                       />
@@ -304,7 +304,7 @@ export default function ContactSection() {
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium">
+                    <label htmlFor="subject" className="text-sm font-medium text-gray-200">
                       Subject <span className="text-cyan-500">*</span>
                     </label>
                     <Input
@@ -314,7 +314,7 @@ export default function ContactSection() {
                       onChange={handleChange}
                       placeholder="Project Inquiry"
                       required
-                      className="bg-black/50 border-gray-700 focus:border-cyan-500 h-12"
+                      className="bg-black/50 border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 h-12 relative z-10 rounded-lg"
                       aria-invalid={errors.subject ? "true" : "false"}
                       aria-describedby={errors.subject ? "subject-error" : undefined}
                     />
@@ -326,7 +326,7 @@ export default function ContactSection() {
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">
+                    <label htmlFor="message" className="text-sm font-medium text-gray-200">
                       Message <span className="text-cyan-500">*</span>
                     </label>
                     <Textarea
@@ -336,7 +336,7 @@ export default function ContactSection() {
                       onChange={handleChange}
                       placeholder="Tell us about your project..."
                       required
-                      className="min-h-[180px] bg-black/50 border-gray-700 focus:border-cyan-500"
+                      className="min-h-[180px] bg-black/50 border-gray-700 focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 relative z-10 rounded-lg"
                       aria-invalid={errors.message ? "true" : "false"}
                       aria-describedby={errors.message ? "message-error" : undefined}
                     />
@@ -358,7 +358,7 @@ export default function ContactSection() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white border-0 rounded-full h-12"
+                    className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 h-12 text-base font-medium rounded-lg shadow-lg shadow-cyan-900/20 hover:shadow-cyan-800/30 transition-all duration-300"
                     aria-label={isSubmitting ? "Sending message..." : "Send message"}
                   >
                     {isSubmitting ? (

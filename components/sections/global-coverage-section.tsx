@@ -1,9 +1,9 @@
 "use client"
 
 import { useRef, useState, useEffect } from "react"
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, Variants } from "framer-motion"
 import { Clock, Users, Zap, Globe, ArrowRight, Sun, Moon } from "lucide-react"
-import WorldMapVisualization from "@/components/ui/world-map-visualization"
+import DualTimeline from "@/components/ui/dual-timeline"
 
 export default function GlobalCoverageSection() {
   const ref = useRef<HTMLDivElement>(null)
@@ -50,7 +50,7 @@ export default function GlobalCoverageSection() {
     return Number.parseInt(hour) >= 8 && Number.parseInt(hour) <= 20
   }
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -60,17 +60,17 @@ export default function GlobalCoverageSection() {
     },
   }
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.6, ease: "circOut" },
     },
   }
 
   return (
-    <div className="min-h-screen py-20 px-4" ref={ref}>
+    <div className="min-h-screen py-20 px-4 relative" ref={ref}>
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -147,14 +147,14 @@ export default function GlobalCoverageSection() {
           </div>
         </motion.div>
 
-        {/* Map Visualization */}
+        {/* Timeline Visualization */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="mb-16"
+          className="mb-16 timeline-container"
         >
-          <WorldMapVisualization className="mb-8" />
+          <DualTimeline />
         </motion.div>
 
         {/* Benefits Grid */}

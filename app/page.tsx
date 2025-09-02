@@ -5,7 +5,6 @@ import Navigation from "@/components/navigation"
 import HomeSection from "@/components/sections/home-section"
 import ServicesSection from "@/components/services-section"
 import AboutSection from "@/components/sections/about-section"
-import ContactSection from "@/components/sections/contact-section"
 import TechnologiesSection from "@/components/sections/technologies-section"
 import GlobalCoverageSection from "@/components/sections/global-coverage-section"
 import PortfolioPreviewSection from "@/components/sections/portfolio-preview-section"
@@ -21,14 +20,13 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [hasWebGL, setHasWebGL] = useState(true)
   const contentRef = useRef<HTMLDivElement>(null)
-  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({
     home: null,
     services: null,
     coverage: null,
     technologies: null,
     portfolio: null,
     about: null,
-    contact: null,
   })
 
   const sections = [
@@ -38,7 +36,6 @@ export default function Home() {
     { id: "technologies", label: "TECH" },
     { id: "portfolio", label: "WORK" },
     { id: "about", label: "ABOUT" },
-    { id: "contact", label: "CONTACT" },
   ]
 
   // Check for WebGL support
@@ -191,39 +188,35 @@ export default function Home() {
           style={{ paddingTop: "6rem" }} // 96px = 6rem for header height
         >
           {/* Home Section */}
-          <section ref={(el) => (sectionRefs.current.home = el)} className="min-h-screen">
+          <section ref={(el) => { sectionRefs.current.home = el }} className="min-h-screen section-container">
             <HomeSection onExplore={() => handleSectionChange("services")} />
           </section>
 
           {/* Services Section */}
-          <section ref={(el) => (sectionRefs.current.services = el)} className="min-h-screen">
+          <section ref={(el) => { sectionRefs.current.services = el }} className="min-h-screen section-container">
             <ServicesSection />
           </section>
 
           {/* Global Coverage Section */}
-          <section ref={(el) => (sectionRefs.current.coverage = el)} className="min-h-screen">
+          <section ref={(el) => { sectionRefs.current.coverage = el }} className="min-h-screen section-container">
             <GlobalCoverageSection />
           </section>
 
           {/* Technologies Section */}
-          <section ref={(el) => (sectionRefs.current.technologies = el)} className="min-h-screen">
+          <section ref={(el) => { sectionRefs.current.technologies = el }} className="min-h-screen section-container">
             <TechnologiesSection />
           </section>
 
           {/* Portfolio Preview Section */}
-          <section ref={(el) => (sectionRefs.current.portfolio = el)} className="min-h-screen">
+          <section ref={(el) => { sectionRefs.current.portfolio = el }} className="min-h-screen section-container">
             <PortfolioPreviewSection />
           </section>
 
           {/* About Section */}
-          <section ref={(el) => (sectionRefs.current.about = el)} className="min-h-screen">
+          <section ref={(el) => { sectionRefs.current.about = el }} className="min-h-screen section-container">
             <AboutSection />
           </section>
 
-          {/* Contact Section */}
-          <section ref={(el) => (sectionRefs.current.contact = el)} className="min-h-screen">
-            <ContactSection />
-          </section>
         </div>
       </div>
 

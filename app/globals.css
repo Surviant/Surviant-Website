@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fix z-index stacking issues */
+.timeline-container {
+  isolation: isolate;
+  position: relative;
+  z-index: 10;
+}
+
+/* Fix section overlap issues */
+.section-container {
+  isolation: isolate;
+  position: relative;
+  z-index: 0;
+  transform: translateZ(0);
+}
+
+/* Ensure text doesn't overlap during scrolling */
+.section-content {
+  position: relative;
+  z-index: 5;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

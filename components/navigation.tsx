@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, Variants } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Github, Twitter, Linkedin, Menu, X, ChevronRight } from "lucide-react"
@@ -32,16 +32,15 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
     { id: "services", label: "SERVICES" },
     { id: "technologies", label: "TECH" },
     { id: "about", label: "ABOUT" },
-    { id: "contact", label: "CONTACT" },
   ]
 
-  const menuVariants = {
+  const menuVariants: Variants = {
     closed: {
       opacity: 0,
       x: "100%",
       transition: {
         duration: 0.5,
-        ease: [0.22, 1, 0.36, 1],
+        ease: "easeInOut",
       },
     },
     open: {
@@ -49,7 +48,7 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
       x: 0,
       transition: {
         duration: 0.5,
-        ease: [0.22, 1, 0.36, 1],
+        ease: "easeInOut",
       },
     },
   }
