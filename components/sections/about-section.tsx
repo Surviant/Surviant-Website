@@ -4,6 +4,7 @@ import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import { Github, Twitter, Linkedin } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Image from "next/image"
 
 export default function AboutSection() {
   const ref = useRef<HTMLDivElement>(null)
@@ -14,6 +15,7 @@ export default function AboutSection() {
       name: "Srivant V",
       role: "Founder & CEO",
       bio: "Full-stack developer specializing in innovative solutions and digital experiences.",
+      image: "/team-member-1.png",
       social: {
         twitter: "#",
         linkedin: "#",
@@ -24,6 +26,7 @@ export default function AboutSection() {
       name: "Dhyuthi S",
       role: "CTO",
       bio: "Full-stack developer specializing in high-performance systems and innovative solutions.",
+      image: "/team-member-2.png",
       social: {
         twitter: "#",
         linkedin: "#",
@@ -47,8 +50,8 @@ export default function AboutSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
     },
+    transition: { duration: 0.6, ease: "easeInOut" }
   }
 
   return (
@@ -151,8 +154,15 @@ export default function AboutSection() {
                 variants={itemVariants}
                 className="group relative overflow-hidden rounded-xl backdrop-blur-sm bg-black/20 border border-gray-800 hover:border-gray-700 transition-all duration-300"
               >
-                <div className="relative h-80 overflow-hidden bg-gray-900 flex items-center justify-center">
-                  <div className="text-6xl font-bold text-gray-800">{member.name.charAt(0)}</div>
+                <div className="relative h-[380px] overflow-hidden bg-gray-900">
+                  <Image 
+                    src={member.image} 
+                    alt={`${member.name} - ${member.role}`} 
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority
+                    className="object-cover object-[center_10%] scale-[1.15]"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                     <div className="p-6 w-full">
                       <div className="flex justify-center space-x-3">
