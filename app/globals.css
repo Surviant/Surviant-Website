@@ -122,11 +122,11 @@ html {
 
 /* Leaflet map styles */
 .leaflet-container {
-  background: #0a0a23 !important;
+  background: #1a1a2e !important;
 }
 
 .leaflet-tile {
-  filter: brightness(0.8) contrast(1.2);
+  filter: brightness(0.9) contrast(1.1);
 }
 
 .custom-marker {
@@ -162,4 +162,21 @@ html {
 
 .marker-active {
   animation: marker-pulse 2s infinite;
+}
+
+/* Leaflet popup dark theme */
+.leaflet-popup-content-wrapper {
+  background: rgba(26, 26, 46, 0.95) !important;
+  color: white !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.leaflet-popup-tip {
+  background: rgba(26, 26, 46, 0.95) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.leaflet-popup-close-button {
+  color: white !important;
 }

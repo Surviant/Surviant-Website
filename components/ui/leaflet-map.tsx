@@ -207,10 +207,12 @@ export default function LeafletMap({ locations, isWorkingHours, isPlaying, speed
         attributionControl={false}
         ref={mapRef}
       >
-        {/* Dark theme tile layer */}
+        {/* Free dark theme tile layer from CartoDB */}
         <TileLayer
-          url="https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>'
+          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          subdomains="abcd"
+          maxZoom={19}
         />
 
         {/* Location markers */}
