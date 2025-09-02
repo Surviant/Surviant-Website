@@ -202,7 +202,7 @@ export default function GlobalCoverageSection() {
               <div
                 className="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-10 transition-opacity duration-500 -z-10"
                 style={{
-                  background: `linear-gradient(to bottom right, ${benefit.color.split(" ")[0].replace("from-", "")}, ${benefit.color.split(" ")[2].replace("to-", "")})`,
+                  background: `linear-gradient(to bottom right, ${benefit.color.split(" ")[0].replace("from-", "")}, ${benefit.color.split(" ")[1].replace("to-", "")})`,
                 }}
               />
 
