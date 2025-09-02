@@ -197,14 +197,40 @@ export default function LeafletMap({ locations, isWorkingHours, isPlaying, speed
     }
   }, [])
 
+  // Disable all map interactions after mount
+  useEffect(() => {
+    if (mapRef.current) {
+      const map = mapRef.current
+
+      // Disable all interactions
+      map.dragging.disable()
+      map.touchZoom.disable()
+      map.doubleClickZoom.disable()
+      map.scrollWheelZoom.disable()
+      map.boxZoom.disable()
+      map.keyboard.disable()
+
+      // Remove zoom control if it exists
+      if (map.zoomControl) {
+        map.removeControl(map.zoomControl)
+      }
+    }
+  }, [])
+
   return (
     <div className="relative rounded-lg overflow-hidden border border-gray-800" style={{ height: "600px" }}>
       <MapContainer
         center={[25, 0]}
         zoom={2}
-        style={{ height: "100%", width: "100%" }}
+        style={{ height: "100%", width: "100%", cursor: "default" }}
         zoomControl={false}
         attributionControl={false}
+        dragging={false}
+        touchZoom={false}
+        doubleClickZoom={false}
+        scrollWheelZoom={false}
+        boxZoom={false}
+        keyboard={false}
         ref={mapRef}
       >
         {/* Free dark theme tile layer from CartoDB */}

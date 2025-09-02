@@ -120,9 +120,10 @@ html {
   animation: pulse-glow 2s ease-in-out infinite;
 }
 
-/* Leaflet map styles */
+/* Leaflet map styles - Fixed and non-interactive */
 .leaflet-container {
   background: #1a1a2e !important;
+  cursor: default !important;
 }
 
 .leaflet-tile {
@@ -139,9 +140,32 @@ html {
   border: none !important;
 }
 
-/* Hide leaflet attribution */
-.leaflet-control-attribution {
+/* Disable all map interactions */
+.leaflet-container .leaflet-control-zoom {
   display: none !important;
+}
+
+.leaflet-container .leaflet-control-attribution {
+  display: none !important;
+}
+
+.leaflet-clickable {
+  cursor: default !important;
+}
+
+.leaflet-grab {
+  cursor: default !important;
+}
+
+.leaflet-interactive {
+  cursor: default !important;
+}
+
+/* Disable touch interactions */
+.leaflet-container {
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+  touch-action: none;
 }
 
 /* Custom marker animations */
