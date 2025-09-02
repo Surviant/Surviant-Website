@@ -39,8 +39,11 @@ const locations: LocationData[] = [
 const DynamicMap = dynamic(() => import("./leaflet-map"), {
   ssr: false,
   loading: () => (
-    <div className="flex items-center justify-center h-[600px] bg-[#0a0a23] rounded-lg border border-gray-800">
-      <div className="text-white">Loading map...</div>
+    <div className="flex items-center justify-center h-[500px] bg-gray-900/50 rounded-xl border border-gray-800">
+      <div className="text-center">
+        <div className="w-8 h-8 border-2 border-cyan-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+        <div className="text-gray-400">Loading global coverage map...</div>
+      </div>
     </div>
   ),
 })
@@ -93,43 +96,22 @@ export default function WorldMapVisualization({ className }: WorldMapVisualizati
 
   return (
     <div className={`relative w-full ${className}`}>
-      {/* Header */}
-      <div className="text-center mb-8">
-        <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-          Your Project Never Sleeps
-        </h2>
-        <p className="text-gray-300 max-w-2xl mx-auto">
-          As the sun sets in California, development continues in Bangalore. When India rests, California takes the
-          lead. Continuous progress, 24 hours a day.
-        </p>
-      </div>
-
       {/* Map Container */}
       <div className="relative">
         <DynamicMap locations={locations} isWorkingHours={isWorkingHours} isPlaying={isPlaying} speed={speed} />
 
-        {/* Controls */}
+        {/* Simplified Controls */}
         <div className="absolute top-4 right-4 flex gap-2 z-[1000]">
           <button
             onClick={() => setIsPlaying(!isPlaying)}
-            className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded text-sm transition-colors"
+            className="px-3 py-1 bg-cyan-600/80 hover:bg-cyan-600 text-white rounded-full text-sm transition-colors backdrop-blur-sm"
           >
             {isPlaying ? "Pause" : "Play"}
           </button>
-          <select
-            value={speed}
-            onChange={(e) => setSpeed(Number(e.target.value))}
-            className="px-2 py-1 bg-gray-800 text-white rounded text-sm border border-gray-600"
-          >
-            <option value={0.5}>0.5x</option>
-            <option value={1}>1x</option>
-            <option value={2}>2x</option>
-            <option value={4}>4x</option>
-          </select>
         </div>
 
-        {/* Status Display */}
-        <div className="absolute bottom-4 left-4 bg-black/90 rounded-lg p-4 text-sm z-[1000]">
+        {/* Enhanced Status Display */}
+        <div className="absolute bottom-4 left-4 bg-black/90 backdrop-blur-sm rounded-xl p-4 text-sm z-[1000] border border-gray-800">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {locations.map((location) => {
               const isActive = isWorkingHours(location.timezone)
@@ -137,14 +119,15 @@ export default function WorldMapVisualization({ className }: WorldMapVisualizati
 
               return (
                 <div key={location.name} className="flex items-center gap-3">
-                  <div className={`w-3 h-3 rounded-full ${isActive ? "bg-green-400" : "bg-red-400"} animate-pulse`} />
+                  <div className={`w-3 h-3 rounded-full ${isActive ? "bg-green-400 animate-pulse" : "bg-gray-500"}`} />
                   <div>
                     <div className="text-white font-medium flex items-center gap-2">
                       <span className="text-lg">{location.flag}</span>
                       {location.name.split(",")[0]}
                     </div>
-                    <div className="text-gray-400 text-xs">
-                      {localTime} - {isActive ? "Active Development" : "Off Hours"}
+                    <div className="text-gray-400 text-xs">{localTime}</div>
+                    <div className={`text-xs font-medium ${isActive ? "text-green-400" : "text-gray-500"}`}>
+                      {isActive ? "🟢 Development Active" : "⚫ Off Hours"}
                     </div>
                   </div>
                 </div>
@@ -154,41 +137,21 @@ export default function WorldMapVisualization({ className }: WorldMapVisualizati
         </div>
 
         {/* Legend */}
-        <div className="absolute bottom-4 right-4 bg-black/90 rounded-lg p-3 text-xs z-[1000]">
+        <div className="absolute bottom-4 right-4 bg-black/90 backdrop-blur-sm rounded-xl p-3 text-xs z-[1000] border border-gray-800">
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-orange-400"></div>
-              <span className="text-gray-300">Data Flow</span>
+              <div className="w-3 h-3 rounded-full bg-orange-400 animate-pulse"></div>
+              <span className="text-gray-300">Work Flow</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-full bg-green-400"></div>
-              <span className="text-gray-300">Active Development</span>
+              <span className="text-gray-300">Active Team</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-red-400"></div>
-              <span className="text-gray-300">Off Hours</span>
+              <div className="w-3 h-3 rounded-full bg-gray-500"></div>
+              <span className="text-gray-300">Standby</span>
             </div>
           </div>
-        </div>
-      </div>
-
-      {/* Value Propositions */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-        <div className="text-center">
-          <div className="text-2xl font-bold text-blue-400">24/7</div>
-          <div className="text-sm text-gray-400">Coverage</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-purple-400">16+</div>
-          <div className="text-sm text-gray-400">Active Hours</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-orange-400">50%</div>
-          <div className="text-sm text-gray-400">Faster Delivery</div>
-        </div>
-        <div className="text-center">
-          <div className="text-2xl font-bold text-green-400">100%</div>
-          <div className="text-sm text-gray-400">Synchronization</div>
         </div>
       </div>
     </div>
