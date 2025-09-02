@@ -30,7 +30,9 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
   const navItems = [
     { id: "home", label: "HOME" },
     { id: "services", label: "SERVICES" },
+    { id: "coverage", label: "GLOBAL" },
     { id: "technologies", label: "TECH" },
+    { id: "portfolio", label: "WORK" },
     { id: "about", label: "ABOUT" },
   ]
 
