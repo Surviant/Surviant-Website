@@ -369,9 +369,9 @@ export default function PortfolioPreviewSection() {
                 transition={{ duration: 0.5, ease: easeInOut }}
                 className="absolute inset-0 w-full h-full flex flex-col"
               >
-                <div className="flex flex-col md:flex-row h-full">
+                <div className="flex flex-col md:flex-row h-full overflow-hidden rounded-xl border border-gray-800/50 shadow-lg">
                   {/* Project information - left side */}
-                  <div className="flex-1 p-6 md:w-3/5 flex flex-col">
+                  <div className="flex-1 p-6 md:w-3/5 flex flex-col rounded-l-xl">
                     <div className="mb-4">
                       <h3 className="text-2xl font-bold">{projects[currentIndex].title}</h3>
                       <p className="text-sm text-gray-400">
@@ -487,7 +487,7 @@ export default function PortfolioPreviewSection() {
                   </div>
                   
                   {/* Project image - right side */}
-                  <div className="md:w-2/5 relative overflow-hidden bg-gray-900 md:h-auto h-48">
+                  <div className="md:w-2/5 relative overflow-hidden bg-gray-900 md:h-auto h-48 md:rounded-r-xl">
                     <img
                       src={projects[currentIndex].image || "/placeholder.svg"}
                       alt={projects[currentIndex].title}
@@ -500,28 +500,28 @@ export default function PortfolioPreviewSection() {
             </AnimatePresence>
 
             {/* Navigation controls */}
-            <div className="absolute left-0 top-1/2 -translate-y-1/2 z-10">
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
               <button 
                 onClick={prevSlide} 
-                className="bg-primary/80 hover:bg-primary text-white rounded-r-full p-3 transition-colors"
+                className="bg-gray-900/60 backdrop-blur-sm hover:bg-primary/90 text-white rounded-full p-3.5 transition-all shadow-lg border border-gray-700/30 transform hover:scale-105 group"
                 aria-label="Previous project"
               >
-                <ChevronLeftIcon className="h-6 w-6" />
+                <ChevronLeftIcon className="h-5 w-5 opacity-80 group-hover:opacity-100" />
               </button>
             </div>
             
-            <div className="absolute right-0 top-1/2 -translate-y-1/2 z-10">
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 z-10">
               <button 
                 onClick={nextSlide} 
-                className="bg-primary/80 hover:bg-primary text-white rounded-l-full p-3 transition-colors"
+                className="bg-gray-900/60 backdrop-blur-sm hover:bg-primary/90 text-white rounded-full p-3.5 transition-all shadow-lg border border-gray-700/30 transform hover:scale-105 group"
                 aria-label="Next project"
               >
-                <ChevronRightIcon className="h-6 w-6" />
+                <ChevronRightIcon className="h-5 w-5 opacity-80 group-hover:opacity-100" />
               </button>
             </div>
             
             {/* Pagination dots */}
-            <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 z-10">
+            <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-3 z-10">
               {projects.map((_, index) => (
                 <button
                   key={index}
@@ -529,7 +529,11 @@ export default function PortfolioPreviewSection() {
                     setDirection(index > currentIndex ? 1 : -1);
                     setCurrentIndex(index);
                   }}
-                  className={`w-3 h-3 rounded-full transition-colors ${index === currentIndex ? 'bg-primary' : 'bg-primary/30'}`}
+                  className={`w-2.5 h-2.5 rounded-full transition-all ${
+                    index === currentIndex 
+                      ? 'bg-primary scale-110 shadow-md shadow-primary/20' 
+                      : 'bg-gray-400/30 hover:bg-gray-400/50'
+                  }`}
                   aria-label={`Go to project ${index + 1}`}
                 />
               ))}
