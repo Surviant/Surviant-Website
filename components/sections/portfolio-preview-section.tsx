@@ -370,8 +370,8 @@ export default function PortfolioPreviewSection() {
                 className="absolute inset-0 w-full h-full flex flex-col"
               >
                 <div className="flex flex-col md:flex-row h-full overflow-hidden rounded-xl border border-gray-800/50 shadow-lg">
-                  {/* Project information - left side */}
-                  <div className="flex-1 p-6 md:w-3/5 flex flex-col rounded-l-xl">
+                  {/* Project information */}
+                  <div className="flex-1 p-6 flex flex-col rounded-xl w-full">
                     <div className="mb-4">
                       <h3 className="text-2xl font-bold">{projects[currentIndex].title}</h3>
                       <p className="text-sm text-gray-400">
@@ -486,15 +486,7 @@ export default function PortfolioPreviewSection() {
                     </div>
                   </div>
                   
-                  {/* Project image - right side */}
-                  <div className="md:w-2/5 relative overflow-hidden bg-gray-900 md:h-auto h-48 md:rounded-r-xl">
-                    <img
-                      src={projects[currentIndex].image || "/placeholder.svg"}
-                      alt={projects[currentIndex].title}
-                      className="w-full h-full object-cover transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent md:bg-gradient-to-l" />
-                  </div>
+                  {/* No image section anymore */}
                 </div>
               </motion.div>
             </AnimatePresence>
