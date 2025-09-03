@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, easeInOut } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 export default function TechnologiesSection() {
@@ -59,7 +59,7 @@ export default function TechnologiesSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+      transition: { duration: 0.6, ease: easeInOut },
     },
   }
 
