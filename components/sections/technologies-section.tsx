@@ -160,9 +160,11 @@ export default function TechnologiesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-20"
+          className="mt-20 p-8 rounded-xl border border-gray-800 backdrop-blur-sm bg-black/20"
         >
-          <h3 className="text-2xl font-bold mb-8 text-center">Our Development Process</h3>
+          <h2 className="text-3xl font-bold mb-12 text-center">
+            Our Development <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600">Process</span>
+          </h2>
 
           <div className="relative">
             {/* Process Line */}

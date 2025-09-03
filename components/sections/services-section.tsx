@@ -147,59 +147,6 @@ export default function ServicesSection() {
           ))}
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-20 p-8 rounded-xl border border-gray-800 backdrop-blur-sm bg-black/20"
-        >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="md:col-span-1">
-              <h3 className="text-2xl font-bold mb-4">Our Development Process</h3>
-              <p className="text-gray-400">
-                We follow a structured approach to ensure your project is delivered on time and exceeds expectations.
-              </p>
-            </div>
-
-            <div className="md:col-span-2">
-              <div className="space-y-8">
-                {[
-                  {
-                    number: "01",
-                    title: "Discovery & Planning",
-                    description: "We analyze your requirements and create a detailed roadmap.",
-                  },
-                  {
-                    number: "02",
-                    title: "Design & Prototyping",
-                    description: "We design intuitive interfaces and create interactive prototypes.",
-                  },
-                  {
-                    number: "03",
-                    title: "Development & Testing",
-                    description: "We build your solution with clean code and comprehensive testing.",
-                  },
-                  {
-                    number: "04",
-                    title: "Deployment & Support",
-                    description: "We launch your product and provide ongoing maintenance.",
-                  },
-                ].map((step, index) => (
-                  <div key={index} className="flex">
-                    <div className="mr-6">
-                      <div className="text-sm font-bold text-cyan-500">{step.number}</div>
-                      <div className="mt-2 h-full w-[1px] bg-gray-800 ml-2"></div>
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-bold mb-2">{step.title}</h4>
-                      <p className="text-gray-400">{step.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </div>
   )

@@ -93,59 +93,6 @@ export default function GlobalCoverageSection() {
           </p>
         </motion.div>
 
-        {/* Handoff Status Display */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-12 p-6 rounded-xl border border-gray-800 backdrop-blur-sm bg-black/20"
-        >
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex items-center gap-4">
-              <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse"></div>
-              <div>
-                <h3 className="text-lg font-bold">
-                  {handoffPhase === "california" && "California Team Active"}
-                  {handoffPhase === "handoff" && "Handoff in Progress"}
-                  {handoffPhase === "india" && "India Team Active"}
-                  {handoffPhase === "receiving" && "Receiving Handoff"}
-                </h3>
-                <p className="text-sm text-gray-400">
-                  {handoffPhase === "california" && "Frontend development, client meetings, code reviews"}
-                  {handoffPhase === "handoff" && "Transferring work items and documentation"}
-                  {handoffPhase === "india" && "Backend development, testing, deployment"}
-                  {handoffPhase === "receiving" && "California team preparing to receive work"}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-6">
-              <div className="text-center">
-                <div className="flex items-center gap-2 mb-1">
-                  <Sun className="h-4 w-4 text-yellow-400" />
-                  <span className="text-sm font-medium">California</span>
-                </div>
-                <div className="text-lg font-mono">{getTimeInZone("America/Los_Angeles")}</div>
-                <div className={`text-xs ${isWorkingHours("America/Los_Angeles") ? "text-green-400" : "text-red-400"}`}>
-                  {isWorkingHours("America/Los_Angeles") ? "Active" : "Off Hours"}
-                </div>
-              </div>
-
-              <ArrowRight className="h-5 w-5 text-cyan-500 animate-pulse" />
-
-              <div className="text-center">
-                <div className="flex items-center gap-2 mb-1">
-                  <Moon className="h-4 w-4 text-blue-400" />
-                  <span className="text-sm font-medium">India</span>
-                </div>
-                <div className="text-lg font-mono">{getTimeInZone("Asia/Kolkata")}</div>
-                <div className={`text-xs ${isWorkingHours("Asia/Kolkata") ? "text-green-400" : "text-red-400"}`}>
-                  {isWorkingHours("Asia/Kolkata") ? "Active" : "Off Hours"}
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
 
         {/* Timeline Visualization */}
         <motion.div
