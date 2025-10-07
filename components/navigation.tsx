@@ -34,6 +34,7 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
     { id: "coverage", label: "GLOBAL" },
     { id: "technologies", label: "TECH" },
     { id: "portfolio", label: "WORK" },
+    { id: "research", label: "RESEARCH" },
     { id: "about", label: "ABOUT" },
   ]
 

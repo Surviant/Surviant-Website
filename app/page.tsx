@@ -8,6 +8,7 @@ import AboutSection from "@/components/sections/about-section"
 import TechnologiesSection from "@/components/sections/technologies-section"
 import GlobalCoverageSection from "@/components/sections/global-coverage-section"
 import PortfolioPreviewSection from "@/components/sections/portfolio-preview-section"
+import ResearchSection from "@/components/sections/research-section"
 import NoiseBackground from "@/components/ui/noise-background"
 import ParticleBackground from "@/components/ui/particle-background"
 import LoadingScreen from "@/components/loading-screen"
@@ -26,6 +27,7 @@ export default function Home() {
     coverage: null,
     technologies: null,
     portfolio: null,
+    research: null,
     about: null,
   })
 
@@ -35,6 +37,7 @@ export default function Home() {
     { id: "coverage", label: "GLOBAL" },
     { id: "technologies", label: "TECH" },
     { id: "portfolio", label: "WORK" },
+    { id: "research", label: "RESEARCH" },
     { id: "about", label: "ABOUT" },
   ]
 
@@ -210,6 +213,11 @@ export default function Home() {
           {/* Portfolio Preview Section */}
           <section ref={(el) => { sectionRefs.current.portfolio = el }} className="min-h-screen section-container">
             <PortfolioPreviewSection />
+          </section>
+
+          {/* Research Section */}
+          <section ref={(el) => { sectionRefs.current.research = el }} className="min-h-screen section-container">
+            <ResearchSection />
           </section>
 
           {/* About Section */}
