@@ -18,9 +18,11 @@ import {
   Users,
   Code,
   Shield,
-  Globe
+  Globe,
+  ExternalLink
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 export default function ResearchSection() {
   const ref = useRef<HTMLDivElement>(null)
@@ -66,6 +68,7 @@ export default function ResearchSection() {
       description: "Pioneering next-generation AI solutions with deep learning, neural networks, and cognitive computing. Our research focuses on natural language processing, computer vision, and reinforcement learning to create intelligent systems that adapt and evolve.",
       technologies: ["Deep Learning", "Neural Networks", "NLP", "Computer Vision", "Reinforcement Learning"],
       impact: "Developed AI models achieving 98% accuracy in production environments",
+      link: "/research/ai-ml",
     },
     {
       icon: Database,
@@ -202,11 +205,12 @@ export default function ResearchSection() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {researchAreas.map((area, index) => {
               const Icon = area.icon
-              return (
+              
+              const cardContent = (
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  className="group relative bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-3xl p-10 hover:border-cyan-500/50 transition-all duration-300"
+                  className="group relative bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-3xl p-10 hover:border-cyan-500/50 transition-all duration-300 cursor-pointer"
                   whileHover={{ scale: 1.02, y: -5 }}
                 >
                   {/* Gradient overlay on hover */}
@@ -220,8 +224,9 @@ export default function ResearchSection() {
 
                     {/* Content */}
                     <div>
-                      <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white group-hover:bg-clip-text group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-500 transition-all duration-300">
+                      <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white group-hover:bg-clip-text group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-purple-500 transition-all duration-300 flex items-center gap-2">
                         {area.title}
+                        {area.link && <ExternalLink className="h-6 w-6 opacity-0 group-hover:opacity-100 transition-opacity" />}
                       </h3>
                       <p className="text-gray-400 leading-relaxed text-lg mb-6">
                         {area.description}
@@ -262,6 +267,14 @@ export default function ResearchSection() {
                   {/* Decorative corner accent */}
                   <div className="absolute top-0 right-0 w-40 h-40 bg-gradient-to-br from-cyan-500/10 to-purple-600/10 opacity-0 rounded-3xl blur-3xl group-hover:opacity-100 transition-opacity duration-300" />
                 </motion.div>
+              )
+              
+              return area.link ? (
+                <Link key={index} href={area.link}>
+                  {cardContent}
+                </Link>
+              ) : (
+                cardContent
               )
             })}
           </div>
