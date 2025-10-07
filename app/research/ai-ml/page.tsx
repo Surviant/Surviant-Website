@@ -48,7 +48,7 @@ export default function AIMLPage() {
     return (
       <motion.div variants={itemVariants} className="space-y-8">
         <div className="text-center space-y-4 mb-12">
-          <div className={\`inline-flex items-center gap-3 px-6 py-3 rounded-full border backdrop-blur-sm \${level.badge}\`}>
+          <div className={`inline-flex items-center gap-3 px-6 py-3 rounded-full border backdrop-blur-sm ${level.badge}`}>
             <StatusIcon className="h-5 w-5" />
             <span className="font-bold text-lg">{level.title}</span>
           </div>
