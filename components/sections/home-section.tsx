@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react"
 import { motion, useInView, useAnimation } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 import FloatingElements from "@/components/ui/floating-elements"
 import { useMediaQuery } from "@/hooks/use-media-query"
 
@@ -95,13 +96,15 @@ export default function HomeSection({ onExplore }: HomeSectionProps) {
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
 
-          <Button
-            size={isMobile ? "default" : "lg"}
-            variant="outline"
-            className="border-gray-700 text-white hover:bg-white/10 rounded-full px-6 sm:px-8 bg-transparent"
-          >
-            Start Your Project
-          </Button>
+          <Link href="/contact">
+            <Button
+              size={isMobile ? "default" : "lg"}
+              variant="outline"
+              className="border-gray-700 text-white hover:bg-white/10 rounded-full px-6 sm:px-8 bg-transparent"
+            >
+              Start Your Project
+            </Button>
+          </Link>
         </motion.div>
       </motion.div>
     </div>

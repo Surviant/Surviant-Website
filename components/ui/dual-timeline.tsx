@@ -17,27 +17,36 @@ interface DualTimelineProps {
 }
 
 export default function DualTimeline({ className = '' }: DualTimelineProps) {
-  const [currentTime, setCurrentTime] = useState<Date>(new Date())
+  const [currentTime, setCurrentTime] = useState<Date | null>(null)
   const [isAnimating, setIsAnimating] = useState(true)
+  const [mounted, setMounted] = useState(false)
+
+  // Set mounted state to true after component mounts
+  useEffect(() => {
+    setMounted(true)
+    setCurrentTime(new Date())
+  }, [])
 
   // Update current time every minute
   useEffect(() => {
+    if (!mounted) return
     const interval = setInterval(() => {
       setCurrentTime(new Date())
     }, 60000)
     return () => clearInterval(interval)
-  }, [])
+  }, [mounted])
 
   // Get current hour in each timezone
   const getHourInTimezone = (timezone: string): number => {
+    if (!mounted || !currentTime) return 12 // Default to noon
     try {
-      return new Date().toLocaleString("en-US", {
+      return parseInt(currentTime.toLocaleString("en-US", {
         timeZone: timezone,
         hour: "numeric",
         hour12: false,
-      }) as unknown as number
+      }))
     } catch {
-      return 0
+      return 12
     }
   }
 
@@ -73,8 +82,8 @@ export default function DualTimeline({ className = '' }: DualTimelineProps) {
   }
 
   // Get current time position for each timezone
-  const californiaTimePosition = getTimePosition(californiaHour)
-  const indiaTimePosition = getTimePosition(indiaHour)
+  const californiaTimePosition = mounted ? getTimePosition(californiaHour) : "50%"
+  const indiaTimePosition = mounted ? getTimePosition(indiaHour) : "50%"
 
   // Calculate handoff zones (when both teams are active)
   const isHandoffZone = isCaliforniaActive && isIndiaActive

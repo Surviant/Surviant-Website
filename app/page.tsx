@@ -11,12 +11,10 @@ import PortfolioPreviewSection from "@/components/sections/portfolio-preview-sec
 import ResearchSection from "@/components/sections/research-section"
 import NoiseBackground from "@/components/ui/noise-background"
 import ParticleBackground from "@/components/ui/particle-background"
-import LoadingScreen from "@/components/loading-screen"
 import { cn } from "@/lib/utils"
 import SectionIndicator from "@/components/ui/section-indicator"
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true)
   const [activeSection, setActiveSection] = useState("home")
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [hasWebGL, setHasWebGL] = useState(true)
@@ -53,13 +51,6 @@ export default function Home() {
     }
   }, [])
 
-  // Simulate loading experience - slightly reduced time
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 1800) // Reduced from 2000ms
-    return () => clearTimeout(timer)
-  }, [])
 
   // Handle section change - now just scrolls to the section
   const handleSectionChange = (section: string) => {
@@ -154,9 +145,6 @@ export default function Home() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [activeSection, sections])
 
-  if (isLoading) {
-    return <LoadingScreen />
-  }
 
   return (
     <main className="relative w-full h-screen bg-black text-white">

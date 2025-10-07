@@ -4,7 +4,8 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence, Variants } from "framer-motion"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
-import { Github, Twitter, Linkedin, Menu, X, ChevronRight } from "lucide-react"
+import { Menu, X, ChevronRight } from "lucide-react"
+import Link from "next/link"
 import Image from "next/image"
 import { useMediaQuery } from "@/hooks/use-media-query"
 
@@ -36,6 +37,7 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
     { id: "portfolio", label: "WORK" },
     { id: "research", label: "RESEARCH" },
     { id: "about", label: "ABOUT" },
+    { id: "contact", label: "CONTACT", isLink: true },
   ]
 
   const menuVariants: Variants = {
@@ -133,28 +135,43 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
             aria-label="Main navigation"
           >
             {navItems.map((item) => (
-              <motion.button
-                key={item.id}
-                onClick={() => onSectionChange(item.id)}
-                className={cn(
-                  "text-base font-bold tracking-wider transition-colors relative py-3 px-3 uppercase",
-                  activeSection === item.id ? "text-white" : "text-gray-400 hover:text-white",
-                )}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                aria-current={activeSection === item.id ? "page" : undefined}
-              >
-                {item.label}
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-500 to-purple-600"
-                  initial={false}
-                  animate={{
-                    scaleX: activeSection === item.id ? 1 : 0,
-                    opacity: activeSection === item.id ? 1 : 0,
-                  }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.button>
+              item.isLink ? (
+                <Link key={item.id} href="/contact">
+                  <motion.div
+                    className={cn(
+                      "text-base font-bold tracking-wider transition-colors relative py-3 px-3 uppercase",
+                      "text-gray-400 hover:text-white cursor-pointer",
+                    )}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    {item.label}
+                  </motion.div>
+                </Link>
+              ) : (
+                <motion.button
+                  key={item.id}
+                  onClick={() => onSectionChange(item.id)}
+                  className={cn(
+                    "text-base font-bold tracking-wider transition-colors relative py-3 px-3 uppercase",
+                    activeSection === item.id ? "text-white" : "text-gray-400 hover:text-white",
+                  )}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  aria-current={activeSection === item.id ? "page" : undefined}
+                >
+                  {item.label}
+                  <motion.div
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-cyan-500 to-purple-600"
+                    initial={false}
+                    animate={{
+                      scaleX: activeSection === item.id ? 1 : 0,
+                      opacity: activeSection === item.id ? 1 : 0,
+                    }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.button>
+              )
             ))}
           </nav>
 
@@ -192,12 +209,28 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
             <div className="container mx-auto px-4 h-full flex flex-col">
               <nav className="flex flex-col space-y-2 mb-auto" role="navigation" aria-label="Mobile navigation">
                 {navItems.map((item, index) => (
-                  <motion.button
-                    key={item.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    onClick={() => {
+                  item.isLink ? (
+                    <Link key={item.id} href="/contact">
+                      <motion.div
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className={cn(
+                          "w-full text-left px-6 py-4 text-2xl font-bold tracking-wide transition-all flex items-center justify-between group rounded-lg",
+                          "text-gray-400 hover:text-white hover:bg-white/5"
+                        )}
+                      >
+                        {item.label}
+                        <ChevronRight className="h-5 w-5 opacity-0 group-hover:opacity-100 transform group-hover:translate-x-2 transition-all" />
+                      </motion.div>
+                    </Link>
+                  ) : (
+                    <motion.button
+                      key={item.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      onClick={() => {
                       onSectionChange(item.id)
                       setIsMenuOpen(false)
                     }}
@@ -211,50 +244,10 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
                     {item.label}
                     <ChevronRight className="h-5 w-5" />
                   </motion.button>
+                  )
                 ))}
               </nav>
 
-              <div className="py-8">
-                <p className="text-gray-400 mb-4 text-sm">CONNECT WITH US</p>
-                <div className="flex space-x-4">
-                  <motion.a
-                    href="https://github.com/SurviantTech"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    aria-label="GitHub"
-                  >
-                    <Button variant="outline" size="icon" className="rounded-full border-gray-700 bg-transparent">
-                      <Github className="h-5 w-5" />
-                    </Button>
-                  </motion.a>
-                  <motion.a
-                    href="https://twitter.com/SurviantTech"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    aria-label="Twitter"
-                  >
-                    <Button variant="outline" size="icon" className="rounded-full border-gray-700 bg-transparent">
-                      <Twitter className="h-5 w-5" />
-                    </Button>
-                  </motion.a>
-                  <motion.a
-                    href="https://linkedin.com/company/surviant"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    whileTap={{ scale: 0.9 }}
-                    aria-label="LinkedIn"
-                  >
-                    <Button variant="outline" size="icon" className="rounded-full border-gray-700 bg-transparent">
-                      <Linkedin className="h-5 w-5" />
-                    </Button>
-                  </motion.a>
-                </div>
-              </div>
             </div>
           </motion.div>
         )}

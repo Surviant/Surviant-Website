@@ -230,7 +230,7 @@ export default function AIMLPage() {
                 </h2>
                 <p className="text-xl text-gray-400 max-w-2xl mx-auto">Let's discuss how these technologies can transform your product</p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-                  <Link href="/#contact">
+                  <Link href="/contact">
                     <Button size="lg" className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white border-0 rounded-full px-10 py-6 text-lg shadow-lg shadow-cyan-500/25">
                       Start a Project <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
