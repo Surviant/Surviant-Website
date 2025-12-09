@@ -90,17 +90,17 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
     <>
       <motion.header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          scrolled || isMenuOpen ? "py-5 backdrop-blur-md bg-black/50" : "py-7",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 safe-area-inset",
+          scrolled || isMenuOpen ? "py-2 sm:py-3 md:py-4 backdrop-blur-md bg-black/70" : "py-3 sm:py-4 md:py-5",
         )}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
         role="banner"
       >
-        <div className="container mx-auto px-4 md:px-6 flex justify-between items-center relative">
+        <div className="container mx-auto px-3 sm:px-4 md:px-6 flex justify-between items-center relative">
           <motion.div
-            className="cursor-pointer"
+            className="cursor-pointer flex-shrink-0"
             onClick={() => {
               onSectionChange("home")
               if (isMenuOpen) setIsMenuOpen(false)
@@ -118,19 +118,19 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
               }
             }}
           >
-            <Image 
-              src="/surviant-logo.png" 
-              alt="Surviant Logo" 
-              width={240} 
-              height={240} 
-              className="h-24 w-auto object-contain" 
+            <Image
+              src="/surviant-logo.png"
+              alt="Surviant Logo"
+              width={240}
+              height={240}
+              className="h-12 sm:h-16 md:h-20 lg:h-24 w-auto object-contain"
               priority
             />
           </motion.div>
 
           {/* Desktop Navigation */}
           <nav
-            className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 space-x-14"
+            className="hidden lg:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 space-x-6 xl:space-x-10 2xl:space-x-14"
             role="navigation"
             aria-label="Main navigation"
           >
@@ -180,7 +180,7 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden text-white"
+              className="lg:hidden text-white h-11 w-11 min-h-[44px] min-w-[44px]"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
@@ -201,27 +201,28 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
             animate="open"
             exit="closed"
             variants={menuVariants}
-            className="fixed inset-0 z-40 bg-black/95 md:hidden pt-24 overflow-y-auto"
+            className="fixed inset-0 z-40 bg-black/98 lg:hidden pt-20 sm:pt-24 overflow-y-auto safe-area-inset"
             role="dialog"
             aria-modal="true"
             aria-label="Mobile navigation menu"
           >
-            <div className="container mx-auto px-4 h-full flex flex-col">
-              <nav className="flex flex-col space-y-2 mb-auto" role="navigation" aria-label="Mobile navigation">
+            <div className="container mx-auto px-4 sm:px-6 h-full flex flex-col">
+              <nav className="flex flex-col space-y-1 sm:space-y-2 mb-auto pt-4" role="navigation" aria-label="Mobile navigation">
                 {navItems.map((item, index) => (
                   item.isLink ? (
-                    <Link key={item.id} href="/contact">
+                    <Link key={item.id} href="/contact" onClick={() => setIsMenuOpen(false)}>
                       <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: index * 0.1 }}
+                        transition={{ delay: index * 0.05 }}
                         className={cn(
-                          "w-full text-left px-6 py-4 text-2xl font-bold tracking-wide transition-all flex items-center justify-between group rounded-lg",
-                          "text-gray-400 hover:text-white hover:bg-white/5"
+                          "w-full text-left px-4 sm:px-6 py-4 sm:py-5 text-lg sm:text-xl md:text-2xl font-bold tracking-wide transition-all flex items-center justify-between group rounded-xl",
+                          "text-gray-400 hover:text-white hover:bg-white/5 active:bg-white/10",
+                          "min-h-[56px] touch-manipulation"
                         )}
                       >
                         {item.label}
-                        <ChevronRight className="h-5 w-5 opacity-0 group-hover:opacity-100 transform group-hover:translate-x-2 transition-all" />
+                        <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 opacity-50 group-hover:opacity-100 transform group-hover:translate-x-2 transition-all" />
                       </motion.div>
                     </Link>
                   ) : (
@@ -229,25 +230,42 @@ export default function Navigation({ activeSection, onSectionChange, isMenuOpen,
                       key={item.id}
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
+                      transition={{ delay: index * 0.05 }}
                       onClick={() => {
-                      onSectionChange(item.id)
-                      setIsMenuOpen(false)
-                    }}
-                    className={cn(
-                      "flex items-center justify-between py-4 text-xl font-medium border-b border-gray-800",
-                      activeSection === item.id ? "text-cyan-500" : "text-white",
-                    )}
-                    whileHover={{ x: 10, color: "#22d3ee" }}
-                    aria-current={activeSection === item.id ? "page" : undefined}
-                  >
-                    {item.label}
-                    <ChevronRight className="h-5 w-5" />
-                  </motion.button>
+                        onSectionChange(item.id)
+                        setIsMenuOpen(false)
+                      }}
+                      className={cn(
+                        "flex items-center justify-between px-4 sm:px-6 py-4 sm:py-5 text-lg sm:text-xl md:text-2xl font-bold tracking-wide rounded-xl transition-all",
+                        "min-h-[56px] touch-manipulation",
+                        activeSection === item.id
+                          ? "text-cyan-400 bg-cyan-500/10"
+                          : "text-white hover:bg-white/5 active:bg-white/10",
+                      )}
+                      whileTap={{ scale: 0.98 }}
+                      aria-current={activeSection === item.id ? "page" : undefined}
+                    >
+                      <span className="flex items-center gap-3">
+                        {activeSection === item.id && (
+                          <motion.div
+                            layoutId="activeMenuIndicator"
+                            className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-cyan-400"
+                          />
+                        )}
+                        {item.label}
+                      </span>
+                      <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6 opacity-50" />
+                    </motion.button>
                   )
                 ))}
               </nav>
 
+              {/* Mobile menu footer */}
+              <div className="py-6 sm:py-8 border-t border-gray-800 mt-auto">
+                <p className="text-center text-gray-500 text-sm">
+                  Surviant Technologies
+                </p>
+              </div>
             </div>
           </motion.div>
         )}

@@ -64,33 +64,33 @@ export default function TechnologiesSection() {
   }
 
   return (
-    <div className="min-h-screen py-20 px-4" ref={ref}>
+    <div className="min-h-[100dvh] min-h-screen py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6" ref={ref}>
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12 md:mb-16"
         >
-          <span className="inline-block py-1 px-3 border border-cyan-500/30 rounded-full text-cyan-500 text-xs tracking-wider mb-4">
+          <span className="inline-block py-1 px-3 border border-cyan-500/30 rounded-full text-cyan-500 text-xs tracking-wider mb-3 sm:mb-4">
             OUR TECH STACK
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Cutting-Edge <br />
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 px-2">
+            Cutting-Edge <br className="hidden sm:block" />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600">
               Technologies
             </span>
           </h2>
-          <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-gray-400 max-w-3xl mx-auto px-2">
             We leverage the latest technologies to build scalable, high-performance digital solutions that drive
             business growth.
           </p>
         </motion.div>
 
         {/* Scrolling Technology Names */}
-        <div className="mb-20 overflow-hidden">
-          <div className="py-4 bg-gray-900/50 rounded-lg">
-            <div className="flex flex-wrap justify-center gap-4 px-4">
+        <div className="mb-10 sm:mb-16 md:mb-20 overflow-hidden">
+          <div className="py-3 sm:py-4 bg-gray-900/50 rounded-lg">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 px-3 sm:px-4">
               {[
                 "React",
                 "Next.js",
@@ -105,7 +105,7 @@ export default function TechnologiesSection() {
               ].map((tech, i) => (
                 <span
                   key={i}
-                  className="px-4 py-2 bg-gray-800/70 rounded-full text-sm text-gray-300 hover:bg-gray-700/70 transition-colors"
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 bg-gray-800/70 rounded-full text-xs sm:text-sm text-gray-300 hover:bg-gray-700/70 transition-colors"
                 >
                   {tech}
                 </span>
@@ -119,13 +119,13 @@ export default function TechnologiesSection() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8"
         >
           {technologies.map((tech, index) => (
             <motion.div
               key={index}
               variants={itemVariants}
-              className="relative overflow-hidden rounded-xl backdrop-blur-sm bg-black/20 border border-gray-800 hover:border-gray-700 transition-all duration-300 p-8"
+              className="relative overflow-hidden rounded-lg sm:rounded-xl backdrop-blur-sm bg-black/20 border border-gray-800 hover:border-gray-700 transition-all duration-300 p-4 sm:p-6 md:p-8"
             >
               <div
                 className={cn(
@@ -139,13 +139,13 @@ export default function TechnologiesSection() {
                 )}
               />
 
-              <h3 className="text-xl font-bold mb-4">{tech.category}</h3>
+              <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">{tech.category}</h3>
 
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {tech.items.map((item, i) => (
                   <span
                     key={i}
-                    className="px-3 py-1 bg-gray-800/50 rounded-full text-sm text-gray-300 hover:bg-gray-700/50 transition-colors"
+                    className="px-2 sm:px-3 py-0.5 sm:py-1 bg-gray-800/50 rounded-full text-xs sm:text-sm text-gray-300 hover:bg-gray-700/50 transition-colors"
                   >
                     {item}
                   </span>
@@ -160,17 +160,20 @@ export default function TechnologiesSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-20 p-8 rounded-xl border border-gray-800 backdrop-blur-sm bg-black/20"
+          className="mt-10 sm:mt-16 md:mt-20 p-4 sm:p-6 md:p-8 rounded-xl border border-gray-800 backdrop-blur-sm bg-black/20"
         >
-          <h2 className="text-3xl font-bold mb-12 text-center">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-6 sm:mb-8 md:mb-12 text-center">
             Our Development <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600">Process</span>
           </h2>
 
           <div className="relative">
-            {/* Process Line */}
+            {/* Process Line - vertical on desktop */}
             <div className="absolute top-0 bottom-0 left-1/2 w-px bg-gradient-to-b from-cyan-500 to-purple-600 transform -translate-x-1/2 hidden md:block" />
 
-            <div className="space-y-12">
+            {/* Process Line - left side on mobile */}
+            <div className="absolute top-0 bottom-0 left-3 w-px bg-gradient-to-b from-cyan-500 to-purple-600 md:hidden" />
+
+            <div className="space-y-6 sm:space-y-8 md:space-y-12">
               {[
                 {
                   number: "01",
@@ -205,19 +208,30 @@ export default function TechnologiesSection() {
                 },
               ].map((step, index) => (
                 <div key={index} className="relative">
-                  <div className="md:grid md:grid-cols-2 md:gap-8">
-                    <div className={`md:text-right ${index % 2 === 1 ? "md:col-start-2" : ""}`}>
+                  {/* Mobile layout */}
+                  <div className="md:hidden pl-10 relative">
+                    {/* Circle on timeline - mobile */}
+                    <div className={`absolute left-0 top-1 w-6 h-6 rounded-full bg-gradient-to-r ${step.color} flex items-center justify-center`}>
+                      <span className="text-[10px] font-bold text-white">{step.number}</span>
+                    </div>
+                    <h4 className="text-base sm:text-lg font-bold mb-1 sm:mb-2">{step.title}</h4>
+                    <p className="text-gray-400 text-xs sm:text-sm">{step.description}</p>
+                  </div>
+
+                  {/* Desktop layout */}
+                  <div className="hidden md:grid md:grid-cols-2 md:gap-8">
+                    <div className={`md:text-right ${index % 2 === 1 ? "md:col-start-2 md:text-left" : ""}`}>
                       <div
                         className={`inline-block py-1 px-3 rounded-full text-xs bg-gradient-to-r ${step.color} mb-2`}
                       >
                         {step.number}
                       </div>
-                      <h4 className="text-xl font-bold mb-2">{step.title}</h4>
-                      <p className="text-gray-400">{step.description}</p>
+                      <h4 className="text-lg md:text-xl font-bold mb-2">{step.title}</h4>
+                      <p className="text-gray-400 text-sm md:text-base">{step.description}</p>
                     </div>
 
-                    {/* Circle on timeline */}
-                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 hidden md:block" />
+                    {/* Circle on timeline - desktop */}
+                    <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-4 h-4 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600" />
                   </div>
                 </div>
               ))}

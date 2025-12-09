@@ -55,37 +55,37 @@ export default function AboutSection() {
   }
 
   return (
-    <div className="min-h-screen py-20 px-4" ref={ref}>
+    <div className="min-h-[100dvh] min-h-screen py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6" ref={ref}>
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12 md:mb-16"
         >
-          <span className="inline-block py-1 px-3 border border-cyan-500/30 rounded-full text-cyan-500 text-xs tracking-wider mb-4">
+          <span className="inline-block py-1 px-3 border border-cyan-500/30 rounded-full text-cyan-500 text-xs tracking-wider mb-3 sm:mb-4">
             OUR STORY
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            The Team Behind <br />
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 px-2">
+            The Team Behind <br className="hidden sm:block" />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600">
               Surviant Technologies
             </span>
           </h2>
-          <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-gray-400 max-w-3xl mx-auto px-2">
             We're a passionate team of 25 specialists dedicated to creating exceptional digital experiences that deliver results in a fraction of the time at a fraction of the cost.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 mb-12 sm:mb-16 md:mb-20">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="flex flex-col h-full"
           >
-            <h3 className="text-2xl font-bold mb-6 flex items-center">Our Story</h3>
-            <div className="space-y-4 text-gray-300">
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 flex items-center">Our Story</h3>
+            <div className="space-y-3 sm:space-y-4 text-gray-300 text-sm sm:text-base">
               <p>
                 What started in 2024 as just the two of us with a simple mission has grown into a full-service digital innovation studio. We began with a vision to help businesses succeed in the digital world through exceptional web development and innovative solutions.
               </p>
@@ -97,30 +97,30 @@ export default function AboutSection() {
               </p>
             </div>
 
-            <div className="mt-8 p-6 rounded-xl bg-gradient-to-br from-cyan-500/10 to-purple-600/10 border border-gray-800">
-              <h4 className="text-xl font-bold mb-4">Our Approach</h4>
-              <p className="text-gray-300 mb-4">
+            <div className="mt-6 sm:mt-8 p-4 sm:p-6 rounded-xl bg-gradient-to-br from-cyan-500/10 to-purple-600/10 border border-gray-800">
+              <h4 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4">Our Approach</h4>
+              <p className="text-gray-300 mb-3 sm:mb-4 text-sm sm:text-base">
                 We combine Silicon Valley innovation with streamlined efficiency. Our specialized team structure allows us to deliver enterprise-quality development at competitive rates while maintaining superior project momentum.
               </p>
-              <p className="text-gray-300">
+              <p className="text-gray-300 text-sm sm:text-base">
                 Whether you're a startup needing market validation or an enterprise requiring AI integration, we scale our approach to your needs—delivering exceptional results in a fraction of the time at a fraction of the cost.
               </p>
             </div>
-            
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <div className="mt-6 sm:mt-8 grid grid-cols-2 gap-3 sm:gap-6">
               {[
                 { label: "Projects Completed", value: "50+" },
                 { label: "Client Outcome Achievement", value: "100%" },
               ].map((stat, index) => (
                 <div
                   key={index}
-                  className="relative overflow-hidden rounded-xl backdrop-blur-sm bg-black/20 border border-gray-800 p-6 flex flex-col items-center text-center"
+                  className="relative overflow-hidden rounded-xl backdrop-blur-sm bg-black/20 border border-gray-800 p-3 sm:p-4 md:p-6 flex flex-col items-center text-center"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-purple-600/5 -z-10" />
-                  <div className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600 mb-2">
+                  <div className="text-2xl sm:text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600 mb-1 sm:mb-2">
                     {stat.value}
                   </div>
-                  <div className="text-sm text-gray-400 uppercase tracking-wider">{stat.label}</div>
+                  <div className="text-xs sm:text-sm text-gray-400 uppercase tracking-wider">{stat.label}</div>
                 </div>
               ))}
             </div>
@@ -132,81 +132,81 @@ export default function AboutSection() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="flex flex-col h-full"
           >
-            <h3 className="text-2xl font-bold mb-6 flex items-center">Our Team Structure</h3>
-            <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 p-8 flex flex-col flex-grow">
+            <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 flex items-center">Our Team Structure</h3>
+            <div className="relative overflow-hidden rounded-xl sm:rounded-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 p-4 sm:p-6 md:p-8 flex flex-col flex-grow">
               <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:20px_20px] opacity-10"></div>
-              
+
               {/* Circle in the center with team size */}
-              <div className="flex justify-center mb-10">
-                <div className="relative flex items-center justify-center w-28 h-28 rounded-full bg-gradient-to-br from-cyan-500/30 to-purple-600/30 border border-cyan-500/30 shadow-lg shadow-cyan-500/10">
+              <div className="flex justify-center mb-6 sm:mb-8 md:mb-10">
+                <div className="relative flex items-center justify-center w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 rounded-full bg-gradient-to-br from-cyan-500/30 to-purple-600/30 border border-cyan-500/30 shadow-lg shadow-cyan-500/10">
                   <div className="text-center">
-                    <div className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500">25</div>
-                    <div className="text-xs text-gray-300 uppercase tracking-wider mt-1">Specialists</div>
+                    <div className="text-2xl sm:text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500">25</div>
+                    <div className="text-[10px] sm:text-xs text-gray-300 uppercase tracking-wider mt-1">Specialists</div>
                   </div>
                   <div className="absolute -inset-1 blur-sm bg-gradient-to-br from-cyan-500/20 to-purple-600/20 -z-10 rounded-full"></div>
                 </div>
               </div>
               
               {/* Team structure disciplines - connected layout */}
-              <div className="flex flex-col gap-6 flex-grow">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+              <div className="flex flex-col gap-3 sm:gap-4 md:gap-6 flex-grow">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 mb-2 sm:mb-4">
                   {[
                     { title: "Full Stack Developers", description: "Versatile engineers handling end-to-end development", color: "from-cyan-500 to-blue-600", Icon: Code2 },
                     { title: "Frontend Specialists", description: "UI/UX focused experts creating exceptional experiences", color: "from-blue-500 to-indigo-600", Icon: Palette },
                     { title: "Backend Specialists", description: "Infrastructure and API experts building robust systems", color: "from-indigo-500 to-violet-600", Icon: ServerCog },
                   ].map((discipline, index) => (
-                    <motion.div 
+                    <motion.div
                       key={index}
                       initial={{ opacity: 0, y: 20 }}
                       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                       transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                      className="relative rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-gray-700 transition-all duration-300 overflow-hidden h-full"
+                      className="relative rounded-lg sm:rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-gray-700 transition-all duration-300 overflow-hidden h-full"
                     >
-                      <div className={`absolute h-1.5 top-0 left-0 right-0 bg-gradient-to-r ${discipline.color}`}></div>
-                      <div className="p-6 flex flex-col h-full">
-                        <div className="flex flex-col items-center text-center mb-5">
-                          <div className={`p-3 rounded-lg bg-gradient-to-br ${discipline.color} bg-opacity-10 mb-3`}>
-                            <discipline.Icon className="h-6 w-6" />
+                      <div className={`absolute h-1 sm:h-1.5 top-0 left-0 right-0 bg-gradient-to-r ${discipline.color}`}></div>
+                      <div className="p-3 sm:p-4 md:p-6 flex flex-col h-full">
+                        <div className="flex flex-col items-center text-center mb-3 sm:mb-4 md:mb-5">
+                          <div className={`p-2 sm:p-3 rounded-lg bg-gradient-to-br ${discipline.color} bg-opacity-10 mb-2 sm:mb-3`}>
+                            <discipline.Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                           </div>
-                          <h4 className={`text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r ${discipline.color}`}>
+                          <h4 className={`text-sm sm:text-base md:text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r ${discipline.color}`}>
                             {discipline.title}
                           </h4>
                         </div>
-                        <p className="text-sm text-gray-400 text-center">{discipline.description}</p>
+                        <p className="text-xs sm:text-sm text-gray-400 text-center">{discipline.description}</p>
                       </div>
                     </motion.div>
                   ))}
                 </div>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
                   {[
                     { title: "AI Specialists", description: "Innovation drivers integrating cutting-edge AI solutions", color: "from-violet-500 to-purple-600", Icon: BrainCircuit },
                     { title: "Product Managers", description: "Strategic leaders guiding product development", color: "from-purple-500 to-pink-600", Icon: LineChart },
                   ].map((discipline, index) => (
-                    <motion.div 
+                    <motion.div
                       key={index}
                       initial={{ opacity: 0, y: 20 }}
                       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
                       transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                      className="relative rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-gray-700 transition-all duration-300 overflow-hidden h-full"
+                      className="relative rounded-lg sm:rounded-xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 hover:border-gray-700 transition-all duration-300 overflow-hidden h-full"
                     >
-                      <div className={`absolute h-1.5 top-0 left-0 right-0 bg-gradient-to-r ${discipline.color}`}></div>
-                      <div className="p-6 flex flex-col h-full">
-                        <div className="flex flex-col items-center text-center mb-5">
-                          <div className={`p-3 rounded-lg bg-gradient-to-br ${discipline.color} bg-opacity-10 mb-3`}>
-                            <discipline.Icon className="h-6 w-6" />
+                      <div className={`absolute h-1 sm:h-1.5 top-0 left-0 right-0 bg-gradient-to-r ${discipline.color}`}></div>
+                      <div className="p-3 sm:p-4 md:p-6 flex flex-col h-full">
+                        <div className="flex flex-col items-center text-center mb-3 sm:mb-4 md:mb-5">
+                          <div className={`p-2 sm:p-3 rounded-lg bg-gradient-to-br ${discipline.color} bg-opacity-10 mb-2 sm:mb-3`}>
+                            <discipline.Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                           </div>
-                          <h4 className={`text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r ${discipline.color}`}>
+                          <h4 className={`text-sm sm:text-base md:text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r ${discipline.color}`}>
                             {discipline.title}
                           </h4>
                         </div>
-                        <p className="text-sm text-gray-400 text-center">{discipline.description}</p>
+                        <p className="text-xs sm:text-sm text-gray-400 text-center">{discipline.description}</p>
                       </div>
                     </motion.div>
                   ))}
                 </div>
-                
-                <div className="text-center text-xs text-gray-500 mt-4 pt-3 border-t border-gray-800">
+
+                <div className="text-center text-[10px] sm:text-xs text-gray-500 mt-2 sm:mt-4 pt-2 sm:pt-3 border-t border-gray-800">
                   All specialists equally represented across project teams
                 </div>
               </div>
@@ -218,46 +218,46 @@ export default function AboutSection() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="mt-20"
+          className="mt-12 sm:mt-16 md:mt-20"
         >
-          <h3 className="text-2xl font-bold mb-10 text-center">Meet Our Leadership Team</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <h3 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8 md:mb-10 text-center">Meet Our Leadership Team</h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto">
             {team.map((member, index) => (
               <motion.div
                 key={index}
                 variants={itemVariants}
                 className="group relative overflow-hidden rounded-xl backdrop-blur-sm bg-black/20 border border-gray-800 hover:border-gray-700 transition-all duration-300"
               >
-                <div className="relative h-[380px] overflow-hidden bg-gray-900">
-                  <Image 
-                    src={member.image} 
-                    alt={`${member.name} - ${member.role}`} 
+                <div className="relative h-[280px] sm:h-[320px] md:h-[380px] overflow-hidden bg-gray-900">
+                  <Image
+                    src={member.image}
+                    alt={`${member.name} - ${member.role}`}
                     fill
-                    sizes="(max-width: 768px) 100vw, 50vw"
+                    sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 50vw"
                     priority
                     className="object-cover object-[center_10%] scale-[1.15]"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                    <div className="p-6 w-full">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                    <div className="p-4 sm:p-6 w-full">
                       <div className="flex justify-center space-x-3">
                         <Button
                           size="icon"
                           variant="ghost"
-                          className="rounded-full bg-white/10 backdrop-blur-sm h-9 w-9"
+                          className="rounded-full bg-white/10 backdrop-blur-sm h-9 w-9 min-h-[44px] min-w-[44px]"
                         >
                           <Twitter className="h-4 w-4" />
                         </Button>
                         <Button
                           size="icon"
                           variant="ghost"
-                          className="rounded-full bg-white/10 backdrop-blur-sm h-9 w-9"
+                          className="rounded-full bg-white/10 backdrop-blur-sm h-9 w-9 min-h-[44px] min-w-[44px]"
                         >
                           <Linkedin className="h-4 w-4" />
                         </Button>
                         <Button
                           size="icon"
                           variant="ghost"
-                          className="rounded-full bg-white/10 backdrop-blur-sm h-9 w-9"
+                          className="rounded-full bg-white/10 backdrop-blur-sm h-9 w-9 min-h-[44px] min-w-[44px]"
                         >
                           <Github className="h-4 w-4" />
                         </Button>
@@ -266,10 +266,10 @@ export default function AboutSection() {
                   </div>
                 </div>
 
-                <div className="p-6">
-                  <h4 className="text-xl font-bold mb-1 group-hover:text-cyan-500 transition-colors">{member.name}</h4>
-                  <p className="text-cyan-500 text-sm mb-3">{member.role}</p>
-                  <p className="text-gray-400 text-sm">{member.bio}</p>
+                <div className="p-4 sm:p-5 md:p-6">
+                  <h4 className="text-lg sm:text-xl font-bold mb-1 group-hover:text-cyan-500 transition-colors">{member.name}</h4>
+                  <p className="text-cyan-500 text-xs sm:text-sm mb-2 sm:mb-3">{member.role}</p>
+                  <p className="text-gray-400 text-xs sm:text-sm">{member.bio}</p>
                 </div>
               </motion.div>
             ))}
@@ -280,18 +280,18 @@ export default function AboutSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-20 p-8 rounded-xl border border-gray-800 backdrop-blur-sm bg-black/20"
+          className="mt-12 sm:mt-16 md:mt-20 p-4 sm:p-6 md:p-8 rounded-xl border border-gray-800 backdrop-blur-sm bg-black/20"
         >
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             <div className="md:col-span-1">
-              <h3 className="text-2xl font-bold mb-4">Our Values</h3>
-              <p className="text-gray-400">
+              <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Our Values</h3>
+              <p className="text-gray-400 text-sm sm:text-base">
                 These core principles guide everything we do and define who we are as a company.
               </p>
             </div>
 
             <div className="md:col-span-2">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6">
                 {[
                   { title: "Innovation", description: "We constantly push boundaries and explore new technologies." },
                   {
@@ -307,9 +307,9 @@ export default function AboutSection() {
                     description: "We operate with transparency and honesty in all our interactions.",
                   },
                 ].map((value, index) => (
-                  <div key={index} className="p-4 rounded-lg bg-gray-800/20 border border-gray-800">
-                    <h4 className="text-lg font-bold mb-2 text-cyan-500">{value.title}</h4>
-                    <p className="text-gray-400 text-sm">{value.description}</p>
+                  <div key={index} className="p-3 sm:p-4 rounded-lg bg-gray-800/20 border border-gray-800">
+                    <h4 className="text-base sm:text-lg font-bold mb-1 sm:mb-2 text-cyan-500">{value.title}</h4>
+                    <p className="text-gray-400 text-xs sm:text-sm">{value.description}</p>
                   </div>
                 ))}
               </div>

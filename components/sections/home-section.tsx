@@ -57,7 +57,7 @@ export default function HomeSection({ onExplore }: HomeSectionProps) {
   }
 
   return (
-    <div className="relative h-screen flex flex-col justify-center items-center px-4 overflow-hidden" ref={ref}>
+    <div className="relative min-h-[100dvh] min-h-screen flex flex-col justify-center items-center px-4 sm:px-6 overflow-hidden" ref={ref}>
       {/* 3D Floating Elements - conditionally rendered based on WebGL support and not on mobile */}
       {hasWebGL && !isMobile && <FloatingElements />}
 
@@ -66,11 +66,11 @@ export default function HomeSection({ onExplore }: HomeSectionProps) {
         variants={containerVariants}
         initial="hidden"
         animate={controls}
-        className="max-w-5xl mx-auto text-center z-10"
+        className="max-w-5xl mx-auto text-center z-10 w-full"
       >
         <motion.h1
           variants={itemVariants}
-          className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight tracking-tight pt-12"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight tracking-tight pt-4 sm:pt-8 md:pt-12"
         >
           <span className="block">We Build</span>
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600">
@@ -80,27 +80,27 @@ export default function HomeSection({ onExplore }: HomeSectionProps) {
 
         <motion.p
           variants={itemVariants}
-          className="text-base sm:text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-10 text-balance"
+          className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto mb-6 sm:mb-8 md:mb-10 px-2 text-balance leading-relaxed"
         >
           From startup strategy to AI-powered applications, we transform your digital vision into reality with our
           global team's 24/7 development coverage.
         </motion.p>
 
-        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 justify-center">
+        <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center px-4 sm:px-0">
           <Button
             size={isMobile ? "default" : "lg"}
             onClick={onExplore}
-            className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white border-0 rounded-full px-6 sm:px-8"
+            className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white border-0 rounded-full px-6 sm:px-8 min-h-[48px] sm:min-h-[52px] text-sm sm:text-base font-semibold w-full sm:w-auto"
           >
             View Our Services
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
 
-          <Link href="/contact">
+          <Link href="/contact" className="w-full sm:w-auto">
             <Button
               size={isMobile ? "default" : "lg"}
               variant="outline"
-              className="border-gray-700 text-white hover:bg-white/10 rounded-full px-6 sm:px-8 bg-transparent"
+              className="border-gray-700 text-white hover:bg-white/10 rounded-full px-6 sm:px-8 bg-transparent min-h-[48px] sm:min-h-[52px] text-sm sm:text-base font-semibold w-full"
             >
               Start Your Project
             </Button>
