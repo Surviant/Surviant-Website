@@ -329,35 +329,35 @@ export default function PortfolioPreviewSection() {
   }
 
   return (
-    <div className="min-h-screen py-20 px-4" ref={ref}>
+    <div className="min-h-[100dvh] min-h-screen py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6" ref={ref}>
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12 md:mb-16"
         >
-          <span className="inline-block py-1 px-3 border border-cyan-500/30 rounded-full text-cyan-500 text-xs tracking-wider mb-4">
+          <span className="inline-block py-1 px-3 border border-cyan-500/30 rounded-full text-cyan-500 text-xs tracking-wider mb-3 sm:mb-4">
             RECENT WORK
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Projects That <br />
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 px-2">
+            Projects That <br className="hidden sm:block" />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600">
               Drive Results
             </span>
           </h2>
-          <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-gray-400 max-w-3xl mx-auto px-2">
             From startup MVPs to enterprise solutions, see how we've helped businesses transform their digital presence
             and achieve measurable growth.
           </p>
         </motion.div>
 
-        <div 
-          className="relative overflow-hidden" 
+        <div
+          className="relative overflow-hidden"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="carousel-container relative h-[650px] md:h-[600px]">
+          <div className="carousel-container relative h-[550px] sm:h-[580px] md:h-[600px]">
             <AnimatePresence initial={false} custom={direction}>
               <motion.div
                 key={currentIndex}
@@ -369,28 +369,28 @@ export default function PortfolioPreviewSection() {
                 transition={{ duration: 0.5, ease: easeInOut }}
                 className="absolute inset-0 w-full h-full flex flex-col"
               >
-                <div className="flex flex-col md:flex-row h-full overflow-hidden rounded-xl border border-gray-800/50 shadow-lg">
+                <div className="flex flex-col md:flex-row h-full overflow-hidden rounded-xl border border-gray-800/50 shadow-lg bg-black/40">
                   {/* Project information */}
-                  <div className="flex-1 p-6 flex flex-col rounded-xl w-full">
-                    <div className="mb-4">
-                      <h3 className="text-2xl font-bold">{projects[currentIndex].title}</h3>
-                      <p className="text-sm text-gray-400">
+                  <div className="flex-1 p-4 sm:p-5 md:p-6 flex flex-col rounded-xl w-full overflow-y-auto">
+                    <div className="mb-2 sm:mb-3 md:mb-4">
+                      <h3 className="text-lg sm:text-xl md:text-2xl font-bold">{projects[currentIndex].title}</h3>
+                      <p className="text-xs sm:text-sm text-gray-400">
                         {projects[currentIndex].industry}
                       </p>
                     </div>
 
-                    <p className="text-gray-400 mb-4">
+                    <p className="text-gray-400 mb-3 sm:mb-4 text-xs sm:text-sm md:text-base">
                       {projects[currentIndex].description}
                     </p>
 
-                    <div className="mb-4">
-                      <h4 className="text-sm font-medium mb-2">Technologies</h4>
-                      <div className="relative overflow-hidden h-20"> 
-                        <motion.div 
-                          className="flex gap-3 absolute whitespace-nowrap"
+                    <div className="mb-3 sm:mb-4">
+                      <h4 className="text-xs sm:text-sm font-medium mb-2">Technologies</h4>
+                      <div className="relative overflow-hidden h-16 sm:h-20">
+                        <motion.div
+                          className="flex gap-2 sm:gap-3 absolute whitespace-nowrap"
                           animate={{
                             x: [
-                              0, 
+                              0,
                               -1200 * (Math.ceil(projects[currentIndex].technologies.length / 6) - 1)
                             ],
                           }}
@@ -398,7 +398,7 @@ export default function PortfolioPreviewSection() {
                             x: {
                               repeat: Infinity,
                               repeatType: "reverse",
-                              duration: 25, 
+                              duration: 25,
                               ease: "linear",
                             },
                           }}
@@ -406,13 +406,13 @@ export default function PortfolioPreviewSection() {
                           {[...projects[currentIndex].technologies, ...projects[currentIndex].technologies].map((tech, i) => (
                             <div
                               key={i}
-                              className="flex flex-col items-center justify-center flex-shrink-0 w-24"
+                              className="flex flex-col items-center justify-center flex-shrink-0 w-16 sm:w-20 md:w-24"
                             >
-                              <span className="text-xs px-2 py-1 bg-gray-800 text-gray-200 rounded-full mb-1.5 text-center whitespace-normal">
+                              <span className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 sm:py-1 bg-gray-800 text-gray-200 rounded-full mb-1 sm:mb-1.5 text-center whitespace-normal">
                                 {tech}
                               </span>
-                              <div className="h-8 w-8 flex items-center justify-center text-primary">
-                                <TechIcon tech={tech} size={22} />
+                              <div className="h-6 w-6 sm:h-8 sm:w-8 flex items-center justify-center text-primary">
+                                <TechIcon tech={tech} size={18} />
                               </div>
                             </div>
                           ))}
@@ -420,24 +420,24 @@ export default function PortfolioPreviewSection() {
                       </div>
                     </div>
 
-                    <div className="mb-4">
-                      <h4 className="text-sm font-medium mb-2">Key Features</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-1">
-                        {projects[currentIndex].features.slice(0, projects[currentIndex].features.length >= 8 ? 8 : projects[currentIndex].features.length).map((feature, i) => (
-                          <div key={i} className="text-sm text-gray-300 flex items-start">
-                            <span className="inline-block w-1.5 h-1.5 rounded-full bg-cyan-500 mt-1.5 mr-2 flex-shrink-0"></span>
-                            <span>{feature}</span>
+                    <div className="mb-3 sm:mb-4">
+                      <h4 className="text-xs sm:text-sm font-medium mb-2">Key Features</h4>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-3 sm:gap-x-4 gap-y-0.5 sm:gap-y-1">
+                        {projects[currentIndex].features.slice(0, projects[currentIndex].features.length >= 6 ? 6 : projects[currentIndex].features.length).map((feature, i) => (
+                          <div key={i} className="text-xs sm:text-sm text-gray-300 flex items-start">
+                            <span className="inline-block w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-cyan-500 mt-1 sm:mt-1.5 mr-1.5 sm:mr-2 flex-shrink-0"></span>
+                            <span className="line-clamp-2">{feature}</span>
                           </div>
                         ))}
                       </div>
-                      {projects[currentIndex].features.length > 8 && (
-                        <p className="text-xs text-cyan-500/80 mt-2">+{projects[currentIndex].features.length - 8} more features</p>
+                      {projects[currentIndex].features.length > 6 && (
+                        <p className="text-[10px] sm:text-xs text-cyan-500/80 mt-1 sm:mt-2">+{projects[currentIndex].features.length - 6} more features</p>
                       )}
                     </div>
                     
-                    <div className="mb-4">
-                      <h4 className="text-sm font-medium mb-2">Best For</h4>
-                      <p className="text-sm text-gray-300">
+                    <div className="mb-2 sm:mb-3 md:mb-4 hidden sm:block">
+                      <h4 className="text-xs sm:text-sm font-medium mb-1 sm:mb-2">Best For</h4>
+                      <p className="text-xs sm:text-sm text-gray-300">
                         {projects[currentIndex].industry === "Health & Fitness" && "Fitness enthusiasts and health-conscious users"}
                         {projects[currentIndex].industry === "Productivity Tools" && "Professionals and students managing complex information"}
                         {projects[currentIndex].industry === "Enterprise Solutions" && "Businesses looking to optimize operations"}
@@ -455,27 +455,27 @@ export default function PortfolioPreviewSection() {
                         {projects[currentIndex].industry === "Automotive" && "Car shoppers and enthusiasts"}
                       </p>
                     </div>
-                    
+
                     <div className="mt-auto">
-                      <h4 className="text-sm font-medium mb-2">Time to Develop</h4>
+                      <h4 className="text-xs sm:text-sm font-medium mb-1 sm:mb-2">Time to Develop</h4>
                       <div className="flex items-center space-x-2">
                         {/* Get a consistent months value */}
                         {(() => {
                           // Use a consistent seed based on project index
                           const seed = currentIndex * 13 % 17;
                           const months = (seed % 6) + 1; // 1-6 months range
-                          
+
                           return (
                             <>
-                              <div className="text-sm text-primary font-medium">
+                              <div className="text-xs sm:text-sm text-primary font-medium">
                                 {`${months} ${months === 1 ? 'month' : 'months'}`}
                               </div>
-                              
+
                               <div className="flex">
                                 {[...Array(6)].map((_, i) => (
-                                  <div 
-                                    key={i} 
-                                    className={`h-1.5 w-3 mx-0.5 rounded-sm ${i < months ? 'bg-primary' : 'bg-gray-600'}`}
+                                  <div
+                                    key={i}
+                                    className={`h-1 sm:h-1.5 w-2 sm:w-3 mx-0.5 rounded-sm ${i < months ? 'bg-primary' : 'bg-gray-600'}`}
                                   />
                                 ))}
                               </div>
@@ -485,35 +485,35 @@ export default function PortfolioPreviewSection() {
                       </div>
                     </div>
                   </div>
-                  
+
                   {/* No image section anymore */}
                 </div>
               </motion.div>
             </AnimatePresence>
 
             {/* Navigation controls */}
-            <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
-              <button 
-                onClick={prevSlide} 
-                className="bg-gray-900/60 backdrop-blur-sm hover:bg-primary/90 text-white rounded-full p-3.5 transition-all shadow-lg border border-gray-700/30 transform hover:scale-105 group"
+            <div className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10">
+              <button
+                onClick={prevSlide}
+                className="bg-gray-900/80 backdrop-blur-sm hover:bg-primary/90 text-white rounded-full p-2 sm:p-3 md:p-3.5 transition-all shadow-lg border border-gray-700/30 transform hover:scale-105 group min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label="Previous project"
               >
-                <ChevronLeftIcon className="h-5 w-5 opacity-80 group-hover:opacity-100" />
+                <ChevronLeftIcon className="h-4 w-4 sm:h-5 sm:w-5 opacity-80 group-hover:opacity-100" />
               </button>
             </div>
-            
-            <div className="absolute right-4 top-1/2 -translate-y-1/2 z-10">
-              <button 
-                onClick={nextSlide} 
-                className="bg-gray-900/60 backdrop-blur-sm hover:bg-primary/90 text-white rounded-full p-3.5 transition-all shadow-lg border border-gray-700/30 transform hover:scale-105 group"
+
+            <div className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10">
+              <button
+                onClick={nextSlide}
+                className="bg-gray-900/80 backdrop-blur-sm hover:bg-primary/90 text-white rounded-full p-2 sm:p-3 md:p-3.5 transition-all shadow-lg border border-gray-700/30 transform hover:scale-105 group min-h-[44px] min-w-[44px] flex items-center justify-center"
                 aria-label="Next project"
               >
-                <ChevronRightIcon className="h-5 w-5 opacity-80 group-hover:opacity-100" />
+                <ChevronRightIcon className="h-4 w-4 sm:h-5 sm:w-5 opacity-80 group-hover:opacity-100" />
               </button>
             </div>
-            
+
             {/* Pagination dots */}
-            <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-3 z-10">
+            <div className="absolute bottom-3 sm:bottom-6 left-0 right-0 flex justify-center gap-1.5 sm:gap-2 md:gap-3 z-10 flex-wrap max-w-full px-4">
               {projects.map((_, index) => (
                 <button
                   key={index}
@@ -521,13 +521,15 @@ export default function PortfolioPreviewSection() {
                     setDirection(index > currentIndex ? 1 : -1);
                     setCurrentIndex(index);
                   }}
-                  className={`w-2.5 h-2.5 rounded-full transition-all ${
-                    index === currentIndex 
-                      ? 'bg-primary scale-110 shadow-md shadow-primary/20' 
+                  className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all min-h-[20px] min-w-[20px] flex items-center justify-center ${
+                    index === currentIndex
+                      ? 'bg-primary scale-110 shadow-md shadow-primary/20'
                       : 'bg-gray-400/30 hover:bg-gray-400/50'
                   }`}
                   aria-label={`Go to project ${index + 1}`}
-                />
+                >
+                  <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${index === currentIndex ? 'bg-primary' : 'bg-gray-400/50'}`} />
+                </button>
               ))}
             </div>
           </div>
@@ -538,11 +540,11 @@ export default function PortfolioPreviewSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center"
+          className="text-center mt-6 sm:mt-8"
         >
           <Button
             size="lg"
-            className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white border-0 rounded-full px-8"
+            className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white border-0 rounded-full px-6 sm:px-8 min-h-[48px] text-sm sm:text-base"
           >
             View Case Studies
             <ArrowRight className="ml-2 h-4 w-4" />

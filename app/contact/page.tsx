@@ -75,15 +75,15 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
+    <div className="min-h-[100dvh] min-h-screen bg-black relative overflow-hidden">
       <NoiseBackground opacity={0.02} />
       <ParticleBackground density={2} />
 
       <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 via-transparent to-purple-600/5" />
 
-      <div className="container mx-auto px-4 py-12 relative z-10">
+      <div className="container mx-auto px-3 sm:px-4 md:px-6 py-6 sm:py-8 md:py-12 relative z-10 safe-area-inset">
         <Link href="/">
-          <Button variant="ghost" className="mb-8 hover:bg-white/10">
+          <Button variant="ghost" className="mb-4 sm:mb-6 md:mb-8 hover:bg-white/10 min-h-[44px]">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
           </Button>
@@ -96,89 +96,89 @@ export default function ContactPage() {
           className="max-w-6xl mx-auto"
         >
           {/* Header */}
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 mb-6">
-              <Sparkles className="h-4 w-4 text-cyan-400" />
-              <span className="text-cyan-400 font-medium">Let's Build Together</span>
+          <motion.div variants={itemVariants} className="text-center mb-8 sm:mb-12 md:mb-16">
+            <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 mb-4 sm:mb-6">
+              <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 text-cyan-400" />
+              <span className="text-cyan-400 font-medium text-xs sm:text-sm md:text-base">Let's Build Together</span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 px-2">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
                 Start Your Project
               </span>
             </h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto px-2">
               Transform your vision into reality with our expert team.
               We're here to help you build the future.
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid lg:grid-cols-3 gap-6 sm:gap-8 md:gap-10 lg:gap-12">
             {/* Contact Information */}
-            <motion.div variants={itemVariants} className="space-y-8">
+            <motion.div variants={itemVariants} className="space-y-6 sm:space-y-8">
               <div>
-                <h2 className="text-2xl font-bold mb-6 text-white">Get in Touch</h2>
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                      <Mail className="h-5 w-5 text-cyan-400" />
+                <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-white">Get in Touch</h2>
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                      <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-cyan-400" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-white mb-1">Email</h3>
-                      <p className="text-gray-400">hello@surviant.com</p>
+                      <h3 className="font-semibold text-white mb-0.5 sm:mb-1 text-sm sm:text-base">Email</h3>
+                      <p className="text-gray-400 text-sm sm:text-base">hello@surviant.com</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
-                      <Phone className="h-5 w-5 text-purple-400" />
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+                      <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-purple-400" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-white mb-1">Phone</h3>
-                      <p className="text-gray-400">+1 (555) 123-4567</p>
+                      <h3 className="font-semibold text-white mb-0.5 sm:mb-1 text-sm sm:text-base">Phone</h3>
+                      <p className="text-gray-400 text-sm sm:text-base">+1 (555) 123-4567</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="h-5 w-5 text-blue-400" />
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-blue-500/20 flex items-center justify-center flex-shrink-0">
+                      <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-blue-400" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-white mb-1">Offices</h3>
-                      <p className="text-gray-400">San Francisco, CA</p>
-                      <p className="text-gray-400">Bangalore, India</p>
+                      <h3 className="font-semibold text-white mb-0.5 sm:mb-1 text-sm sm:text-base">Offices</h3>
+                      <p className="text-gray-400 text-sm sm:text-base">San Francisco, CA</p>
+                      <p className="text-gray-400 text-sm sm:text-base">Bangalore, India</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
-                      <Clock className="h-5 w-5 text-green-400" />
+                  <div className="flex items-start gap-3 sm:gap-4">
+                    <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
+                      <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-green-400" />
                     </div>
                     <div>
-                      <h3 className="font-semibold text-white mb-1">Response Time</h3>
-                      <p className="text-gray-400">Within 24 hours</p>
+                      <h3 className="font-semibold text-white mb-0.5 sm:mb-1 text-sm sm:text-base">Response Time</h3>
+                      <p className="text-gray-400 text-sm sm:text-base">Within 24 hours</p>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Why Choose Us */}
-              <div className="pt-8 border-t border-gray-800">
-                <h3 className="text-lg font-semibold mb-4 text-white">Why Work With Us</h3>
-                <ul className="space-y-3 text-gray-400">
+              <div className="pt-6 sm:pt-8 border-t border-gray-800">
+                <h3 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-white">Why Work With Us</h3>
+                <ul className="space-y-2 sm:space-y-3 text-gray-400 text-sm sm:text-base">
                   <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0" />
                     24/7 Global Development Cycle
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0" />
                     Expert Teams in CA & India
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0" />
                     Cutting-edge Technology Stack
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 flex-shrink-0" />
                     Proven Track Record
                   </li>
                 </ul>
@@ -188,27 +188,27 @@ export default function ContactPage() {
             {/* Contact Form */}
             <motion.div
               variants={itemVariants}
-              className="lg:col-span-2 bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl p-8"
+              className="lg:col-span-2 bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 md:p-8"
             >
-              <h2 className="text-2xl font-bold mb-6 text-white">Project Details</h2>
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-white">Project Details</h2>
 
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="text-center py-12"
+                  className="text-center py-8 sm:py-12"
                 >
-                  <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-500/20 flex items-center justify-center">
-                    <Send className="h-10 w-10 text-green-400" />
+                  <div className="w-16 h-16 sm:w-20 sm:h-20 mx-auto mb-4 sm:mb-6 rounded-full bg-green-500/20 flex items-center justify-center">
+                    <Send className="h-8 w-8 sm:h-10 sm:w-10 text-green-400" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-2">Thank You!</h3>
-                  <p className="text-gray-400">We'll get back to you within 24 hours.</p>
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-2">Thank You!</h3>
+                  <p className="text-gray-400 text-sm sm:text-base">We'll get back to you within 24 hours.</p>
                 </motion.div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5 md:space-y-6">
+                  <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5 sm:mb-2">
                         Your Name *
                       </label>
                       <input
@@ -217,13 +217,13 @@ export default function ContactPage() {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors text-sm sm:text-base"
                         placeholder="John Doe"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5 sm:mb-2">
                         Email Address *
                       </label>
                       <input
@@ -232,15 +232,15 @@ export default function ContactPage() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors text-sm sm:text-base"
                         placeholder="john@company.com"
                       />
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5 sm:mb-2">
                         Company
                       </label>
                       <input
@@ -248,13 +248,13 @@ export default function ContactPage() {
                         name="company"
                         value={formData.company}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors text-sm sm:text-base"
                         placeholder="Acme Inc."
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5 sm:mb-2">
                         Project Type *
                       </label>
                       <select
@@ -262,7 +262,7 @@ export default function ContactPage() {
                         required
                         value={formData.projectType}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors text-sm sm:text-base"
                       >
                         <option value="">Select a type</option>
                         <option value="web">Web Development</option>
@@ -276,16 +276,16 @@ export default function ContactPage() {
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5 sm:mb-2">
                         Budget Range
                       </label>
                       <select
                         name="budget"
                         value={formData.budget}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors text-sm sm:text-base"
                       >
                         <option value="">Select budget</option>
                         <option value="10-25k">$10,000 - $25,000</option>
@@ -297,14 +297,14 @@ export default function ContactPage() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">
+                      <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5 sm:mb-2">
                         Timeline
                       </label>
                       <select
                         name="timeline"
                         value={formData.timeline}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors"
+                        className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors text-sm sm:text-base"
                       >
                         <option value="">Select timeline</option>
                         <option value="asap">ASAP</option>
@@ -317,7 +317,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-2">
+                    <label className="block text-xs sm:text-sm font-medium text-gray-400 mb-1.5 sm:mb-2">
                       Project Description *
                     </label>
                     <textarea
@@ -325,8 +325,8 @@ export default function ContactPage() {
                       required
                       value={formData.message}
                       onChange={handleChange}
-                      rows={6}
-                      className="w-full px-4 py-3 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors resize-none"
+                      rows={5}
+                      className="w-full px-3 sm:px-4 py-2.5 sm:py-3 rounded-lg bg-black/50 border border-gray-700 text-white placeholder-gray-500 focus:border-cyan-500 focus:outline-none transition-colors resize-none text-sm sm:text-base"
                       placeholder="Tell us about your project, goals, and any specific requirements..."
                     />
                   </div>
@@ -334,7 +334,7 @@ export default function ContactPage() {
                   <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-semibold py-6 rounded-lg transition-all duration-300 disabled:opacity-50"
+                    className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-semibold py-4 sm:py-5 md:py-6 rounded-lg transition-all duration-300 disabled:opacity-50 min-h-[48px] text-sm sm:text-base"
                   >
                     {isSubmitting ? (
                       <span className="flex items-center justify-center gap-2">
@@ -342,13 +342,13 @@ export default function ContactPage() {
                           animate={{ rotate: 360 }}
                           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                         >
-                          <Send className="h-5 w-5" />
+                          <Send className="h-4 w-4 sm:h-5 sm:w-5" />
                         </motion.div>
                         Sending...
                       </span>
                     ) : (
                       <span className="flex items-center justify-center gap-2">
-                        <Send className="h-5 w-5" />
+                        <Send className="h-4 w-4 sm:h-5 sm:w-5" />
                         Send Message
                       </span>
                     )}

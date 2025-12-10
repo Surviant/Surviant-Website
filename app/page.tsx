@@ -147,7 +147,7 @@ export default function Home() {
 
 
   return (
-    <main className="relative w-full h-screen bg-black text-white">
+    <main className="relative w-full min-h-screen min-h-[100dvh] bg-black text-white overflow-x-hidden">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <div className="w-full h-full bg-gradient-to-b from-black to-gray-900">
@@ -175,41 +175,45 @@ export default function Home() {
         {/* Continuous scrolling container with all sections */}
         <div
           ref={contentRef}
-          className={cn("h-full overflow-y-auto scroll-smooth", isMenuOpen && "pointer-events-none")}
-          style={{ paddingTop: "6rem" }} // 96px = 6rem for header height
+          className={cn(
+            "h-full overflow-y-auto scroll-smooth hide-scrollbar",
+            "-webkit-overflow-scrolling-touch",
+            isMenuOpen && "pointer-events-none"
+          )}
+          style={{ paddingTop: "5rem" }} // Adjusted for mobile header
         >
           {/* Home Section */}
-          <section ref={(el) => { sectionRefs.current.home = el }} className="min-h-screen section-container">
+          <section ref={(el) => { sectionRefs.current.home = el }} className="min-h-[100dvh] min-h-screen section-container">
             <HomeSection onExplore={() => handleSectionChange("services")} />
           </section>
 
           {/* Services Section */}
-          <section ref={(el) => { sectionRefs.current.services = el }} className="min-h-screen section-container">
+          <section ref={(el) => { sectionRefs.current.services = el }} className="min-h-[100dvh] min-h-screen section-container py-8 md:py-0">
             <ServicesSection />
           </section>
 
           {/* Global Coverage Section */}
-          <section ref={(el) => { sectionRefs.current.coverage = el }} className="min-h-screen section-container">
+          <section ref={(el) => { sectionRefs.current.coverage = el }} className="min-h-[100dvh] min-h-screen section-container py-8 md:py-0">
             <GlobalCoverageSection />
           </section>
 
           {/* Technologies Section */}
-          <section ref={(el) => { sectionRefs.current.technologies = el }} className="min-h-screen section-container">
+          <section ref={(el) => { sectionRefs.current.technologies = el }} className="min-h-[100dvh] min-h-screen section-container py-8 md:py-0">
             <TechnologiesSection />
           </section>
 
           {/* Portfolio Preview Section */}
-          <section ref={(el) => { sectionRefs.current.portfolio = el }} className="min-h-screen section-container">
+          <section ref={(el) => { sectionRefs.current.portfolio = el }} className="min-h-[100dvh] min-h-screen section-container py-8 md:py-0">
             <PortfolioPreviewSection />
           </section>
 
           {/* Research Section */}
-          <section ref={(el) => { sectionRefs.current.research = el }} className="min-h-screen section-container">
+          <section ref={(el) => { sectionRefs.current.research = el }} className="min-h-[100dvh] min-h-screen section-container py-8 md:py-0">
             <ResearchSection />
           </section>
 
           {/* About Section */}
-          <section ref={(el) => { sectionRefs.current.about = el }} className="min-h-screen section-container">
+          <section ref={(el) => { sectionRefs.current.about = el }} className="min-h-[100dvh] min-h-screen section-container py-8 md:py-0">
             <AboutSection />
           </section>
 

@@ -89,42 +89,42 @@ export default function DualTimeline({ className = '' }: DualTimelineProps) {
   const isHandoffZone = isCaliforniaActive && isIndiaActive
 
   return (
-    <div className={`w-full p-6 rounded-xl border border-gray-800 bg-black/80 ${className}`}>
-      <div className="flex justify-between items-center mb-6">
-        <h3 className="text-xl font-bold">24-Hour Development Timeline</h3>
-        <button 
+    <div className={`w-full p-3 sm:p-4 md:p-6 rounded-lg sm:rounded-xl border border-gray-800 bg-black/80 ${className}`}>
+      <div className="flex justify-between items-center gap-2 mb-4 sm:mb-6">
+        <h3 className="text-base sm:text-lg md:text-xl font-bold">24-Hour Development Timeline</h3>
+        <button
           onClick={() => setIsAnimating(!isAnimating)}
-          className="text-sm px-3 py-1 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors"
+          className="text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-1.5 rounded-full bg-gray-800 hover:bg-gray-700 transition-colors touch-manipulation min-h-[32px] sm:min-h-[36px] flex-shrink-0"
         >
           {isAnimating ? "Pause" : "Animate"}
         </button>
       </div>
 
       {/* California Timeline */}
-      <div className="mb-8">
-        <div className="flex items-center gap-2 mb-2">
-          <div className="w-3 h-3 rounded-full bg-cyan-500"></div>
-          <h4 className="font-medium">California Team (PST)</h4>
-          <span className={`ml-auto text-sm ${isCaliforniaActive ? "text-green-400" : "text-gray-500"}`}>
-            {isCaliforniaActive ? "Active" : "Off Hours"}
+      <div className="mb-4 sm:mb-6 md:mb-8">
+        <div className="flex items-center gap-1.5 sm:gap-2 mb-2">
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-cyan-500 flex-shrink-0"></div>
+          <h4 className="font-medium text-sm sm:text-base truncate">California Team (PST)</h4>
+          <span className={`ml-auto text-xs sm:text-sm flex-shrink-0 ${isCaliforniaActive ? "text-green-400" : "text-gray-500"}`}>
+            {isCaliforniaActive ? "Active" : "Off"}
           </span>
         </div>
 
-        <div className="relative h-16 bg-gray-900/50 rounded-lg overflow-hidden">
+        <div className="relative h-14 sm:h-16 bg-gray-900/50 rounded-lg overflow-hidden">
           {/* Active Period Highlight (8am-8pm) */}
-          <div 
+          <div
             className="absolute h-full bg-cyan-900/30 border-l border-r border-cyan-500/30"
             style={{ left: getTimePosition(8), width: "50%" }}
           ></div>
 
-          {/* Hour markers */}
-          {[0, 3, 6, 9, 12, 15, 18, 21].map(hour => (
-            <div 
+          {/* Hour markers - fewer on mobile */}
+          {[0, 6, 12, 18].map(hour => (
+            <div
               key={`ca-${hour}`}
-              className="absolute h-full border-l border-gray-700/50 flex flex-col justify-end pb-1 pl-1"
+              className="absolute h-full border-l border-gray-700/50 flex flex-col justify-end pb-1 pl-0.5 sm:pl-1"
               style={{ left: getTimePosition(hour) }}
             >
-              <span className="text-xs text-gray-500">{formatTime(hour)}</span>
+              <span className="text-[10px] sm:text-xs text-gray-500">{formatTime(hour)}</span>
             </div>
           ))}
 
@@ -134,19 +134,20 @@ export default function DualTimeline({ className = '' }: DualTimelineProps) {
             .map(item => (
               <motion.div
                 key={item.id}
-                className="absolute top-2 -translate-x-1/2 bg-cyan-500 text-black rounded-full p-1 cursor-pointer"
+                className="absolute top-1.5 sm:top-2 -translate-x-1/2 bg-cyan-500 text-black rounded-full p-1.5 sm:p-1 cursor-pointer touch-manipulation"
                 style={{ left: getTimePosition(item.time) }}
                 whileHover={{ scale: 1.2 }}
-                animate={isAnimating ? { y: [0, -5, 0] } : {}}
-                transition={isAnimating ? { 
-                  repeat: Infinity, 
-                  repeatType: "reverse", 
+                whileTap={{ scale: 0.95 }}
+                animate={isAnimating ? { y: [0, -3, 0] } : {}}
+                transition={isAnimating ? {
+                  repeat: Infinity,
+                  repeatType: "reverse",
                   duration: 2,
                   delay: item.time % 3 // Staggered animation
                 } : {}}
                 title={`${item.label} (${formatTime(item.time)})`}
               >
-                {item.icon}
+                <span className="[&>svg]:h-3 [&>svg]:w-3 sm:[&>svg]:h-4 sm:[&>svg]:w-4">{item.icon}</span>
               </motion.div>
             ))}
 
@@ -163,48 +164,48 @@ export default function DualTimeline({ className = '' }: DualTimelineProps) {
       </div>
 
       {/* Handoff Visualization */}
-      <div className="relative h-8 mb-8 flex justify-center items-center">
+      <div className="relative h-6 sm:h-8 mb-4 sm:mb-6 md:mb-8 flex justify-center items-center">
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
-          <motion.div 
-            className="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center"
-            animate={isAnimating && isHandoffZone ? { 
+          <motion.div
+            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center"
+            animate={isAnimating && isHandoffZone ? {
               scale: [1, 1.2, 1],
               rotate: [0, 180, 360]
             } : {}}
             transition={{ repeat: Infinity, duration: 4 }}
           >
-            <Clock className="h-5 w-5 text-white" />
+            <Clock className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
           </motion.div>
         </div>
-        <div className="w-1/3 h-0.5 bg-gradient-to-r from-transparent to-cyan-500"></div>
-        <div className="w-1/3 h-0.5 bg-gradient-to-r from-purple-600 to-transparent"></div>
+        <div className="w-1/4 sm:w-1/3 h-0.5 bg-gradient-to-r from-transparent to-cyan-500"></div>
+        <div className="w-1/4 sm:w-1/3 h-0.5 bg-gradient-to-r from-purple-600 to-transparent"></div>
       </div>
 
       {/* India Timeline */}
       <div>
-        <div className="flex items-center gap-2 mb-2">
-          <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-          <h4 className="font-medium">India Team (IST)</h4>
-          <span className={`ml-auto text-sm ${isIndiaActive ? "text-green-400" : "text-gray-500"}`}>
-            {isIndiaActive ? "Active" : "Off Hours"}
+        <div className="flex items-center gap-1.5 sm:gap-2 mb-2">
+          <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-purple-500 flex-shrink-0"></div>
+          <h4 className="font-medium text-sm sm:text-base truncate">India Team (IST)</h4>
+          <span className={`ml-auto text-xs sm:text-sm flex-shrink-0 ${isIndiaActive ? "text-green-400" : "text-gray-500"}`}>
+            {isIndiaActive ? "Active" : "Off"}
           </span>
         </div>
 
-        <div className="relative h-16 bg-gray-900/50 rounded-lg overflow-hidden">
+        <div className="relative h-14 sm:h-16 bg-gray-900/50 rounded-lg overflow-hidden">
           {/* Active Period Highlight (8am-8pm) */}
-          <div 
+          <div
             className="absolute h-full bg-purple-900/30 border-l border-r border-purple-500/30"
             style={{ left: getTimePosition(8), width: "50%" }}
           ></div>
 
-          {/* Hour markers */}
-          {[0, 3, 6, 9, 12, 15, 18, 21].map(hour => (
-            <div 
+          {/* Hour markers - fewer on mobile */}
+          {[0, 6, 12, 18].map(hour => (
+            <div
               key={`in-${hour}`}
-              className="absolute h-full border-l border-gray-700/50 flex flex-col justify-end pb-1 pl-1"
+              className="absolute h-full border-l border-gray-700/50 flex flex-col justify-end pb-1 pl-0.5 sm:pl-1"
               style={{ left: getTimePosition(hour) }}
             >
-              <span className="text-xs text-gray-500">{formatTime(hour)}</span>
+              <span className="text-[10px] sm:text-xs text-gray-500">{formatTime(hour)}</span>
             </div>
           ))}
 
@@ -214,19 +215,20 @@ export default function DualTimeline({ className = '' }: DualTimelineProps) {
             .map(item => (
               <motion.div
                 key={item.id}
-                className="absolute top-2 -translate-x-1/2 bg-purple-500 text-black rounded-full p-1 cursor-pointer"
+                className="absolute top-1.5 sm:top-2 -translate-x-1/2 bg-purple-500 text-black rounded-full p-1.5 sm:p-1 cursor-pointer touch-manipulation"
                 style={{ left: getTimePosition(item.time) }}
                 whileHover={{ scale: 1.2 }}
-                animate={isAnimating ? { y: [0, -5, 0] } : {}}
-                transition={isAnimating ? { 
-                  repeat: Infinity, 
-                  repeatType: "reverse", 
+                whileTap={{ scale: 0.95 }}
+                animate={isAnimating ? { y: [0, -3, 0] } : {}}
+                transition={isAnimating ? {
+                  repeat: Infinity,
+                  repeatType: "reverse",
                   duration: 2,
                   delay: item.time % 4 // Staggered animation
                 } : {}}
                 title={`${item.label} (${formatTime(item.time)})`}
               >
-                {item.icon}
+                <span className="[&>svg]:h-3 [&>svg]:w-3 sm:[&>svg]:h-4 sm:[&>svg]:w-4">{item.icon}</span>
               </motion.div>
             ))}
 
@@ -243,26 +245,26 @@ export default function DualTimeline({ className = '' }: DualTimelineProps) {
       </div>
 
       {/* Legend */}
-      <div className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs text-gray-400">
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-cyan-500"></div>
-          <span>California Team</span>
+      <div className="mt-4 sm:mt-6 grid grid-cols-2 sm:flex sm:flex-wrap gap-x-4 sm:gap-x-6 gap-y-2 text-[10px] sm:text-xs text-gray-400">
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="w-2 h-2 rounded-full bg-cyan-500 flex-shrink-0"></div>
+          <span>California</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-          <span>India Team</span>
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="w-2 h-2 rounded-full bg-purple-500 flex-shrink-0"></div>
+          <span>India</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-white"></div>
-          <span>Current Time</span>
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="w-2 h-2 rounded-full bg-white flex-shrink-0"></div>
+          <span>Now</span>
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-green-400"></div>
-          <span>Active Hours</span>
+        <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="w-2 h-2 rounded-full bg-green-400 flex-shrink-0"></div>
+          <span>Active</span>
         </div>
-        <div className="flex items-center gap-2">
-          <Clock className="h-3 w-3" />
-          <span>Handoff Period</span>
+        <div className="flex items-center gap-1.5 sm:gap-2 col-span-2 sm:col-span-1">
+          <Clock className="h-3 w-3 flex-shrink-0" />
+          <span>Handoff</span>
         </div>
       </div>
     </div>

@@ -125,24 +125,24 @@ export default function ServicesSection() {
   }
 
   return (
-    <div className="min-h-screen py-20 px-4 scroll-smooth" ref={ref}>
+    <div className="min-h-[100dvh] min-h-screen py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6 scroll-smooth" ref={ref}>
       <div className="container mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12 md:mb-16"
         >
-          <span className="inline-block py-1 px-3 border border-cyan-500/30 rounded-full text-cyan-500 text-xs tracking-wider mb-4">
+          <span className="inline-block py-1 px-3 border border-cyan-500/30 rounded-full text-cyan-500 text-xs tracking-wider mb-3 sm:mb-4">
             OUR EXPERTISE
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Comprehensive Digital <br />
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 px-2">
+            Comprehensive Digital <br className="hidden sm:block" />
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 to-purple-600">
               Development Services
             </span>
           </h2>
-          <p className="text-lg text-gray-400 max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base md:text-lg text-gray-400 max-w-3xl mx-auto px-2">
             From concept to deployment, we offer end-to-end development services tailored to your unique business needs.
           </p>
         </motion.div>
@@ -151,7 +151,7 @@ export default function ServicesSection() {
           variants={containerVariants}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
         >
           {services.map((service, index) => (
             <motion.div key={index} variants={itemVariants}>
@@ -159,21 +159,21 @@ export default function ServicesSection() {
                 glareColor={service.color.split(" ")[0].split("-")[1]}
                 borderColor={service.color.split(" ")[2]}
               >
-                <div className="p-6 h-[220px] flex flex-col justify-center items-center text-center">
+                <div className="p-4 sm:p-5 md:p-6 min-h-[180px] sm:min-h-[200px] md:h-[220px] flex flex-col justify-center items-center text-center">
                   <div
                     className={cn(
-                      "w-12 h-12 rounded-lg flex items-center justify-center mb-5 bg-gradient-to-br",
+                      "w-10 h-10 sm:w-12 sm:h-12 rounded-lg flex items-center justify-center mb-3 sm:mb-4 md:mb-5 bg-gradient-to-br",
                       service.color,
                     )}
                   >
                     {service.icon}
                   </div>
 
-                  <h3 className="text-xl font-bold mb-3 group-hover:text-cyan-500 transition-colors">
+                  <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 sm:mb-3 group-hover:text-cyan-500 transition-colors leading-tight">
                     {service.title}
                   </h3>
 
-                  <p className="text-gray-400 text-sm">{service.description}</p>
+                  <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">{service.description}</p>
                 </div>
               </InteractiveCard>
             </motion.div>
