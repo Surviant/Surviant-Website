@@ -57,7 +57,7 @@ export function HeroSection({ onExplore }: HeroSectionProps) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mb-8 text-4xl font-bold text-transparent md:text-5xl lg:text-6xl bg-gradient-to-r from-cyan-500 via-blue-500 to-blue-600 bg-clip-text"
+          className="mb-8 text-4xl font-bold text-transparent md:text-5xl lg:text-6xl bg-gradient-to-r from-cyan-500 via-blue-500 to-blue-600 bg-clip-text pb-2"
         >
           Complete Digital Solutions
         </motion.h2>
