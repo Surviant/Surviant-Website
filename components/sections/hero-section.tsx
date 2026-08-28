@@ -1,118 +1,127 @@
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, CircuitBoard, Code2, Workflow } from "lucide-react"
 import Link from "next/link"
 
-const releaseStages = [
+const systemLayers = [
   {
-    number: "01",
-    name: "Scope",
-    question: "Who needs this now?",
-    output: "Decision brief",
+    label: "Digital transformation",
+    title: "Modernize the operation",
+    description: "Replace fragile workflows, connect existing systems, and make operational data usable.",
+    output: "A stronger operating core",
+    href: "/services/digital-transformation",
+    icon: Workflow,
   },
   {
-    number: "02",
-    name: "Interface",
-    question: "What is the shortest useful path?",
-    output: "Testable flow",
+    label: "Product engineering",
+    title: "Build the software layer",
+    description: "Design and ship the web, mobile, API, and cloud systems your teams and customers need.",
+    output: "Software people can rely on",
+    href: "/services/product-engineering",
+    icon: Code2,
   },
   {
-    number: "03",
-    name: "Build",
-    question: "What has to hold up in production?",
-    output: "Working product",
-  },
-  {
-    number: "04",
-    name: "Release",
-    question: "What proves the product is ready?",
-    output: "Owned release",
+    label: "AI engineering",
+    title: "Add intelligence with purpose",
+    description: "Use models, retrieval, agents, vision, and voice where they improve a measurable decision or task.",
+    output: "AI that earns its place",
+    href: "/services/ai-engineering",
+    icon: CircuitBoard,
   },
 ]
 
 export function HeroSection() {
   return (
-    <section
-      id="home"
-      className="scroll-mt-24 border-b border-[#DCE9FF] bg-white"
-      aria-labelledby="hero-heading"
-    >
-      <div className="mx-auto max-w-7xl px-4 pb-16 pt-16 sm:px-6 sm:pb-20 sm:pt-20 lg:px-8 lg:pb-24 lg:pt-24">
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:items-end">
+    <section id="home" className="scroll-mt-24 border-b border-[#DCE9FF] bg-white" aria-labelledby="hero-heading">
+      <div className="mx-auto max-w-7xl px-4 pb-16 pt-14 sm:px-6 sm:pb-20 sm:pt-20 lg:px-8 lg:pb-24 lg:pt-24">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.28fr)_minmax(19rem,0.72fr)] lg:items-end">
           <div>
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#155EEF]">
-              Surviant / Product engineering studio
+              Surviant / Software, AI, and systems
             </p>
             <h1
               id="hero-heading"
-              className="mt-6 max-w-5xl text-balance text-[clamp(3.25rem,8vw,7.25rem)] font-semibold leading-[0.9] tracking-[-0.065em] text-[#0A1533]"
+              className="mt-6 max-w-5xl text-balance text-[clamp(3rem,7.2vw,6.7rem)] font-semibold leading-[0.91] tracking-[-0.06em] text-[#0A1533]"
             >
-              You have a product to ship. We make it real.
+              We build the whole thing: the software, the AI inside it, and the systems it runs on.
             </h1>
           </div>
 
           <div className="border-l-2 border-[#155EEF] pl-5 sm:pl-7">
             <p className="text-pretty text-lg leading-8 text-[#526078]">
-              Surviant helps founders and product teams turn a product decision into a clear interface, a durable
-              build, and a release people can use.
+              Surviant helps established teams modernize operations, build missing software, and put practical AI to
+              work. We also help founders take new products from a hard decision to a dependable release.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
               <Link
                 href="/contact"
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[4px] bg-[#155EEF] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0A1533] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] focus-visible:ring-offset-2"
               >
-                Tell us what you are building
+                Start a project
                 <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </Link>
-              <a
-                href="#process"
+              <Link
+                href="/services"
                 className="inline-flex min-h-12 items-center justify-center rounded-[4px] border border-[#DCE9FF] bg-white px-5 py-3 text-sm font-semibold text-[#0A1533] transition-colors hover:border-[#155EEF] hover:text-[#155EEF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] focus-visible:ring-offset-2"
               >
-                See how the work moves
-              </a>
+                Explore our services
+              </Link>
             </div>
           </div>
         </div>
 
-        <figure className="mt-16 overflow-hidden rounded-[4px] border border-[#155EEF] bg-[#F2F6FC] sm:mt-20">
+        <figure className="mt-14 overflow-hidden rounded-[4px] border border-[#155EEF] bg-[#F2F6FC] lg:mt-20">
           <figcaption className="flex flex-col gap-2 border-b border-[#DCE9FF] bg-white px-5 py-4 font-mono text-xs uppercase tracking-[0.14em] text-[#526078] sm:flex-row sm:items-center sm:justify-between sm:px-6">
-            <span className="font-semibold text-[#0A1533]">Build map / One accountable path</span>
-            <span>First decision to live release</span>
+            <span className="font-semibold text-[#0A1533]">Whole system map / One accountable team</span>
+            <span>Operation to product to intelligence</span>
           </figcaption>
 
-          <div className="relative px-5 py-8 sm:px-6 sm:py-10">
-            <div className="absolute left-[12.5%] right-[12.5%] top-[3.45rem] hidden h-px bg-[#DCE9FF] md:block" aria-hidden="true">
-              <span className="release-trace block h-px w-full bg-[#155EEF]" />
+          <div className="relative p-5 sm:p-6 lg:p-8">
+            <div className="absolute bottom-8 left-8 top-8 hidden w-px bg-[#DCE9FF] lg:block" aria-hidden="true">
+              <span className="system-trace block h-full w-px bg-[#155EEF]" />
             </div>
 
-            <ol className="grid gap-0 md:grid-cols-4">
-              {releaseStages.map((stage) => (
-                <li
-                  key={stage.number}
-                  className="relative border-l border-[#DCE9FF] py-5 pl-6 md:border-l-0 md:border-t md:px-5 md:pb-0 md:pt-8 md:first:px-0 md:first:pr-5 md:first:pt-8 md:last:pl-5 md:last:pt-8"
-                >
-                  <span
-                    className="absolute -left-[5px] top-7 h-[9px] w-[9px] bg-[#155EEF] md:-top-[5px] md:left-1/2 md:-translate-x-1/2"
-                    aria-hidden="true"
-                  />
-                  <p className="font-mono text-xs font-semibold tracking-[0.14em] text-[#155EEF]">
-                    {stage.number} / {stage.name.toUpperCase()}
-                  </p>
-                  <h2 className="mt-4 max-w-[15rem] text-xl font-semibold leading-6 text-[#0A1533]">
-                    {stage.question}
-                  </h2>
-                  <p className="mt-6 font-mono text-xs uppercase tracking-[0.12em] text-[#526078]">
-                    Output / <span className="font-semibold text-[#0A1533]">{stage.output}</span>
-                  </p>
-                </li>
-              ))}
+            <ol className="grid gap-4 lg:pl-8">
+              {systemLayers.map((layer, index) => {
+                const Icon = layer.icon
+
+                return (
+                  <li key={layer.label} className="relative">
+                    <span
+                      className="absolute -left-[2.28rem] top-1/2 hidden h-[9px] w-[9px] -translate-y-1/2 bg-[#155EEF] lg:block"
+                      aria-hidden="true"
+                    />
+                    <Link
+                      href={layer.href}
+                      className="group grid min-h-[10rem] gap-5 rounded-[3px] border border-[#DCE9FF] bg-white p-5 transition-colors hover:border-[#155EEF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] sm:grid-cols-[3.25rem_minmax(0,0.85fr)_minmax(0,1.15fr)_auto] sm:items-center sm:p-6"
+                    >
+                      <span className="flex h-12 w-12 items-center justify-center rounded-[3px] bg-[#DCE9FF] text-[#155EEF]">
+                        <Icon className="h-5 w-5" aria-hidden="true" />
+                      </span>
+                      <span>
+                        <span className="font-mono block text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[#155EEF]">
+                          Layer {index + 1} / {layer.label}
+                        </span>
+                        <span className="font-display mt-2 block text-xl font-semibold tracking-[-0.02em] text-[#0A1533] sm:text-2xl">
+                          {layer.title}
+                        </span>
+                      </span>
+                      <span className="text-sm leading-6 text-[#526078]">{layer.description}</span>
+                      <span className="flex items-center gap-3 border-t border-[#DCE9FF] pt-4 font-mono text-[0.68rem] font-semibold uppercase tracking-[0.11em] text-[#0A1533] sm:border-l sm:border-t-0 sm:pl-5 sm:pt-0">
+                        {layer.output}
+                        <ArrowRight className="h-4 w-4 shrink-0 text-[#155EEF] transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                      </span>
+                    </Link>
+                  </li>
+                )
+              })}
             </ol>
           </div>
 
           <div className="grid border-t border-[#DCE9FF] bg-[#155EEF] text-white sm:grid-cols-[auto_1fr]">
             <p className="border-b border-white/30 px-5 py-4 font-mono text-xs font-semibold uppercase tracking-[0.14em] sm:border-b-0 sm:border-r sm:px-6">
-              You leave with
+              The result
             </p>
             <p className="px-5 py-4 text-sm font-medium sm:px-6">
-              Working software, the decisions behind it, and a release your team can own.
+              Fewer handoffs, clearer ownership, and systems designed to work together from the start.
             </p>
           </div>
         </figure>

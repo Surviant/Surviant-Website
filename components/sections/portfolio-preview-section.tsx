@@ -23,11 +23,6 @@ export default function PortfolioPreviewSection() {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length)
   }
 
-  useEffect(() => {
-    startAutoplay()
-    return () => stopAutoplay()
-  }, [])
-
   const startAutoplay = () => {
     stopAutoplay()
     intervalRef.current = setInterval(() => {
@@ -293,6 +288,17 @@ export default function PortfolioPreviewSection() {
       ],
     },
   ]
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setDirection(1)
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length)
+    }, 5000)
+
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
+  }, [projects.length])
 
   const containerVariants = {
     hidden: { opacity: 0 },

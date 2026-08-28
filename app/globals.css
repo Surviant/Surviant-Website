@@ -113,18 +113,18 @@
   background: #526078;
 }
 
-@keyframes release-trace {
+@keyframes system-trace {
   from {
-    transform: scaleX(0);
+    transform: scaleY(0);
   }
   to {
-    transform: scaleX(1);
+    transform: scaleY(1);
   }
 }
 
-.release-trace {
-  transform-origin: left center;
-  animation: release-trace 1.25s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
+.system-trace {
+  transform-origin: top center;
+  animation: system-trace 1.15s cubic-bezier(0.22, 1, 0.36, 1) 0.25s both;
 }
 
 @media (prefers-reduced-motion: reduce) {
