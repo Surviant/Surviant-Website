@@ -19,14 +19,6 @@ const navigation = [
 export default function SiteHeader() {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-
-  useEffect(() => {
-    const updateScrolled = () => setScrolled(window.scrollY > 12)
-    updateScrolled()
-    window.addEventListener("scroll", updateScrolled, { passive: true })
-    return () => window.removeEventListener("scroll", updateScrolled)
-  }, [])
 
   useEffect(() => {
     setMenuOpen(false)
@@ -36,22 +28,16 @@ export default function SiteHeader() {
     <>
       <a
         href="#main-content"
-        className="fixed left-4 top-3 z-[100] -translate-y-24 rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white shadow-lg transition-transform focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
+        className="fixed left-4 top-3 z-[100] -translate-y-24 rounded-[4px] bg-[#0A1533] px-4 py-2 text-sm font-semibold text-white transition-transform focus:translate-y-0 focus:outline-none focus:ring-2 focus:ring-[#155EEF] focus:ring-offset-2"
       >
         Skip to content
       </a>
 
-      <header
-        className={`sticky top-0 z-50 border-b transition-colors duration-200 ${
-          scrolled
-            ? "border-slate-200/80 bg-white/95 shadow-[0_10px_30px_rgba(15,23,42,0.06)] backdrop-blur-xl"
-            : "border-transparent bg-white/90 backdrop-blur-xl"
-        }`}
-      >
-        <div className="mx-auto flex h-[4.75rem] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <header className="sticky top-0 z-50 border-b border-[#DCE9FF] bg-white/95 backdrop-blur-md">
+        <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link
             href="/"
-            className="group inline-flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-4"
+            className="inline-flex items-center gap-3 rounded-[3px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] focus-visible:ring-offset-4"
             aria-label="Surviant home"
           >
             <Image
@@ -59,15 +45,18 @@ export default function SiteHeader() {
               alt=""
               width={48}
               height={48}
-              className="h-11 w-11 rounded-xl object-cover ring-1 ring-slate-200 transition-transform duration-200 group-hover:scale-[1.03]"
+              className="h-10 w-10 rounded-[3px] object-cover ring-1 ring-[#DCE9FF]"
               priority
             />
-            <span className="text-sm font-bold uppercase tracking-[0.22em] text-slate-900 sm:text-base">
-              Surviant
+            <span>
+              <span className="font-display block text-base font-semibold tracking-[-0.01em] text-[#0A1533]">Surviant</span>
+              <span className="font-mono hidden text-xs uppercase tracking-[0.16em] text-[#526078] sm:block">
+                Product engineering
+              </span>
             </span>
           </Link>
 
-          <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary navigation">
+          <nav className="hidden items-center gap-5 lg:flex" aria-label="Primary navigation">
             {navigation.map((item) => {
               const isCurrent = item.href === pathname
               return (
@@ -75,10 +64,10 @@ export default function SiteHeader() {
                   key={item.href}
                   href={item.href}
                   aria-current={isCurrent ? "page" : undefined}
-                  className={`rounded-full px-3.5 py-2 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 ${
+                  className={`border-b px-0.5 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] ${
                     isCurrent
-                      ? "bg-blue-50 text-blue-800"
-                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-950"
+                      ? "border-[#155EEF] text-[#0A1533]"
+                      : "border-transparent text-[#526078] hover:border-[#DCE9FF] hover:text-[#0A1533]"
                   }`}
                 >
                   {item.label}
@@ -90,9 +79,9 @@ export default function SiteHeader() {
           <div className="flex items-center gap-2">
             <Link
               href="/contact"
-              className="hidden items-center gap-2 rounded-full bg-slate-950 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2 sm:inline-flex"
+              className="hidden items-center gap-2 rounded-[4px] bg-[#155EEF] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#0A1533] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] focus-visible:ring-offset-2 sm:inline-flex"
             >
-              Start a project
+              Start a brief
               <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </Link>
 
@@ -100,7 +89,7 @@ export default function SiteHeader() {
               <Dialog.Trigger asChild>
                 <button
                   type="button"
-                  className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-900 shadow-sm transition-colors hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2 lg:hidden"
+                  className="inline-flex h-11 w-11 items-center justify-center rounded-[4px] border border-[#DCE9FF] bg-white text-[#0A1533] transition-colors hover:bg-[#F2F6FC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] focus-visible:ring-offset-2 lg:hidden"
                   aria-label="Open navigation menu"
                 >
                   <Menu className="h-5 w-5" aria-hidden="true" />
@@ -108,16 +97,16 @@ export default function SiteHeader() {
               </Dialog.Trigger>
 
               <Dialog.Portal>
-                <Dialog.Overlay className="fixed inset-0 z-[70] bg-slate-950/35 backdrop-blur-sm data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:fade-out data-[state=open]:fade-in" />
-                <Dialog.Content className="fixed inset-y-0 right-0 z-[80] flex w-full max-w-sm flex-col border-l border-slate-200 bg-white p-6 shadow-2xl outline-none data-[state=closed]:animate-out data-[state=open]:animate-in data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right">
-                  <div className="flex items-center justify-between border-b border-slate-200 pb-5">
-                    <Dialog.Title className="text-sm font-bold uppercase tracking-[0.2em] text-slate-900">
+                <Dialog.Overlay className="fixed inset-0 z-[70] bg-[#0A1533]/35" />
+                <Dialog.Content className="fixed inset-y-0 right-0 z-[80] flex w-full max-w-sm flex-col border-l border-[#DCE9FF] bg-white p-6 outline-none">
+                  <div className="flex items-center justify-between border-b border-[#DCE9FF] pb-5">
+                    <Dialog.Title className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#0A1533]">
                       Navigation
                     </Dialog.Title>
                     <Dialog.Close asChild>
                       <button
                         type="button"
-                        className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-slate-100 text-slate-900 transition-colors hover:bg-slate-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700"
+                        className="inline-flex h-11 w-11 items-center justify-center rounded-[4px] border border-[#DCE9FF] bg-white text-[#0A1533] transition-colors hover:bg-[#F2F6FC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF]"
                         aria-label="Close navigation menu"
                       >
                         <X className="h-5 w-5" aria-hidden="true" />
@@ -125,13 +114,13 @@ export default function SiteHeader() {
                     </Dialog.Close>
                   </div>
 
-                  <nav className="flex flex-1 flex-col gap-1 py-6" aria-label="Mobile navigation">
+                  <nav className="flex flex-1 flex-col py-6" aria-label="Mobile navigation">
                     {navigation.map((item) => (
                       <Link
                         key={item.href}
                         href={item.href}
                         onClick={() => setMenuOpen(false)}
-                        className="flex items-center justify-between rounded-2xl px-4 py-3 text-lg font-semibold text-slate-800 transition-colors hover:bg-blue-50 hover:text-blue-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700"
+                        className="flex items-center justify-between border-b border-[#DCE9FF] px-1 py-4 text-lg font-semibold text-[#0A1533] transition-colors hover:bg-[#F2F6FC] hover:text-[#155EEF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF]"
                       >
                         {item.label}
                         <ArrowUpRight className="h-4 w-4 text-slate-400" aria-hidden="true" />
@@ -139,18 +128,18 @@ export default function SiteHeader() {
                     ))}
                   </nav>
 
-                  <div className="border-t border-slate-200 pt-5">
+                  <div className="border-t border-[#DCE9FF] pt-5">
                     <Link
                       href="/contact"
                       onClick={() => setMenuOpen(false)}
-                      className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-blue-800 px-5 py-3 text-base font-semibold text-white transition-colors hover:bg-blue-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2"
+                      className="inline-flex w-full items-center justify-center gap-2 rounded-[4px] bg-[#155EEF] px-5 py-3 text-base font-semibold text-white transition-colors hover:bg-[#0A1533] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] focus-visible:ring-offset-2"
                     >
-                      Start a project
+                      Start a brief
                       <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                     </Link>
                     <a
                       href="mailto:contact@surviant.com"
-                      className="mt-4 block text-center text-sm font-medium text-slate-600 underline decoration-slate-300 underline-offset-4 hover:text-blue-800"
+                      className="mt-4 block text-center text-sm font-medium text-[#526078] underline decoration-[#DCE9FF] underline-offset-4 hover:text-[#155EEF]"
                     >
                       contact@surviant.com
                     </a>

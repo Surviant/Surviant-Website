@@ -1,217 +1,126 @@
-"use client"
-
-import { useRef } from "react"
-import Image from "next/image"
 import { Linkedin } from "lucide-react"
-import { motion, useInView, useReducedMotion } from "framer-motion"
+import Image from "next/image"
 
 const team = [
   {
     name: "Srivant V",
-    role: "Founder & CEO",
-    bio: "Full-stack developer focused on product strategy, thoughtful interfaces, and dependable delivery.",
+    role: "Founder & CEO / Product lead",
+    bio: "Srivant leads product direction and full-stack development, connecting early product decisions to the interface and implementation.",
     image: "/team-member-1.png",
     linkedin: "https://www.linkedin.com/in/srivantv/",
   },
   {
     name: "Dhyuthi S",
-    role: "CTO",
-    bio: "Full-stack developer focused on scalable systems, performance, and practical technical execution.",
+    role: "CTO / Engineering lead",
+    bio: "Dhyuthi leads technical architecture and full-stack engineering, with a focus on system structure, performance, and reliable delivery.",
     image: "/team-member-2.webp",
     linkedin: "https://www.linkedin.com/in/dhyuthidhar2404/",
   },
 ]
 
-const workingPrinciples = [
+const workingMethod = [
   {
-    title: "Start with clarity",
-    description: "We define the problem, audience, and success criteria before implementation begins.",
+    number: "01",
+    title: "Frame the problem",
+    description: "We clarify the problem, the people using the product, and what needs to ship first.",
   },
   {
-    title: "Work as one team",
-    description: "Product thinking, design, and engineering stay aligned throughout delivery.",
+    number: "02",
+    title: "Design with engineering",
+    description:
+      "Interface and system decisions are reviewed together so each choice works in the product and in the code.",
   },
   {
-    title: "Build for the long term",
-    description: "We favor maintainable systems, clear communication, and reliable handoffs.",
+    number: "03",
+    title: "Hand over clearly",
+    description:
+      "We deliver the working product with documentation and a clear account of the decisions behind it.",
   },
 ]
-
-const values = [
-  {
-    title: "Curiosity",
-    description: "We explore better ways to solve meaningful product and engineering problems.",
-  },
-  {
-    title: "Craft",
-    description: "We care about the details that make digital products useful, clear, and dependable.",
-  },
-  {
-    title: "Collaboration",
-    description: "We work closely with clients and make decisions with shared context.",
-  },
-  {
-    title: "Integrity",
-    description: "We communicate openly, set realistic expectations, and follow through.",
-  },
-]
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeInOut" as const },
-  },
-}
 
 export default function AboutSection() {
-  const ref = useRef<HTMLElement>(null)
-  const isInView = useInView(ref, { once: true, amount: 0.15 })
-  const shouldReduceMotion = useReducedMotion()
-
   return (
-    <section
-      ref={ref}
-      aria-labelledby="about-heading"
-      className="min-h-screen px-4 py-12 sm:px-6 sm:py-16 md:py-20"
-    >
-      <div className="container mx-auto max-w-7xl">
-        <motion.header
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
-          className="mx-auto mb-10 max-w-3xl text-center sm:mb-12"
-        >
-          <span className="mb-3 inline-block rounded-full border border-blue-500/30 px-3 py-1 text-xs font-medium tracking-wider text-blue-700 sm:mb-4">
-            OUR STORY
-          </span>
-          <h2
-            id="about-heading"
-            className="mb-4 text-3xl font-bold leading-tight text-slate-900 sm:text-4xl lg:text-5xl"
-          >
-            The people behind{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-              Surviant Technologies
-            </span>
-          </h2>
-          <p className="text-base leading-relaxed text-slate-600 sm:text-lg">
-            We pair product thinking, design, engineering, and AI expertise to help teams turn ideas into dependable
-            digital products.
+    <section aria-labelledby="about-heading" className="border-b border-[#DCE9FF] bg-white">
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+        <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+          <div>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#155EEF]">
+              About / Surviant
+            </p>
+            <h2
+              id="about-heading"
+              className="mt-5 max-w-3xl text-4xl font-semibold leading-[1] tracking-[-0.045em] text-[#0A1533] sm:text-5xl"
+            >
+              Product decisions and engineering decisions happen at the same table.
+            </h2>
+          </div>
+          <p className="max-w-xl border-l-2 border-[#155EEF] pl-5 text-lg leading-8 text-[#526078] sm:pl-7 lg:mt-8">
+            Surviant is led by two full-stack developers who stay directly involved from product framing through
+            implementation and handoff.
           </p>
-        </motion.header>
-
-        <div className="mb-14 grid gap-6 sm:mb-16 lg:grid-cols-2 lg:gap-8">
-          <article className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
-            <h3 className="mb-4 text-2xl font-bold text-slate-900">Our story</h3>
-            <div className="space-y-4 text-sm leading-relaxed text-slate-600 sm:text-base">
-              <p>
-                Surviant began as a small development partnership with a shared interest in building useful, polished
-                digital experiences.
-              </p>
-              <p>
-                Today, we bring product strategy and technical execution together so clients can move from an early
-                concept to a solution that is ready to evolve.
-              </p>
-            </div>
-          </article>
-
-          <article className="rounded-2xl border border-blue-100 bg-gradient-to-br from-blue-50 to-cyan-50/60 p-6 sm:p-8">
-            <h3 className="mb-5 text-2xl font-bold text-slate-900">How we work</h3>
-            <div className="space-y-5">
-              {workingPrinciples.map((principle, index) => (
-                <div key={principle.title} className="flex gap-4">
-                  <span
-                    aria-hidden="true"
-                    className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-blue-600 text-sm font-semibold text-white"
-                  >
-                    {index + 1}
-                  </span>
-                  <div>
-                    <h4 className="font-semibold text-slate-900">{principle.title}</h4>
-                    <p className="mt-1 text-sm leading-relaxed text-slate-600">{principle.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </article>
         </div>
 
-        <motion.div
-          variants={shouldReduceMotion ? undefined : containerVariants}
-          initial={shouldReduceMotion ? undefined : "hidden"}
-          animate={shouldReduceMotion ? undefined : isInView ? "visible" : "hidden"}
-          className="mb-14 sm:mb-16"
-        >
-          <div className="mx-auto mb-7 max-w-2xl text-center sm:mb-9">
-            <h3 className="text-2xl font-bold text-slate-900 sm:text-3xl">Meet the leadership team</h3>
-            <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
-              Hands-on technical leadership keeps product decisions and delivery closely connected.
+        <div className="mt-14 grid gap-8 border-t border-[#DCE9FF] pt-8 lg:grid-cols-[0.55fr_1.45fr] lg:gap-16 sm:mt-16">
+          <h3 className="text-2xl font-semibold text-[#0A1533]">How the work moves</h3>
+          <ol className="border-b border-[#DCE9FF]">
+            {workingMethod.map((item) => (
+              <li key={item.number} className="grid gap-3 border-t border-[#DCE9FF] py-6 first:border-t-0 sm:grid-cols-[5rem_0.8fr_1.2fr] sm:gap-6">
+                <p className="font-mono text-xs font-semibold tracking-[0.14em] text-[#155EEF]">{item.number}</p>
+                <h4 className="text-lg font-semibold text-[#0A1533]">{item.title}</h4>
+                <p className="text-sm leading-6 text-[#526078]">{item.description}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+
+      <div className="border-t border-[#DCE9FF] bg-[#F2F6FC]">
+        <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
+          <div className="grid gap-6 border-b border-[#DCE9FF] pb-8 lg:grid-cols-[0.6fr_1.4fr] lg:items-end">
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#155EEF]">
+              Leadership / Directly involved
             </p>
+            <h3 className="max-w-3xl text-3xl font-semibold leading-tight tracking-[-0.035em] text-[#0A1533] sm:text-4xl">
+              The people leading the engagement stay close to the work.
+            </h3>
           </div>
 
-          <div className="mx-auto grid max-w-4xl grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
-            {team.map((member) => (
-              <motion.article
+          <div className="grid lg:grid-cols-2">
+            {team.map((member, index) => (
+              <article
                 key={member.name}
-                variants={shouldReduceMotion ? undefined : itemVariants}
-                className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-lg"
+                className={`grid gap-6 border-b border-[#DCE9FF] py-8 sm:grid-cols-[minmax(10rem,0.75fr)_minmax(0,1fr)] sm:items-end lg:border-b-0 lg:py-10 ${
+                  index === 0 ? "lg:pr-10" : "lg:border-l lg:pl-10"
+                }`}
               >
-                <div className="relative aspect-[4/5] overflow-hidden bg-slate-100">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[3px] bg-[#DCE9FF]">
                   <Image
                     src={member.image}
-                    alt={`Portrait of ${member.name}, ${member.role} at Surviant Technologies`}
+                    alt={`Portrait of ${member.name}`}
                     fill
-                    sizes="(max-width: 640px) calc(100vw - 2rem), 448px"
+                    sizes="(max-width: 640px) calc(100vw - 2rem), (max-width: 1024px) 40vw, 280px"
                     className="object-cover object-[center_12%]"
                   />
                 </div>
-
-                <div className="p-5 sm:p-6">
-                  <h4 className="text-xl font-bold text-slate-900">{member.name}</h4>
-                  <p className="mt-1 text-sm font-medium text-blue-700">{member.role}</p>
-                  <p className="mt-3 text-sm leading-relaxed text-slate-600">{member.bio}</p>
+                <div>
+                  <p className="font-mono text-xs font-semibold uppercase tracking-[0.13em] text-[#155EEF]">
+                    {member.role}
+                  </p>
+                  <h4 className="mt-3 text-3xl font-semibold tracking-[-0.03em] text-[#0A1533]">{member.name}</h4>
+                  <p className="mt-4 text-sm leading-6 text-[#526078]">{member.bio}</p>
                   <a
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Visit ${member.name}'s LinkedIn profile`}
-                    className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+                    className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#0A1533] underline decoration-[#DCE9FF] underline-offset-4 transition-colors hover:text-[#155EEF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF]"
                   >
-                    <Linkedin aria-hidden="true" className="h-4 w-4" />
-                    LinkedIn
+                    <Linkedin className="h-4 w-4" aria-hidden="true" />
+                    LinkedIn profile
+                    <span className="sr-only"> for {member.name}, opens in a new tab</span>
                   </a>
                 </div>
-              </motion.article>
+              </article>
             ))}
-          </div>
-        </motion.div>
-
-        <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8 lg:p-10">
-          <div className="grid gap-7 lg:grid-cols-[0.8fr_2fr] lg:gap-10">
-            <div>
-              <h3 className="text-2xl font-bold text-slate-900 sm:text-3xl">What guides us</h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
-                These principles shape how we make decisions and work with clients.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              {values.map((value) => (
-                <article key={value.title} className="rounded-2xl border border-slate-200 bg-white p-5 sm:p-6">
-                  <h4 className="text-lg font-bold text-blue-700">{value.title}</h4>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">{value.description}</p>
-                </article>
-              ))}
-            </div>
           </div>
         </div>
       </div>

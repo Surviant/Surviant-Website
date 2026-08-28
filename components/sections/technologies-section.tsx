@@ -1,37 +1,26 @@
-import { ArrowRight, BrainCircuit, Cloud, Code2, Database, type LucideIcon } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
-type TechnologyGroup = {
-  title: string
-  description: string
-  items: string[]
-  icon: LucideIcon
-}
-
-const technologyGroups: TechnologyGroup[] = [
+const technologyDecisions = [
   {
-    title: "Product interfaces",
-    description: "Fast, accessible experiences for browsers and connected devices.",
-    items: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
-    icon: Code2,
+    concern: "Interface",
+    foundations: "React, Next.js, TypeScript",
+    protect: "Accessibility, speed, and a UI your team can extend",
   },
   {
-    title: "Application systems",
-    description: "Maintainable services and APIs that support real product growth.",
-    items: ["Node.js", "Python", "Go", "REST and GraphQL"],
-    icon: Database,
+    concern: "Application",
+    foundations: "Node.js, Python, Go, REST, GraphQL",
+    protect: "Clear boundaries, predictable behavior, and maintainable services",
   },
   {
-    title: "Data and infrastructure",
-    description: "Secure foundations for data, releases, and reliable operations.",
-    items: ["PostgreSQL", "Redis", "Docker", "AWS and Railway"],
-    icon: Cloud,
+    concern: "Data and delivery",
+    foundations: "PostgreSQL, Redis, Docker, Railway, AWS",
+    protect: "Data ownership, repeatable releases, backups, and visibility",
   },
   {
-    title: "Applied intelligence",
-    description: "Purpose-built AI features with evaluation and human control in the loop.",
-    items: ["Language models", "PyTorch", "Vector search", "AI evaluation"],
-    icon: BrainCircuit,
+    concern: "Applied AI",
+    foundations: "Model APIs, PyTorch, vector search, evaluation harnesses",
+    protect: "Evidence, cost control, failure handling, and human oversight",
   },
 ]
 
@@ -39,72 +28,81 @@ export default function TechnologiesSection() {
   return (
     <section
       id="technology"
-      className="scroll-mt-24 border-y border-slate-800 bg-slate-950 py-20 text-white sm:py-24 lg:py-28"
+      className="scroll-mt-24 border-b border-[#DCE9FF] bg-[#F2F6FC] py-16 sm:py-20 lg:py-24"
       aria-labelledby="technology-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr] lg:items-end">
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.2em] text-cyan-300">Technology</p>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#155EEF]">
+              Technical choices
+            </p>
             <h2
               id="technology-heading"
-              className="mt-4 text-3xl font-semibold tracking-[-0.035em] text-white sm:text-4xl lg:text-5xl"
+              className="mt-5 max-w-xl text-4xl font-semibold leading-[1] tracking-[-0.045em] text-[#0A1533] sm:text-5xl"
             >
-              A focused stack, chosen around the product.
+              The stack is a decision, not a display.
             </h2>
           </div>
-          <p className="max-w-2xl text-base leading-7 text-slate-300 sm:text-lg lg:justify-self-end">
-            We use mature foundations where they matter and emerging technology where it creates a clear advantage. The
-            goal is a system your team can understand, operate, and extend.
+          <p className="max-w-2xl text-lg leading-8 text-[#526078] lg:pt-8">
+            We choose technology after the product constraints are clear. Familiar tools are often the right answer.
+            New tools have to earn their place through a specific advantage.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-4 md:grid-cols-2">
-          {technologyGroups.map((group) => {
-            const Icon = group.icon
-            return (
-              <article
-                key={group.title}
-                className="rounded-[1.5rem] border border-white/10 bg-white/[0.045] p-6 sm:p-7"
-              >
-                <div className="flex items-start gap-4">
-                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-cyan-300/10 text-cyan-200 ring-1 ring-inset ring-cyan-200/15">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <div>
-                    <h3 className="text-xl font-semibold text-white">{group.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-slate-400">{group.description}</p>
-                  </div>
-                </div>
-                <ul className="mt-6 flex flex-wrap gap-2" aria-label={`${group.title} technologies`}>
-                  {group.items.map((item) => (
-                    <li
-                      key={item}
-                      className="rounded-full border border-white/10 bg-slate-900 px-3 py-1.5 text-xs font-semibold text-slate-200"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </article>
-            )
-          })}
+        <div
+          role="region"
+          aria-label="Technology decisions"
+          tabIndex={0}
+          className="mt-12 overflow-x-auto border-y border-[#DCE9FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] sm:mt-16"
+        >
+          <p className="border-b border-[#DCE9FF] px-4 py-3 text-xs text-[#526078] sm:hidden">
+            Scroll horizontally to compare columns.
+          </p>
+          <table className="w-full min-w-[760px] border-collapse text-left">
+            <caption className="sr-only">Typical technical foundations and the product qualities they protect</caption>
+            <thead>
+              <tr className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#526078]">
+                <th scope="col" className="w-1/5 px-4 py-4 sm:px-5">
+                  Concern
+                </th>
+                <th scope="col" className="w-2/5 px-4 py-4 sm:px-5">
+                  Typical foundations
+                </th>
+                <th scope="col" className="w-2/5 px-4 py-4 sm:px-5">
+                  Decision we protect
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {technologyDecisions.map((row) => (
+                <tr key={row.concern} className="border-t border-[#DCE9FF] align-top">
+                  <th scope="row" className="px-4 py-6 text-base font-semibold text-[#0A1533] sm:px-5">
+                    {row.concern}
+                  </th>
+                  <td className="px-4 py-6 font-mono text-sm leading-6 text-[#155EEF] sm:px-5">{row.foundations}</td>
+                  <td className="px-4 py-6 text-sm leading-6 text-[#526078] sm:px-5">{row.protect}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
 
-        <div className="mt-5 grid gap-5 overflow-hidden rounded-[1.5rem] border border-blue-300/20 bg-gradient-to-r from-blue-800 to-cyan-800 p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-center">
+        <div className="mt-10 grid gap-5 border-l-2 border-[#155EEF] pl-5 sm:grid-cols-[1fr_auto] sm:items-end sm:pl-7">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-100">Surviant Labs</p>
-            <h3 className="mt-2 text-2xl font-semibold tracking-tight text-white">See how we evaluate the AI and ML landscape.</h3>
-            <p className="mt-2 max-w-3xl text-sm leading-6 text-blue-100">
-              Our research map explains the tools, methods, and maturity levels behind modern intelligent systems.
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.14em] text-[#526078]">
+              Research note / AI and ML
             </p>
+            <h3 className="mt-3 text-2xl font-semibold tracking-[-0.025em] text-[#0A1533]">
+              See how we separate proven patterns from active experiments.
+            </h3>
           </div>
           <Link
             href="/research/ai-ml"
-            className="group inline-flex w-fit items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-blue-900 transition-colors hover:bg-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-blue-800"
+            className="inline-flex min-h-11 w-fit items-center gap-2 text-sm font-semibold text-[#155EEF] underline decoration-[#DCE9FF] underline-offset-4 transition-colors hover:text-[#0A1533] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF]"
           >
-            Explore AI and ML research
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+            Read the working map
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
       </div>

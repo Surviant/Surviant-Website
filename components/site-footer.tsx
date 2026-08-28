@@ -13,27 +13,9 @@ const footerNavigation = [
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-slate-950 text-white">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
-        <div className="grid gap-12 border-b border-white/10 pb-12 lg:grid-cols-[1.3fr_0.7fr] lg:items-end">
-          <div>
-            <p className="mb-4 text-sm font-bold uppercase tracking-[0.22em] text-cyan-300">
-              Have a product in mind?
-            </p>
-            <h2 className="max-w-3xl text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
-              Let&apos;s turn the idea into a useful, dependable product.
-            </h2>
-          </div>
-          <Link
-            href="/contact"
-            className="inline-flex w-fit items-center gap-3 rounded-full bg-white px-6 py-3.5 text-base font-semibold text-slate-950 transition-colors hover:bg-cyan-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 lg:justify-self-end"
-          >
-            Start a conversation
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
-        </div>
-
-        <div className="grid gap-10 py-12 md:grid-cols-[1fr_1.2fr]">
+    <footer className="border-t border-[#DCE9FF] bg-[#F2F6FC] text-[#0A1533]">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 lg:px-8">
+        <div className="grid gap-10 md:grid-cols-[1fr_1.2fr]">
           <div className="max-w-md">
             <Link href="/" className="inline-flex items-center gap-3" aria-label="Surviant home">
               <Image
@@ -41,38 +23,50 @@ export default function SiteFooter() {
                 alt=""
                 width={44}
                 height={44}
-                className="h-11 w-11 rounded-xl object-cover ring-1 ring-white/15"
+                className="h-10 w-10 rounded-[3px] object-cover ring-1 ring-[#DCE9FF]"
               />
-              <span className="font-bold uppercase tracking-[0.22em]">Surviant</span>
+              <span className="font-display text-lg font-semibold">Surviant</span>
             </Link>
-            <p className="mt-5 text-sm leading-7 text-slate-400">
-              Product strategy, experience design, engineering, and practical AI for teams building what comes next.
+            <p className="mt-5 max-w-sm text-sm leading-7 text-[#526078]">
+              Product strategy, experience design, engineering, and practical AI for teams with software to ship.
             </p>
             <a
               href="mailto:contact@surviant.com"
-              className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-white underline decoration-slate-600 underline-offset-4 transition-colors hover:text-cyan-300"
+              className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#0A1533] underline decoration-[#DCE9FF] underline-offset-4 transition-colors hover:text-[#155EEF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF]"
             >
               <Mail className="h-4 w-4" aria-hidden="true" />
               contact@surviant.com
             </a>
           </div>
 
-          <nav className="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3" aria-label="Footer navigation">
+          <div>
+            <div className="mb-7 flex flex-col gap-3 border-b border-[#DCE9FF] pb-6 sm:flex-row sm:items-center sm:justify-between">
+              <p className="font-display text-xl font-semibold">Have a product to ship?</p>
+              <Link
+                href="/contact"
+                className="inline-flex min-h-11 w-fit items-center gap-2 rounded-[4px] border border-[#155EEF] px-4 py-2 text-sm font-semibold text-[#155EEF] transition-colors hover:bg-[#155EEF] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] focus-visible:ring-offset-2"
+              >
+                Tell us about it
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
+            <nav className="grid grid-cols-2 gap-x-6 gap-y-3 sm:grid-cols-3" aria-label="Footer navigation">
             {footerNavigation.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-sm font-medium text-slate-300 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-300"
+                  className="text-sm font-medium text-[#526078] transition-colors hover:text-[#155EEF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF]"
               >
                 {item.label}
               </Link>
             ))}
-          </nav>
+            </nav>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-10 flex flex-col gap-3 border-t border-[#DCE9FF] pt-6 font-mono text-xs uppercase tracking-[0.1em] text-[#526078] sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Surviant Technologies. All rights reserved.</p>
-          <p>Strategy, design, engineering, and AI.</p>
+          <p>San Francisco / Bangalore</p>
         </div>
       </div>
     </footer>

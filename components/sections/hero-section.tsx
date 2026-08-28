@@ -1,135 +1,121 @@
-import { ArrowRight, Check, Sparkles } from "lucide-react"
+import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 
-const deliveryTracks = [
+const releaseStages = [
   {
     number: "01",
-    title: "Clarify the opportunity",
-    description: "Align the product, audience, and business case before code begins.",
+    name: "Scope",
+    question: "Who needs this now?",
+    output: "Decision brief",
   },
   {
     number: "02",
-    title: "Design the experience",
-    description: "Turn the strategy into a clear system that is easy to use and evolve.",
+    name: "Interface",
+    question: "What is the shortest useful path?",
+    output: "Testable flow",
   },
   {
     number: "03",
-    title: "Build for production",
-    description: "Engineer, test, launch, and improve the product with one accountable team.",
+    name: "Build",
+    question: "What has to hold up in production?",
+    output: "Working product",
+  },
+  {
+    number: "04",
+    name: "Release",
+    question: "What proves the product is ready?",
+    output: "Owned release",
   },
 ]
-
-const capabilities = ["Product strategy", "UX and UI design", "Full-stack engineering", "Applied AI"]
 
 export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative isolate scroll-mt-24 overflow-hidden border-b border-slate-200 bg-white"
+      className="scroll-mt-24 border-b border-[#DCE9FF] bg-white"
       aria-labelledby="hero-heading"
     >
-      <div
-        className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] bg-[size:64px_64px] opacity-35 [mask-image:linear-gradient(to_bottom,black,transparent_88%)]"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute -right-36 top-16 -z-10 h-[30rem] w-[30rem] rounded-full bg-blue-200/50 blur-3xl"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute -left-40 bottom-0 -z-10 h-96 w-96 rounded-full bg-cyan-100/70 blur-3xl"
-        aria-hidden="true"
-      />
-
-      <div className="mx-auto grid min-h-[calc(100svh-4.75rem)] max-w-7xl items-center gap-14 px-4 py-20 sm:px-6 sm:py-24 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-28">
-        <div className="max-w-3xl">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-3.5 py-2 text-xs font-bold uppercase tracking-[0.18em] text-blue-800">
-            <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-            Strategy to production
+      <div className="mx-auto max-w-7xl px-4 pb-16 pt-16 sm:px-6 sm:pb-20 sm:pt-20 lg:px-8 lg:pb-24 lg:pt-24">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(18rem,0.65fr)] lg:items-end">
+          <div>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#155EEF]">
+              Surviant / Product engineering studio
+            </p>
+            <h1
+              id="hero-heading"
+              className="mt-6 max-w-5xl text-balance text-[clamp(3.25rem,8vw,7.25rem)] font-semibold leading-[0.9] tracking-[-0.065em] text-[#0A1533]"
+            >
+              You have a product to ship. We make it real.
+            </h1>
           </div>
 
-          <h1
-            id="hero-heading"
-            className="text-balance text-4xl font-semibold leading-[1.03] tracking-[-0.045em] text-slate-950 sm:text-5xl md:text-6xl lg:text-[4.5rem]"
-          >
-            Digital products built for what comes next.
-          </h1>
-
-          <p className="mt-7 max-w-2xl text-pretty text-lg leading-8 text-slate-600 sm:text-xl">
-            Surviant brings product strategy, experience design, engineering, and practical AI together to move a strong
-            idea into a dependable product.
-          </p>
-
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/contact"
-              className="group inline-flex items-center justify-center gap-2 rounded-full bg-blue-800 px-6 py-3.5 text-base font-semibold text-white shadow-[0_12px_30px_rgba(30,64,175,0.2)] transition-colors hover:bg-blue-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2"
-            >
-              Start a project
-              <ArrowRight
-                className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
-                aria-hidden="true"
-              />
-            </Link>
-            <a
-              href="#services"
-              className="inline-flex items-center justify-center rounded-full border border-slate-300 bg-white px-6 py-3.5 text-base font-semibold text-slate-800 shadow-sm transition-colors hover:border-blue-300 hover:bg-blue-50 hover:text-blue-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:ring-offset-2"
-            >
-              Explore our capabilities
-            </a>
+          <div className="border-l-2 border-[#155EEF] pl-5 sm:pl-7">
+            <p className="text-pretty text-lg leading-8 text-[#526078]">
+              Surviant helps founders and product teams turn a product decision into a clear interface, a durable
+              build, and a release people can use.
+            </p>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
+              <Link
+                href="/contact"
+                className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[4px] bg-[#155EEF] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0A1533] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] focus-visible:ring-offset-2"
+              >
+                Tell us what you are building
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <a
+                href="#process"
+                className="inline-flex min-h-12 items-center justify-center rounded-[4px] border border-[#DCE9FF] bg-white px-5 py-3 text-sm font-semibold text-[#0A1533] transition-colors hover:border-[#155EEF] hover:text-[#155EEF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] focus-visible:ring-offset-2"
+              >
+                See how the work moves
+              </a>
+            </div>
           </div>
-
-          <ul className="mt-10 grid gap-x-6 gap-y-3 border-t border-slate-200 pt-7 sm:grid-cols-2" aria-label="Core capabilities">
-            {capabilities.map((capability) => (
-              <li key={capability} className="flex items-center gap-2.5 text-sm font-medium text-slate-700">
-                <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-cyan-100 text-cyan-800">
-                  <Check className="h-3.5 w-3.5" aria-hidden="true" />
-                </span>
-                {capability}
-              </li>
-            ))}
-          </ul>
         </div>
 
-        <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
-          <div className="absolute -inset-4 -z-10 rounded-[2rem] bg-gradient-to-br from-blue-100 to-cyan-100 blur-xl" aria-hidden="true" />
-          <div className="overflow-hidden rounded-[1.75rem] border border-slate-700 bg-slate-950 p-5 text-white shadow-[0_28px_80px_rgba(15,23,42,0.22)] sm:p-7">
-            <div className="flex items-center justify-between border-b border-white/10 pb-5">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Product delivery system</p>
-                <h2 className="mt-1 text-lg font-semibold">One connected path to launch</h2>
-              </div>
-              <span className="inline-flex items-center gap-2 rounded-full bg-emerald-400/10 px-3 py-1.5 text-xs font-semibold text-emerald-300 ring-1 ring-inset ring-emerald-300/20">
-                <span className="h-2 w-2 rounded-full bg-emerald-300" aria-hidden="true" />
-                Ready
-              </span>
+        <figure className="mt-16 overflow-hidden rounded-[4px] border border-[#155EEF] bg-[#F2F6FC] sm:mt-20">
+          <figcaption className="flex flex-col gap-2 border-b border-[#DCE9FF] bg-white px-5 py-4 font-mono text-xs uppercase tracking-[0.14em] text-[#526078] sm:flex-row sm:items-center sm:justify-between sm:px-6">
+            <span className="font-semibold text-[#0A1533]">Build map / One accountable path</span>
+            <span>First decision to live release</span>
+          </figcaption>
+
+          <div className="relative px-5 py-8 sm:px-6 sm:py-10">
+            <div className="absolute left-[12.5%] right-[12.5%] top-[3.45rem] hidden h-px bg-[#DCE9FF] md:block" aria-hidden="true">
+              <span className="release-trace block h-px w-full bg-[#155EEF]" />
             </div>
 
-            <ol className="mt-5 space-y-3">
-              {deliveryTracks.map((track) => (
+            <ol className="grid gap-0 md:grid-cols-4">
+              {releaseStages.map((stage) => (
                 <li
-                  key={track.number}
-                  className="grid grid-cols-[auto_1fr] gap-4 rounded-2xl border border-white/10 bg-white/[0.04] p-4 sm:p-5"
+                  key={stage.number}
+                  className="relative border-l border-[#DCE9FF] py-5 pl-6 md:border-l-0 md:border-t md:px-5 md:pb-0 md:pt-8 md:first:px-0 md:first:pr-5 md:first:pt-8 md:last:pl-5 md:last:pt-8"
                 >
-                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-blue-500/15 text-xs font-bold text-blue-200 ring-1 ring-inset ring-blue-300/20">
-                    {track.number}
-                  </span>
-                  <div>
-                    <h3 className="text-base font-semibold text-white">{track.title}</h3>
-                    <p className="mt-1 text-sm leading-6 text-slate-400">{track.description}</p>
-                  </div>
+                  <span
+                    className="absolute -left-[5px] top-7 h-[9px] w-[9px] bg-[#155EEF] md:-top-[5px] md:left-1/2 md:-translate-x-1/2"
+                    aria-hidden="true"
+                  />
+                  <p className="font-mono text-xs font-semibold tracking-[0.14em] text-[#155EEF]">
+                    {stage.number} / {stage.name.toUpperCase()}
+                  </p>
+                  <h2 className="mt-4 max-w-[15rem] text-xl font-semibold leading-6 text-[#0A1533]">
+                    {stage.question}
+                  </h2>
+                  <p className="mt-6 font-mono text-xs uppercase tracking-[0.12em] text-[#526078]">
+                    Output / <span className="font-semibold text-[#0A1533]">{stage.output}</span>
+                  </p>
                 </li>
               ))}
             </ol>
-
-            <div className="mt-5 flex flex-col gap-3 rounded-2xl bg-gradient-to-r from-blue-700 to-cyan-700 p-5 sm:flex-row sm:items-center sm:justify-between">
-              <p className="max-w-sm text-sm font-medium leading-6 text-blue-50">
-                Clear decisions, visible progress, and production quality from the first sprint.
-              </p>
-              <span className="shrink-0 text-xs font-bold uppercase tracking-[0.16em] text-white">Surviant method</span>
-            </div>
           </div>
-        </div>
+
+          <div className="grid border-t border-[#DCE9FF] bg-[#155EEF] text-white sm:grid-cols-[auto_1fr]">
+            <p className="border-b border-white/30 px-5 py-4 font-mono text-xs font-semibold uppercase tracking-[0.14em] sm:border-b-0 sm:border-r sm:px-6">
+              You leave with
+            </p>
+            <p className="px-5 py-4 text-sm font-medium sm:px-6">
+              Working software, the decisions behind it, and a release your team can own.
+            </p>
+          </div>
+        </figure>
       </div>
     </section>
   )

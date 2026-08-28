@@ -9,7 +9,7 @@ import TechnologiesSection from "@/components/sections/technologies-section"
 
 export default function Home() {
   return (
-    <div className="min-h-screen overflow-x-clip bg-white text-slate-950">
+    <div className="min-h-screen overflow-x-clip bg-white text-[#0A1533]">
       <SiteHeader />
       <main id="main-content">
         <HeroSection />

@@ -1,29 +1,27 @@
-import { ArrowDownRight } from "lucide-react"
-
 const steps = [
   {
     number: "01",
-    title: "Understand",
-    description: "We clarify the goal, audience, constraints, and evidence so the team solves the right problem.",
-    output: "Shared product brief",
+    title: "Decide",
+    description: "Agree on the user, the constraint, and the smallest release worth making.",
+    output: "Decision brief",
   },
   {
     number: "02",
-    title: "Shape",
-    description: "We map the experience, test key decisions, and turn uncertainty into a focused delivery plan.",
-    output: "Validated direction",
+    title: "Prove",
+    description: "Prototype the riskiest path and resolve the choices that would be expensive to reverse.",
+    output: "Tested direction",
   },
   {
     number: "03",
     title: "Build",
-    description: "Design and engineering move together in short, visible cycles with quality built into every release.",
-    output: "Production-ready product",
+    description: "Design and engineering move together in visible slices that can be reviewed in the product.",
+    output: "Production build",
   },
   {
     number: "04",
-    title: "Improve",
-    description: "After launch, we use feedback and operating data to strengthen the experience and guide what comes next.",
-    output: "Measured iteration plan",
+    title: "Release",
+    description: "Put the product in people’s hands, watch how it behaves, and document what comes next.",
+    output: "Live release",
   },
 ]
 
@@ -31,46 +29,44 @@ export default function DevelopmentProcess() {
   return (
     <section
       id="process"
-      className="scroll-mt-24 bg-white py-20 sm:py-24 lg:py-28"
+      className="scroll-mt-24 border-b border-[#DCE9FF] bg-white py-16 sm:py-20 lg:py-24"
       aria-labelledby="process-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="max-w-3xl">
-          <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-800">How we work</p>
-          <h2
-            id="process-heading"
-            className="mt-4 text-3xl font-semibold tracking-[-0.035em] text-slate-950 sm:text-4xl lg:text-5xl"
-          >
-            A clear process with useful decisions at every step.
-          </h2>
-          <p className="mt-5 text-base leading-7 text-slate-600 sm:text-lg">
-            You see what is being decided, what is being built, and what comes next. The process stays flexible without
-            becoming vague.
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+          <div>
+            <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#155EEF]">
+              Delivery sequence
+            </p>
+            <h2
+              id="process-heading"
+              className="mt-5 max-w-xl text-4xl font-semibold leading-[1] tracking-[-0.045em] text-[#0A1533] sm:text-5xl"
+            >
+              Four decisions between idea and release.
+            </h2>
+          </div>
+          <p className="max-w-2xl text-lg leading-8 text-[#526078] lg:pt-8">
+            Each phase closes a real uncertainty. You can see what changed, what was decided, and what is ready for
+            the next step.
           </p>
         </div>
 
-        <ol className="relative mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step, index) => (
+        <ol className="mt-14 grid sm:mt-16 lg:grid-cols-4">
+          {steps.map((step) => (
             <li
               key={step.number}
-              className="group relative flex min-h-80 flex-col overflow-hidden rounded-[1.5rem] border border-slate-200 bg-slate-50 p-6 transition-colors hover:border-blue-200 hover:bg-blue-50/50"
+              className="relative border-l border-[#DCE9FF] pb-10 pl-7 last:pb-0 lg:border-l-0 lg:border-t lg:px-6 lg:pb-0 lg:pt-8 lg:first:pl-0 lg:last:pr-0"
             >
-              <div className="flex items-center justify-between">
-                <span className="text-sm font-bold tracking-[0.18em] text-blue-800">{step.number}</span>
-                {index < steps.length - 1 && (
-                  <ArrowDownRight
-                    className="h-5 w-5 text-slate-300 transition-colors group-hover:text-blue-500"
-                    aria-hidden="true"
-                  />
-                )}
-              </div>
-
-              <h3 className="mt-16 text-2xl font-semibold tracking-tight text-slate-950">{step.title}</h3>
-              <p className="mt-3 text-sm leading-6 text-slate-600">{step.description}</p>
-
-              <div className="mt-auto border-t border-slate-200 pt-5">
-                <p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-500">Output</p>
-                <p className="mt-2 text-sm font-semibold text-slate-800">{step.output}</p>
+              <span
+                className="absolute -left-[5px] top-0 h-[9px] w-[9px] bg-[#155EEF] lg:-top-[5px] lg:left-1/2 lg:-translate-x-1/2"
+                aria-hidden="true"
+              />
+              <p className="font-mono text-xs font-semibold tracking-[0.14em] text-[#155EEF]">{step.number}</p>
+              <h3 className="mt-6 text-3xl font-semibold tracking-[-0.025em] text-[#0A1533]">{step.title}</h3>
+              <p className="mt-4 text-sm leading-6 text-[#526078]">{step.description}</p>
+              <div className="mt-7 border-t border-[#DCE9FF] pt-4">
+                <p className="font-mono text-xs uppercase tracking-[0.12em] text-[#526078]">Output</p>
+                <p className="mt-1 text-sm font-semibold text-[#0A1533]">{step.output}</p>
               </div>
             </li>
           ))}
