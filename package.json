@@ -2,6 +2,7 @@
   "name": "surviant-llc",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@9.15.9",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -60,7 +61,7 @@
     "input-otp": "^1.4.1",
     "leaflet": "latest",
     "lucide-react": "^0.454.0",
-    "next": "15.2.6",
+    "next": "15.5.24",
     "next-themes": "latest",
     "react": "^19",
     "react-dom": "^19",
@@ -75,7 +76,7 @@
     "tailwindcss-animate": "^1.0.7",
     "three": "latest",
     "use-sync-external-store": "^1.5.0",
-    "vaul": "^0.9.6",
+    "vaul": "1.1.2",
     "zod": "^3.24.1",
     "zustand": "latest"
   },
@@ -84,7 +85,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^8.0.0",
-    "eslint-config-next": "^14.0.0",
+    "eslint-config-next": "15.5.24",
     "postcss": "^8.5",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
