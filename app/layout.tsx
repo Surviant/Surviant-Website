@@ -14,6 +14,7 @@ const plexSans = IBM_Plex_Sans({
   subsets: ["latin"],
   variable: "--font-plex-sans",
   display: "swap",
+  preload: false,
 })
 
 const plexMono = IBM_Plex_Mono({
@@ -21,6 +22,7 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500", "600"],
   variable: "--font-plex-mono",
   display: "swap",
+  preload: false,
 })
 
 export const metadata: Metadata = {
