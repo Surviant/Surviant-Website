@@ -1,135 +1,152 @@
-"use client";
-import React, { useRef, useState, useEffect } from "react";
-import { useScroll, useTransform, motion } from "framer-motion";
+import {
+  Blocks,
+  Bot,
+  CloudCog,
+  Compass,
+  Gauge,
+  PanelsTopLeft,
+  type LucideIcon,
+} from "lucide-react"
 
-const ContainerScroll = ({ titleComponent, children }: { titleComponent: React.ReactNode; children: React.ReactNode }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const scrollContainerRef = useRef<HTMLElement | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [isReady, setIsReady] = useState(false);
+type Service = {
+  title: string
+  description: string
+  outcomes: string[]
+  icon: LucideIcon
+  className: string
+  featured?: boolean
+}
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    
-    // Find scrollable parent container
-    if (containerRef.current) {
-      let parent = containerRef.current.parentElement;
-      while (parent) {
-        const style = window.getComputedStyle(parent);
-        if (style.overflowY === 'auto' || style.overflowY === 'scroll') {
-          scrollContainerRef.current = parent;
-          break;
-        }
-        parent = parent.parentElement;
-      }
-    }
-    setIsReady(true);
-    
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+const services: Service[] = [
+  {
+    title: "Product strategy",
+    description: "Shape the right product before investing in the build.",
+    outcomes: ["Opportunity framing", "Roadmaps and scope", "Technical direction"],
+    icon: Compass,
+    className: "lg:col-span-5",
+    featured: true,
+  },
+  {
+    title: "Experience design",
+    description: "Create a clear, useful experience grounded in real user needs.",
+    outcomes: ["UX flows", "Interface design", "Design systems"],
+    icon: PanelsTopLeft,
+    className: "lg:col-span-7",
+  },
+  {
+    title: "Web and platform engineering",
+    description: "Build reliable customer experiences, internal tools, and connected platforms.",
+    outcomes: ["Full-stack applications", "APIs and integrations", "Responsive web experiences"],
+    icon: Blocks,
+    className: "lg:col-span-7",
+  },
+  {
+    title: "AI and automation",
+    description: "Apply AI where it produces a practical improvement, not another layer of complexity.",
+    outcomes: ["AI product features", "Workflow automation", "Knowledge and agent systems"],
+    icon: Bot,
+    className: "lg:col-span-5",
+  },
+  {
+    title: "Cloud and delivery",
+    description: "Create an operating foundation that supports secure, repeatable releases.",
+    outcomes: ["Cloud architecture", "CI and CD", "Observability and reliability"],
+    icon: CloudCog,
+    className: "lg:col-span-6",
+  },
+  {
+    title: "Optimization and growth",
+    description: "Improve performance and product quality after the first release.",
+    outcomes: ["Performance reviews", "Quality engineering", "Continuous product iteration"],
+    icon: Gauge,
+    className: "lg:col-span-6",
+  },
+]
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    container: scrollContainerRef.current ? { current: scrollContainerRef.current } : undefined,
-    offset: ["start end", "end start"]
-  });
-
-  const scaleDimensions = () => isMobile ? [0.8, 1] : [0.9, 1];
-  const rotate = useTransform(scrollYProgress, [0, 0.5], [25, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], scaleDimensions());
-  const translate = useTransform(scrollYProgress, [0, 0.5], [50, 0]);
-  
-  return (
-    <div className="min-h-screen flex items-center justify-center relative p-4 md:p-10" ref={containerRef}>
-      <div className="py-6 md:py-10 w-full relative" style={{ perspective: "1200px" }}>
-        <Header translate={translate} titleComponent={titleComponent} />
-        <Card rotate={rotate} scale={scale}>{children}</Card>
-      </div>
-    </div>
-  );
-};
-
-const Header = ({ translate, titleComponent }: { translate: any; titleComponent: React.ReactNode }) => (
-  <motion.div style={{ translateY: translate }} className="max-w-5xl mx-auto text-center mb-8">
-    {titleComponent}
-  </motion.div>
-);
-
-const Card = ({ rotate, scale, children }: { rotate: any; scale: any; children: React.ReactNode }) => (
-  <motion.div
-    style={{
-      rotateX: rotate,
-      scale,
-      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.4), 0 12px 24px -8px rgba(0, 0, 0, 0.25)",
-      borderColor: "#1a1a1a",
-      backgroundColor: "#1a1a1a"
-    }}
-    className="max-w-5xl mx-auto h-[32rem] md:h-[40rem] w-full border-[6px] p-2 md:p-4 rounded-[28px]"
-  >
-    <div className="h-full w-full overflow-hidden rounded-2xl bg-slate-100">{children}</div>
-  </motion.div>
-);
-
-// Services Data
-const services = [
-  { title: "Startup Strategy & Consulting", desc: "Market validation, product-market fit assessment, funding roadmaps, and grant research.", isFirst: true },
-  { title: "Frontend Development", desc: "Crafting responsive, high-performance interfaces with React, Vue, and Next.js.", isFirst: false },
-  { title: "Backend Engineering", desc: "Building robust APIs and server architectures with Node.js, Python, and Go.", isFirst: false },
-  { title: "UI/UX Design", desc: "Creating intuitive user experiences with Figma, Adobe XD, and prototyping tools.", isFirst: false },
-  { title: "Mobile Development", desc: "Developing cross-platform mobile applications with React Native and Flutter.", isFirst: false },
-  { title: "Cloud & DevOps Solutions", desc: "Scalable cloud infrastructure, CI/CD pipelines, and automated deployment systems.", isFirst: false },
-  { title: "API Development & Integration", desc: "Custom API development, third-party integrations, and microservices architecture.", isFirst: false },
-  { title: "Quality Assurance & Testing", desc: "Comprehensive testing strategies, automated test suites, and performance testing.", isFirst: false },
-  { title: "AI Solutions & Development", desc: "Custom AI models, large language model applications, and intelligent automation.", isFirst: false },
-  { title: "Data Visualization", desc: "Transforming complex data into intuitive, interactive visual representations.", isFirst: false },
-  { title: "Full-Stack Solutions", desc: "End-to-end development from concept to deployment with enterprise-grade architecture.", isFirst: false },
-  { title: "Generative AI Applications", desc: "Creating next-gen applications powered by generative AI for content and images.", isFirst: false },
-];
-
-// Service Card Component
-const ServiceCard = ({ title, desc, isFirst }: { title: string; desc: string; isFirst: boolean }) => (
-  <div 
-    className="bg-white rounded-2xl p-5 transition-all duration-300 hover:shadow-md cursor-pointer"
-  >
-    <div className="w-2.5 h-2.5 rounded-full bg-teal-500 mb-4"></div>
-    <h3 className="text-gray-800 font-semibold text-base mb-2 leading-tight">{title}</h3>
-    <p className="text-gray-500 text-sm leading-relaxed">{desc}</p>
-  </div>
-);
-
-// Main Export Component
 export default function ServicesScrollSection() {
   return (
-    <section className="bg-white">
-      <ContainerScroll
-        titleComponent={
-          <>
-            <span className="inline-block px-4 py-1.5 bg-cyan-50 border border-cyan-200 rounded-full text-cyan-600 text-xs font-medium tracking-widest mb-4">
-              SERVICES
-            </span>
-            <h1 className="text-2xl md:text-4xl font-bold text-gray-900 leading-tight">
-              A Full-Stack Team Crafting
-              <br />
-              <span className="bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text text-transparent">
-                Tomorrow&apos;s Products Today
-              </span>
-            </h1>
-            <p className="text-gray-500 mt-3 max-w-xl mx-auto text-sm">
-              Strategy, design, engineering, and AI expertise delivered through transparent partnerships.
-            </p>
-          </>
-        }
-      >
-        <div className="h-full w-full p-4 md:p-6 overflow-y-auto">
-          <div className="grid grid-cols-2 gap-4 md:gap-5">
-            {services.map((service, i) => (
-              <ServiceCard key={i} title={service.title} desc={service.desc} isFirst={service.isFirst} />
-            ))}
+    <section
+      id="services"
+      className="scroll-mt-24 border-b border-slate-200 bg-slate-50 py-20 sm:py-24 lg:py-28"
+      aria-labelledby="services-heading"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-7 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.2em] text-blue-800">What we do</p>
+            <h2
+              id="services-heading"
+              className="mt-4 text-3xl font-semibold tracking-[-0.035em] text-slate-950 sm:text-4xl lg:text-5xl"
+            >
+              The capabilities to move from question to product.
+            </h2>
           </div>
+          <p className="max-w-2xl text-base leading-7 text-slate-600 sm:text-lg lg:justify-self-end">
+            Bring us a specific build or an open problem. We assemble the right mix of strategy, design, engineering,
+            and AI around the outcome you need.
+          </p>
         </div>
-      </ContainerScroll>
+
+        <div className="mt-12 grid gap-4 lg:grid-cols-12 lg:gap-5">
+          {services.map((service) => {
+            const Icon = service.icon
+            return (
+              <article
+                key={service.title}
+                className={`relative overflow-hidden rounded-[1.5rem] border p-6 sm:p-7 ${service.className} ${
+                  service.featured
+                    ? "border-slate-800 bg-slate-950 text-white shadow-[0_20px_50px_rgba(15,23,42,0.16)]"
+                    : "border-slate-200 bg-white text-slate-950 shadow-[0_12px_40px_rgba(15,23,42,0.04)]"
+                }`}
+              >
+                {service.featured && (
+                  <div
+                    className="pointer-events-none absolute -right-16 -top-20 h-56 w-56 rounded-full bg-blue-500/20 blur-3xl"
+                    aria-hidden="true"
+                  />
+                )}
+
+                <div
+                  className={`relative inline-flex h-11 w-11 items-center justify-center rounded-2xl ${
+                    service.featured
+                      ? "bg-blue-400/15 text-cyan-200 ring-1 ring-inset ring-blue-300/20"
+                      : "bg-blue-50 text-blue-800 ring-1 ring-inset ring-blue-100"
+                  }`}
+                >
+                  <Icon className="h-5 w-5" aria-hidden="true" />
+                </div>
+
+                <h3 className="relative mt-7 text-xl font-semibold tracking-tight sm:text-2xl">{service.title}</h3>
+                <p
+                  className={`relative mt-3 max-w-2xl text-sm leading-6 sm:text-base ${
+                    service.featured ? "text-slate-300" : "text-slate-600"
+                  }`}
+                >
+                  {service.description}
+                </p>
+
+                <ul
+                  className={`relative mt-7 grid gap-2 border-t pt-5 text-sm sm:grid-cols-3 ${
+                    service.featured ? "border-white/10 text-slate-200" : "border-slate-200 text-slate-700"
+                  }`}
+                >
+                  {service.outcomes.map((outcome) => (
+                    <li key={outcome} className="flex items-start gap-2">
+                      <span
+                        className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full ${
+                          service.featured ? "bg-cyan-300" : "bg-blue-700"
+                        }`}
+                        aria-hidden="true"
+                      />
+                      {outcome}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            )
+          })}
+        </div>
+      </div>
     </section>
-  );
+  )
 }

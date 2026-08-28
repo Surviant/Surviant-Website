@@ -75,7 +75,7 @@ export default function AboutSection() {
             </p>
             <p>
               Our approach combines technical excellence with creative problem-solving. We don't just build websites and
-              apps—we create digital experiences that drive business growth.
+              apps, we create digital experiences that drive business growth.
             </p>
           </div>
         </motion.div>

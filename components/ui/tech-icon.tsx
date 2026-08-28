@@ -1,4 +1,5 @@
 import React from 'react';
+import type { IconType } from 'react-icons';
 import { 
   SiReact, SiTypescript, SiNextdotjs, SiOpenai, SiFirebase, SiAmazon, SiMongodb, 
   SiExpress, SiSocketdotio, SiTailwindcss, SiRedux, SiJest, SiCypress, SiNodedotjs, 
@@ -17,7 +18,7 @@ import { AiFillApi, AiFillCloud, AiFillDatabase, AiFillCode } from 'react-icons/
 import { FaAws, FaMicrosoft, FaGoogle, FaApple } from 'react-icons/fa';
 
 // A mapping of technology names to their corresponding icon components
-const iconMap: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
+const iconMap: Record<string, IconType> = {
   // Frontend Frameworks & Libraries
   'React': SiReact,
   'ReactJS': SiReact,
@@ -229,11 +230,13 @@ const TechIcon: React.FC<TechIconProps> = ({ tech, size = DEFAULT_SIZE, classNam
     return null;
   }
   
-  // Use React.createElement to handle custom props properly
-  return React.createElement(Icon, { 
-    className, 
-    style: { fontSize: size } 
-  });
+  const IconComponent = Icon as unknown as React.ComponentType<{
+    className?: string;
+    style?: React.CSSProperties;
+    "aria-hidden"?: boolean;
+  }>;
+
+  return <IconComponent className={className} style={{ fontSize: size }} aria-hidden />;
 };
 
 export default TechIcon;

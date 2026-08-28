@@ -44,7 +44,7 @@ export default function LoadingScreen() {
   // Preload critical resources
   useEffect(() => {
     // Preload key images
-    const preloadImages = ["/team-member-1.png", "/team-member-2.png", "/client-logo-1.png", "/client-logo-2.png"]
+    const preloadImages = ["/team-member-1.png", "/team-member-2.webp", "/client-logo-1.png", "/client-logo-2.png"]
 
     preloadImages.forEach((src) => {
       const img = new Image()

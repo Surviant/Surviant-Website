@@ -7,10 +7,21 @@ import { ThemeProvider } from "@/components/theme-provider"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Surviant Technologies | Intelligent Solutions",
+  metadataBase: new URL("https://www.surviant.com"),
+  title: {
+    default: "Surviant Technologies | Product Strategy, Engineering, and AI",
+    template: "%s | Surviant Technologies",
+  },
   description:
-    "Specializing in creating intelligent systems, from custom AI models to autonomous agents. We harness the power of artificial intelligence to drive innovation and business growth.",
-  generator: "v0.dev",
+    "Surviant designs and builds dependable digital products through product strategy, experience design, full-stack engineering, and practical AI.",
+  openGraph: {
+    type: "website",
+    url: "https://www.surviant.com",
+    siteName: "Surviant Technologies",
+    title: "Surviant Technologies | Product Strategy, Engineering, and AI",
+    description:
+      "Product strategy, experience design, full-stack engineering, and practical AI for teams building what comes next.",
+  },
   icons: {
     icon: "/surviant-logo.jpg",
     shortcut: "/surviant-logo.jpg",
@@ -34,7 +45,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
           {children}
         </ThemeProvider>
       </body>
