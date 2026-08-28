@@ -53,6 +53,7 @@ export function HeroSection() {
             <div className="mt-7 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
               <Link
                 href="/contact"
+                prefetch={false}
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-[4px] bg-[#155EEF] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#0A1533] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] focus-visible:ring-offset-2"
               >
                 Start a project
@@ -60,6 +61,7 @@ export function HeroSection() {
               </Link>
               <Link
                 href="/services"
+                prefetch={false}
                 className="inline-flex min-h-12 items-center justify-center rounded-[4px] border border-[#DCE9FF] bg-white px-5 py-3 text-sm font-semibold text-[#0A1533] transition-colors hover:border-[#155EEF] hover:text-[#155EEF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] focus-visible:ring-offset-2"
               >
                 Explore our services
@@ -91,6 +93,7 @@ export function HeroSection() {
                     />
                     <Link
                       href={layer.href}
+                      prefetch={false}
                       className="group grid min-h-[10rem] gap-5 rounded-[3px] border border-[#DCE9FF] bg-white p-5 transition-colors hover:border-[#155EEF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] sm:grid-cols-[3.25rem_minmax(0,0.85fr)_minmax(0,1.15fr)_auto] sm:items-center sm:p-6"
                     >
                       <span className="flex h-12 w-12 items-center justify-center rounded-[3px] bg-[#DCE9FF] text-[#155EEF]">
