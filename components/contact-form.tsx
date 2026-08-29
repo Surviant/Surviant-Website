@@ -4,6 +4,8 @@ import { CalendarDays, Send } from "lucide-react"
 import Link from "next/link"
 import { useRef, useState } from "react"
 
+import { getContactErrorMessage } from "@/lib/contact-errors"
+
 type ServiceGroup = {
   practiceTitle: string
   offerings: Array<{ slug: string; title: string }>
@@ -20,17 +22,6 @@ type FormValues = {
 
 const fieldClassName = "min-h-12 w-full rounded-[4px] border border-[#DCE9FF] bg-white px-3.5 py-3 text-base text-[#0A1533] outline-none transition-colors placeholder:text-[#526078] hover:border-[#526078] focus-visible:border-[#155EEF] focus-visible:ring-2 focus-visible:ring-[#155EEF]/20 sm:px-4"
 const labelClassName = "mb-2 block font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[#0A1533]"
-
-const errorMessages: Record<string, string> = {
-  INVALID_JSON: "The form could not be read. Please refresh the page and try again.",
-  VALIDATION_ERROR: "Check the highlighted information and try again.",
-  ORIGIN_REJECTED: "This form could not verify the page it was sent from. Please refresh and try again.",
-  PAYLOAD_TOO_LARGE: "The message is too long. Shorten it or email us directly.",
-  UNSUPPORTED_MEDIA_TYPE: "The form could not be submitted from this browser. Please email us directly.",
-  RATE_LIMITED: "Too many attempts were received. Please wait a few minutes or email us directly.",
-  DELIVERY_UNAVAILABLE: "The message could not be delivered right now. Please email us directly.",
-  INTERNAL_ERROR: "Something went wrong. Please email us directly.",
-}
 
 export default function ContactForm({ serviceGroups, initialService = "", bookingUrl, contactEmail }: { serviceGroups: ServiceGroup[]; initialService?: string; bookingUrl: string | null; contactEmail: string }) {
   const [values, setValues] = useState<FormValues>({ name: "", email: "", company: "", serviceSlug: initialService, message: "", website: "" })
@@ -65,8 +56,7 @@ export default function ContactForm({ serviceGroups, initialService = "", bookin
       const result = (await response.json().catch(() => null)) as { ok?: boolean; errorCode?: string } | null
 
       if (!response.ok || !result?.ok) {
-        const errorCode = result?.errorCode || "INTERNAL_ERROR"
-        setStatus({ kind: "error", message: errorMessages[errorCode] || errorMessages.INTERNAL_ERROR })
+        setStatus({ kind: "error", message: getContactErrorMessage(result?.errorCode) })
         return
       }
 
@@ -74,7 +64,7 @@ export default function ContactForm({ serviceGroups, initialService = "", bookin
       startedAtRef.current = Date.now()
       setStatus({ kind: "success", message: "Your message was sent. We will reply directly after reviewing the context." })
     } catch {
-      setStatus({ kind: "error", message: errorMessages.DELIVERY_UNAVAILABLE })
+      setStatus({ kind: "error", message: getContactErrorMessage("DELIVERY_UNAVAILABLE") })
     }
   }
 

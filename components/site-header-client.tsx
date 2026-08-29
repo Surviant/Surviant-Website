@@ -25,6 +25,7 @@ export default function SiteHeaderClient({ serviceGroups }: { serviceGroups: Ser
   const [menuOpen, setMenuOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const servicesAreaRef = useRef<HTMLDivElement>(null)
+  const servicesTriggerRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     setMenuOpen(false)
@@ -39,7 +40,20 @@ export default function SiteHeaderClient({ serviceGroups }: { serviceGroups: Ser
     }
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setServicesOpen(false)
+      if (event.key !== "Escape") return
+
+      const servicesMenu = servicesAreaRef.current?.querySelector("#desktop-services-menu")
+      if (!servicesMenu) return
+
+      const focusWasInsideMenu = document.activeElement
+        ? servicesMenu.contains(document.activeElement)
+        : false
+
+      setServicesOpen(false)
+      if (focusWasInsideMenu) {
+        event.preventDefault()
+        servicesTriggerRef.current?.focus()
+      }
     }
 
     document.addEventListener("pointerdown", handlePointerDown)
@@ -71,7 +85,7 @@ export default function SiteHeaderClient({ serviceGroups }: { serviceGroups: Ser
 
           <nav className="hidden items-center gap-5 lg:flex" aria-label="Primary navigation">
             <div ref={servicesAreaRef} className="relative">
-              <button type="button" aria-expanded={servicesOpen} aria-controls="desktop-services-menu" onClick={() => setServicesOpen((open) => !open)} className={`inline-flex min-h-11 items-center gap-1.5 border-b px-0.5 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] ${isServicesPath || servicesOpen ? "border-[#155EEF] text-[#0A1533]" : "border-transparent text-[#526078] hover:border-[#DCE9FF] hover:text-[#0A1533]"}`}>
+              <button ref={servicesTriggerRef} type="button" aria-expanded={servicesOpen} aria-controls="desktop-services-menu" onClick={() => setServicesOpen((open) => !open)} className={`inline-flex min-h-11 items-center gap-1.5 border-b px-0.5 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] ${isServicesPath || servicesOpen ? "border-[#155EEF] text-[#0A1533]" : "border-transparent text-[#526078] hover:border-[#DCE9FF] hover:text-[#0A1533]"}`}>
                 Services
                 <ChevronDown className={`h-3.5 w-3.5 transition-transform ${servicesOpen ? "rotate-180" : ""}`} aria-hidden="true" />
               </button>
@@ -115,7 +129,7 @@ export default function SiteHeaderClient({ serviceGroups }: { serviceGroups: Ser
             {navigation.map((item) => {
               const isCurrent = item.href === pathname
               return (
-                <Link key={item.href} href={item.href} aria-current={isCurrent ? "page" : undefined} className={`inline-flex min-h-11 items-center border-b px-0.5 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] ${isCurrent ? "border-[#155EEF] text-[#0A1533]" : "border-transparent text-[#526078] hover:border-[#DCE9FF] hover:text-[#0A1533]"}`}>
+                <Link key={item.href} href={item.href} aria-current={isCurrent ? "page" : undefined} className={`inline-flex min-h-11 min-w-11 items-center justify-center border-b px-0.5 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] ${isCurrent ? "border-[#155EEF] text-[#0A1533]" : "border-transparent text-[#526078] hover:border-[#DCE9FF] hover:text-[#0A1533]"}`}>
                   {item.label}
                 </Link>
               )

@@ -2,6 +2,15 @@ import assert from "node:assert/strict"
 import test from "node:test"
 
 import {
+  DELETE,
+  GET,
+  HEAD,
+  OPTIONS,
+  PATCH,
+  PUT,
+} from "@/app/api/contact/route"
+import { getContactErrorMessage } from "@/lib/contact-errors"
+import {
   getContactRateLimitSizeForTests,
   handleContactRequest,
   resetContactRateLimitForTests,
@@ -92,7 +101,7 @@ test("invalid fields and invalid service slugs are rejected without returning PI
   assert.ok(!responseText.includes("example.com"))
 })
 
-test("honeypot and timing checks return synthetic success without delivery", async () => {
+test("the honeypot returns synthetic success without delivery", async () => {
   let calls = 0
   const fetcher = (async () => {
     calls += 1
@@ -104,14 +113,80 @@ test("honeypot and timing checks return synthetic success without delivery", asy
     { env: productionEnv, fetcher, now: () => NOW },
   )
   assert.equal(honeypot.status, 200)
+  assert.deepEqual(await honeypot.json(), { ok: true })
+  assert.equal(calls, 0)
+})
 
-  resetContactRateLimitForTests()
+test("a legitimate fast submission returns a safe, retryable error without delivery", async () => {
+  let calls = 0
+  const fetcher = (async () => {
+    calls += 1
+    return new Response(null, { status: 200 })
+  }) as typeof fetch
+
   const tooFast = await handleContactRequest(
     contactRequest(validBody({ startedAt: NOW - 500 })),
     { env: productionEnv, fetcher, now: () => NOW },
   )
-  assert.equal(tooFast.status, 200)
+  const responseText = await tooFast.text()
+
+  assert.equal(tooFast.status, 400)
+  assert.equal(tooFast.headers.get("Retry-After"), "2")
+  assert.deepEqual(JSON.parse(responseText), { ok: false, errorCode: "SUBMISSION_TOO_FAST" })
+  assert.ok(!responseText.includes("Casey"))
+  assert.ok(!responseText.includes("example.com"))
   assert.equal(calls, 0)
+})
+
+test("expired and future form sessions return a refreshable error without delivery", async () => {
+  let calls = 0
+  const fetcher = (async () => {
+    calls += 1
+    return new Response(null, { status: 200 })
+  }) as typeof fetch
+
+  for (const startedAt of [NOW - 24 * 60 * 60 * 1000 - 1, NOW + 1]) {
+    const response = await handleContactRequest(
+      contactRequest(validBody({ startedAt })),
+      { env: productionEnv, fetcher, now: () => NOW },
+    )
+    assert.equal(response.status, 400)
+    assert.deepEqual(await response.json(), { ok: false, errorCode: "FORM_SESSION_EXPIRED" })
+    resetContactRateLimitForTests()
+  }
+
+  assert.equal(calls, 0)
+})
+
+test("timing errors have clear inline copy and never claim delivery", () => {
+  const tooFast = getContactErrorMessage("SUBMISSION_TOO_FAST")
+  const expired = getContactErrorMessage("FORM_SESSION_EXPIRED")
+
+  assert.match(tooFast, /wait a moment/i)
+  assert.match(tooFast, /submit.*again/i)
+  assert.match(expired, /refresh.*try again/i)
+  assert.doesNotMatch(`${tooFast} ${expired}`, /message was sent/i)
+})
+
+test("the contact endpoint advertises POST and OPTIONS and rejects unsupported methods with JSON", async () => {
+  const options = await OPTIONS()
+  assert.equal(options.status, 204)
+  assert.equal(options.headers.get("Allow"), "OPTIONS, POST")
+  assert.equal(await options.text(), "")
+
+  for (const [method, handler] of [
+    ["GET", GET],
+    ["PUT", PUT],
+    ["PATCH", PATCH],
+    ["DELETE", DELETE],
+    ["HEAD", HEAD],
+  ] as const) {
+    const response = await handler()
+    assert.equal(response.status, 405, method)
+    assert.equal(response.headers.get("Allow"), "OPTIONS, POST", method)
+    assert.match(response.headers.get("Content-Type") || "", /^application\/json/, method)
+    assert.deepEqual(await response.json(), { ok: false, errorCode: "METHOD_NOT_ALLOWED" }, method)
+  }
 })
 
 test("the sixth attempt from one IP is rate limited for ten minutes", async () => {

@@ -234,13 +234,14 @@ export async function handleContactRequest(
   }
 
   const elapsed = now() - submission.startedAt
-  if (
-    submission.website ||
-    elapsed < 2000 ||
-    elapsed > 24 * 60 * 60 * 1000 ||
-    elapsed < 0
-  ) {
-    return success()
+  if (submission.website) return success()
+  if (elapsed >= 0 && elapsed < 2000) {
+    return jsonError(400, "SUBMISSION_TOO_FAST", {
+      "Retry-After": String(Math.max(1, Math.ceil((2000 - elapsed) / 1000))),
+    })
+  }
+  if (elapsed < 0 || elapsed > 24 * 60 * 60 * 1000) {
+    return jsonError(400, "FORM_SESSION_EXPIRED")
   }
 
   const resendApiKey = env.RESEND_API_KEY
