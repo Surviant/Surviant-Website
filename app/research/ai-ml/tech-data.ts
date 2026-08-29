@@ -1,244 +1,147 @@
-// Complete AI/ML Technology Data
+type ResearchEntry = {
+  name: string
+  desc: string
+  sourceLabel: string
+  sourceUrl: string
+}
 
-export const techData = {
+type ResearchSection = {
+  id: string
+  category: string
+  description: string
+  technologies: ResearchEntry[]
+}
+
+type ResearchBand = {
+  sections: ResearchSection[]
+}
+
+export const techData: Record<"mature" | "emerging" | "cutting", ResearchBand> = {
   mature: {
-    title: "MATURE (2024)",
-    subtitle: "Production-Ready Standards",
-    color: "emerald",
-    badge: "bg-emerald-500/10 border-emerald-500/30 text-emerald-400",
     sections: [
       {
-        id: "core-infra",
-        category: "Core Infrastructure",
-        description: "Building blocks for intelligent systems",
-        useCaseHighlight: "Powering 10M+ daily code analyses across 2M+ files",
+        id: "knowledge-grounding",
+        category: "Knowledge grounding",
+        description: "Patterns for connecting generation to selected external material.",
         technologies: [
-          { name: "AST (Abstract Syntax Tree) Parsing", desc: "Standard for code understanding", metric: "2M+ files parsed daily" },
-          { name: "Language Server Protocol (LSP)", desc: "Industry standard for IDE features", metric: "15+ languages supported" },
-          { name: "Merkle Trees", desc: "Change detection and version control", metric: "<10ms change detection" },
-          { name: "Vector Databases", desc: "Embedding storage (Pinecone, Turbopuffer, Weaviate)", metric: "10TB+ indexed" },
-          { name: "Traditional RAG", desc: "Vector similarity search", metric: "98% relevance score" },
-          { name: "Semantic Embeddings", desc: "Text to vectors (OpenAI Ada, sentence-transformers)", metric: "100K+ embeddings/sec" },
-          { name: "Graph Databases", desc: "Relationship mapping (Neo4j, etc.)", metric: "500K+ nodes mapped" },
+          {
+            name: "Retrieval-augmented generation",
+            desc: "Combine a generator with retrieved source material, then evaluate retrieval quality and answer grounding separately.",
+            sourceLabel: "Lewis et al., RAG paper",
+            sourceUrl: "https://arxiv.org/abs/2005.11401",
+          },
         ],
       },
       {
-        id: "neural-arch",
-        category: "Neural Architectures",
-        description: "Foundation models driving our AI systems",
-        useCaseHighlight: "Serving 10M+ inferences daily with 92% accuracy",
+        id: "model-adaptation",
+        category: "Model adaptation",
+        description: "Ways to specialize model behavior without retraining every parameter.",
         technologies: [
-          { name: "Standard Transformers", desc: "Base architecture for LLMs", metric: "Production deployment" },
-          { name: "Multi-Head Attention", desc: "Original attention mechanism", metric: "8-16 heads in use" },
-          { name: "BERT-style Encoders", desc: "Bidirectional understanding", metric: "Code review automation" },
-          { name: "GPT-style Decoders", desc: "Autoregressive generation", metric: "10M+ completions daily" },
-          { name: "Positional Embeddings", desc: "Sequence position encoding (sinusoidal, learned)", metric: "Up to 4K context" },
+          {
+            name: "Low-rank adaptation",
+            desc: "Train small low-rank matrices while keeping the pretrained model weights fixed, when the task and evidence justify adaptation.",
+            sourceLabel: "Hu et al., LoRA paper",
+            sourceUrl: "https://arxiv.org/abs/2106.09685",
+          },
         ],
       },
       {
-        id: "training-opt",
-        category: "Training & Optimization",
-        description: "Efficient model training and deployment",
-        useCaseHighlight: "Fine-tuned 20+ domain-specific models with 95%+ accuracy",
+        id: "tool-interfaces",
+        category: "Tool and context interfaces",
+        description: "Protocol-level boundaries for connecting AI applications to tools and data.",
         technologies: [
-          { name: "Supervised Fine-Tuning (SFT)", desc: "Standard training approach", metric: "20+ models fine-tuned" },
-          { name: "LoRA/QLoRA", desc: "Parameter-efficient fine-tuning", metric: "90% fewer parameters" },
-          { name: "RLHF", desc: "Reinforcement Learning from Human Feedback - Alignment technique", metric: "User satisfaction 4.5/5" },
-          { name: "Quantization (INT8)", desc: "Basic model compression", metric: "4x faster inference" },
-          { name: "Prompt Engineering", desc: "Structured prompting techniques", metric: "40% accuracy improvement" },
-        ],
-      },
-      {
-        id: "dev-patterns",
-        category: "Development Patterns",
-        description: "Production-grade deployment architectures",
-        useCaseHighlight: "99.9% uptime with <50ms response times",
-        technologies: [
-          { name: "Two-Tier Architecture", desc: "Fast/slow paths - Latency optimization", metric: "<50ms fast path" },
-          { name: "Local Models", desc: "On-device inference", metric: "Zero latency for offline" },
-          { name: "Code Completion", desc: "Token prediction", metric: "92% accept rate" },
-          { name: "Diff Generation", desc: "Code change proposals", metric: "500K+ diffs generated" },
-          { name: "Encryption/Security", desc: "Standard E2E encryption", metric: "Zero breaches" },
+          {
+            name: "Model Context Protocol",
+            desc: "Use an explicit protocol boundary for tools, resources, and prompts, with authorization and deployment decisions treated as part of the system design.",
+            sourceLabel: "MCP 2026-07-28 specification release",
+            sourceUrl: "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+          },
         ],
       },
     ],
   },
   emerging: {
-    title: "EMERGING (2025)",
-    subtitle: "Proven But Still Being Adopted",
-    color: "yellow",
-    badge: "bg-yellow-500/10 border-yellow-500/30 text-yellow-400",
     sections: [
       {
-        id: "advanced-neural",
-        category: "Advanced Neural Architectures",
-        description: "Next-generation model architectures",
-        useCaseHighlight: "Testing MoE with 8 expert models for 50+ programming languages",
+        id: "agent-patterns",
+        category: "Agent patterns",
+        description: "Model-led task execution that alternates between reasoning and external actions.",
         technologies: [
-          { name: "Mixture of Experts (MoE)", desc: "Sparse activation (Mixtral, GPT-4)", metric: "8 expert models active" },
-          { name: "Grouped-Query Attention (GQA)", desc: "Efficient KV cache", metric: "3x faster inference" },
-          { name: "FlashAttention 2/3", desc: "Memory-efficient attention", metric: "40% memory reduction" },
-          { name: "Rotary Position Embeddings (RoPE)", desc: "Relative position encoding", metric: "Better long context" },
-          { name: "Multi-Latent Attention (MLA)", desc: "Compressed KV cache (DeepSeek)", metric: "50% cache compression" },
+          {
+            name: "Reasoning and acting loops",
+            desc: "Interleave reasoning traces with task-specific actions, while keeping tool authority, failure handling, and evaluation explicit.",
+            sourceLabel: "Yao et al., ReAct paper",
+            sourceUrl: "https://arxiv.org/abs/2210.03629",
+          },
         ],
       },
       {
-        id: "reasoning-compute",
-        category: "Reasoning & Compute",
-        description: "Extended thinking for complex problems",
-        useCaseHighlight: "15 min reasoning achieves 99.2% accuracy on complex debugging",
+        id: "attention-kernels",
+        category: "Attention kernels",
+        description: "Implementation techniques that reduce data movement for transformer attention.",
         technologies: [
-          { name: "Test-Time Compute", desc: "Extended inference reasoning (o1, o3)", metric: "15 min max reasoning" },
-          { name: "Chain-of-Thought (CoT) Prompting", desc: "Step-by-step reasoning", metric: "35% accuracy boost" },
-          { name: "Self-Consistency", desc: "Multiple reasoning paths", metric: "5-10 paths sampled" },
-          { name: "Process Reward Models (PRM)", desc: "Step-wise verification", metric: "99.2% verification accuracy" },
-          { name: "Monte Carlo Tree Search for LLMs", desc: "Search-based inference", metric: "100+ paths explored" },
+          {
+            name: "FlashAttention",
+            desc: "Use an input-output-aware exact attention algorithm when supported hardware and workload measurements show a practical benefit.",
+            sourceLabel: "Dao et al., FlashAttention paper",
+            sourceUrl: "https://arxiv.org/abs/2205.14135",
+          },
         ],
       },
       {
-        id: "memory-caching",
-        category: "Memory & Caching",
-        description: "Efficient context and memory management",
-        useCaseHighlight: "Processing 100K+ token contexts with <100ms latency",
+        id: "model-serving",
+        category: "Model serving",
+        description: "Memory management patterns for higher-throughput language model inference.",
         technologies: [
-          { name: "PagedAttention", desc: "Virtual memory for KV cache (vLLM)", metric: "10x throughput increase" },
-          { name: "KV Cache Optimization", desc: "Compression and pruning", metric: "60% memory savings" },
-          { name: "Cyclic KV Cache", desc: "Circular buffers for sliding windows", metric: "Constant memory usage" },
-          { name: "Hierarchical Memory Systems", desc: "Working/Main/Archive tiers", metric: "3-tier architecture" },
-        ],
-      },
-      {
-        id: "advanced-retrieval",
-        category: "Advanced Retrieval",
-        description: "Knowledge graphs meet vector search",
-        useCaseHighlight: "Graph RAG handles multi-hop queries across 2M+ code files",
-        technologies: [
-          { name: "Graph RAG", desc: "Knowledge graph + vector search hybrid", metric: "<100ms complex queries" },
-          { name: "Semantic Search", desc: "Enhanced embedding similarity", metric: "95% relevance" },
-          { name: "Multi-Hop Reasoning", desc: "Graph traversal for connected info", metric: "5-hop depth supported" },
-          { name: "Community Detection", desc: "Clustering for summarization", metric: "Auto-grouping 1K+ modules" },
-        ],
-      },
-      {
-        id: "agentic-systems",
-        category: "Agentic Systems",
-        description: "Coordinated AI agents working together",
-        useCaseHighlight: "4 specialized agents collaborate with 70% auto-fix rate",
-        technologies: [
-          { name: "Multi-Agent Orchestration", desc: "Coordinated agent systems (AutoGen, CrewAI)", metric: "4 agent types active" },
-          { name: "Actor-Evaluator-Reflection", desc: "Self-improving agents", metric: "Continuous improvement" },
-          { name: "Debate-Based Systems", desc: "Multiple agents arguing solutions", metric: "3-5 agents per problem" },
-          { name: "Asynchronous Coding Agents", desc: "Cloud-based parallel execution", metric: "10x faster completion" },
-        ],
-      },
-      {
-        id: "optimization-tech",
-        category: "Optimization Techniques",
-        description: "Cutting-edge performance improvements",
-        useCaseHighlight: "Speculative decoding achieves 2-3x speedup in production",
-        technologies: [
-          { name: "Speculative Decoding", desc: "Draft model + verification", metric: "2-3x speedup" },
-          { name: "Ring Attention", desc: "Distributed attention computation", metric: "Multi-GPU scaling" },
-          { name: "Quantization (INT4, FP8)", desc: "Advanced compression (GPTQ, AWQ)", metric: "4-bit deployment" },
-          { name: "Kernel Fusion", desc: "Combined operations for efficiency", metric: "30% faster ops" },
-          { name: "Online RL", desc: "Real-time learning from feedback", metric: "Continuous adaptation" },
-        ],
-      },
-      {
-        id: "program-understanding",
-        category: "Program Understanding",
-        description: "Deep code comprehension and generation",
-        useCaseHighlight: "Program synthesis from specs with 85% success rate",
-        technologies: [
-          { name: "Program Synthesis", desc: "Generate code from specs", metric: "85% success rate" },
-          { name: "Formal Verification", desc: "Provably correct code", metric: "Critical paths verified" },
-          { name: "CEGIS", desc: "Counter-Example Guided Inductive Synthesis", metric: "Iterative refinement" },
-          { name: "Abstract Interpretation", desc: "Static analysis techniques", metric: "Bug detection before runtime" },
+          {
+            name: "PagedAttention and vLLM",
+            desc: "Manage key-value cache memory in blocks so serving decisions can account for fragmentation, batching, and changing sequence lengths.",
+            sourceLabel: "Kwon et al., PagedAttention paper",
+            sourceUrl: "https://arxiv.org/abs/2309.06180",
+          },
         ],
       },
     ],
   },
   cutting: {
-    title: "CUTTING EDGE (2026+)",
-    subtitle: "Research/Early Experiments",
-    color: "red",
-    badge: "bg-red-500/10 border-red-500/30 text-red-400",
     sections: [
       {
-        id: "next-gen-arch",
-        category: "Next-Gen Architectures",
-        description: "Future of neural network design",
-        useCaseHighlight: "Mamba prototypes handle 1M+ token contexts with O(n) complexity",
+        id: "state-space-models",
+        category: "Sequence architectures",
+        description: "Alternatives to attention-based sequence modeling that need workload-specific validation.",
         technologies: [
-          { name: "Mamba / State Space Models (SSMs)", desc: "Linear-time alternative to transformers", metric: "1M token context tested" },
-          { name: "Kolmogorov-Arnold Networks (KANs)", desc: "Learnable activation functions", metric: "Proof of concept" },
-          { name: "Liquid Neural Networks", desc: "Continuous-time adaptive models", metric: "Early experiments" },
-          { name: "Hyper-Networks", desc: "Networks generating other networks", metric: "Meta-learning research" },
-          { name: "Neural ODEs", desc: "Continuous-depth models", metric: "Theory exploration" },
+          {
+            name: "Mamba and selective state spaces",
+            desc: "Explore input-dependent state-space models for sequence workloads where linear scaling may matter, without assuming a general replacement for transformers.",
+            sourceLabel: "Gu and Dao, Mamba paper",
+            sourceUrl: "https://arxiv.org/abs/2312.00752",
+          },
         ],
       },
       {
-        id: "hybrid-intelligence",
-        category: "Hybrid Intelligence",
-        description: "Fusing neural and symbolic reasoning",
-        useCaseHighlight: "Neurosymbolic prototypes achieving formal correctness proofs",
+        id: "graph-retrieval",
+        category: "Graph-based retrieval",
+        description: "Structured retrieval for questions that depend on relationships across a corpus.",
         technologies: [
-          { name: "Neurosymbolic AI", desc: "Neural + symbolic reasoning fusion", metric: "Beta testing" },
-          { name: "World Models for Code", desc: "Internal simulation of execution", metric: "Simulation accuracy 80%" },
-          { name: "Causal Reasoning Models", desc: "Understanding cause-effect in code", metric: "Research phase" },
-          { name: "Theorem Provers + LLMs", desc: "Formal methods integration", metric: "Proof generation" },
-          { name: "Constraint-Based Generation", desc: "Satisfying formal constraints", metric: "100% type safety" },
+          {
+            name: "GraphRAG",
+            desc: "Evaluate graph-derived summaries for global or multi-part questions, including the additional indexing cost and evidence requirements.",
+            sourceLabel: "Microsoft Research, GraphRAG publications",
+            sourceUrl: "https://www.microsoft.com/en-us/research/project/graphrag/publications/",
+          },
         ],
       },
       {
-        id: "advanced-reasoning",
-        category: "Advanced Reasoning",
-        description: "Next-level cognitive capabilities",
-        useCaseHighlight: "ParaThinker explores parallel solution paths simultaneously",
+        id: "multimodal-retrieval",
+        category: "Multimodal retrieval",
+        description: "Retrieval systems that select evidence across text and visual inputs.",
         technologies: [
-          { name: "ParaThinker", desc: "Native parallel thinking (overcomes sequential bias)", metric: "10+ parallel paths" },
-          { name: "Reflexion Loops", desc: "Iterative self-correction", metric: "3-5 iterations typical" },
-          { name: "Expected Attention", desc: "Predicting future query distributions", metric: "Adaptive caching" },
-          { name: "Meta-Reasoning", desc: "Reasoning about reasoning strategies", metric: "Strategy selection" },
-          { name: "Compositional Generalization", desc: "Systematic recombination", metric: "Novel composition" },
-        ],
-      },
-      {
-        id: "next-gen-retrieval",
-        category: "Next-Gen Retrieval",
-        description: "Future of information access",
-        useCaseHighlight: "Multimodal RAG processing code + diagrams + videos",
-        technologies: [
-          { name: "Agentic RAG", desc: "Active query/synthesis agents", metric: "Autonomous search" },
-          { name: "Multi-Modal RAG", desc: "Images/diagrams/video in code docs", metric: "4 modalities" },
-          { name: "Causal RAG", desc: "Dependency and causality understanding", metric: "Deep reasoning" },
-          { name: "Temporal RAG", desc: "Time-aware code evolution tracking", metric: "Version-aware" },
-          { name: "Federated RAG", desc: "Privacy-preserving distributed retrieval", metric: "Zero data sharing" },
-        ],
-      },
-      {
-        id: "frontier-tech",
-        category: "Frontier Techniques",
-        description: "Bleeding edge research directions",
-        useCaseHighlight: "Exploring quantum-inspired optimization algorithms",
-        technologies: [
-          { name: "Quantum-Inspired Algorithms", desc: "Quantum annealing for optimization", metric: "Simulation testing" },
-          { name: "Tensor Networks", desc: "Efficient parameter representation", metric: "Compression research" },
-          { name: "Federated Learning", desc: "Distributed training without centralization", metric: "Privacy-first" },
-          { name: "Gradient-Based Meta-Learning", desc: "Rapid adaptation (MAML extensions)", metric: "Few-shot learning" },
-          { name: "Self-Supervised Structure Learning", desc: "Learning from code structure alone", metric: "No labels needed" },
-        ],
-      },
-      {
-        id: "memory-context",
-        category: "Memory & Context",
-        description: "Breaking context window barriers",
-        useCaseHighlight: "Researching infinite context windows for unlimited codebase understanding",
-        technologies: [
-          { name: "Infinite Context Windows", desc: "Beyond fixed-length limitations", metric: "Unlimited context goal" },
-          { name: "Dynamic Memory Allocation", desc: "Adaptive context management", metric: "Smart allocation" },
-          { name: "Episodic Memory Systems", desc: "Human-like memory formation", metric: "Long-term storage" },
-          { name: "Associative Memory Networks", desc: "Content-addressable storage", metric: "Fast retrieval" },
+          {
+            name: "Self-adaptive multimodal RAG",
+            desc: "Track research that selects retrieval strategies across modalities, then validate it against the actual document, image, and latency constraints of the use case.",
+            sourceLabel: "Yu et al., multimodal RAG paper",
+            sourceUrl: "https://arxiv.org/abs/2410.11321",
+          },
         ],
       },
     ],
@@ -246,12 +149,22 @@ export const techData = {
 }
 
 export const comparisonMatrix = [
-  { category: "Attention Mechanisms", mature: "Multi-Head", emerging: "GQA, FlashAttention, MLA", cutting: "Expected Attention, KANs" },
-  { category: "Reasoning", mature: "Prompting", emerging: "CoT, Test-Time Compute", cutting: "ParaThinker, Meta-Reasoning" },
-  { category: "Retrieval", mature: "Vector RAG", emerging: "Graph RAG", cutting: "Agentic/Causal/Multimodal RAG" },
-  { category: "Agents", mature: "Single-agent", emerging: "Multi-agent orchestration", cutting: "Neurosymbolic agents" },
-  { category: "Memory", mature: "Fixed context", emerging: "Paged/Hierarchical", cutting: "Infinite context, Episodic" },
-  { category: "Architectures", mature: "Transformers", emerging: "MoE, Speculative Decode", cutting: "Mamba/SSMs, Liquid Networks" },
-  { category: "Verification", mature: "Testing", emerging: "Program Synthesis", cutting: "Formal Methods + AI" },
-  { category: "Training", mature: "RLHF", emerging: "Online RL, PRM", cutting: "Federated Learning" },
+  {
+    category: "Primary question",
+    mature: "Can this established pattern solve the measured task?",
+    emerging: "Does a bounded prototype justify operational adoption?",
+    cutting: "Is this worth monitoring or testing in a research setting?",
+  },
+  {
+    category: "Evidence expected",
+    mature: "Task-level quality, cost, latency, security, and failure behavior",
+    emerging: "Prototype results against a simpler baseline",
+    cutting: "Paper findings, reproducible code, and a narrow hypothesis",
+  },
+  {
+    category: "Delivery posture",
+    mature: "Production candidate after system-specific validation",
+    emerging: "Controlled evaluation before production use",
+    cutting: "Research watchlist, not a default recommendation",
+  },
 ]

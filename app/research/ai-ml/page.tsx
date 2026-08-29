@@ -1,17 +1,20 @@
 import type { Metadata } from "next"
-import { ArrowLeft } from "lucide-react"
+import { ArrowLeft, ExternalLink } from "lucide-react"
 import Link from "next/link"
 
 import SiteFooter from "@/components/site-footer"
 import SiteHeader from "@/components/site-header"
+import { createPageMetadata } from "@/lib/seo"
 
 import { comparisonMatrix, techData } from "./tech-data"
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Applied AI and ML Research",
   description:
     "A working map of proven, emerging, and exploratory AI and machine learning methods for product engineering decisions.",
-}
+  path: "/research/ai-ml",
+  type: "article",
+})
 
 const maturityOrder = ["mature", "emerging", "cutting"] as const
 
@@ -54,7 +57,7 @@ export default function AIMLPage() {
     <div className="min-h-screen bg-white text-[#0A1533]">
       <SiteHeader />
 
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
         <section className="border-b border-[#DCE9FF] bg-white" aria-labelledby="research-heading">
           <div className="mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 sm:pb-20 sm:pt-12 lg:px-8 lg:pb-24">
             <Link
@@ -83,6 +86,7 @@ export default function AIMLPage() {
                   ["Purpose", "Support product and architecture planning"],
                   ["Scope", "Methods relevant to current AI and ML work"],
                   ["Status", "Working reference"],
+                  ["Reviewed", "August 28, 2026"],
                 ].map(([term, description]) => (
                   <div key={term} className="grid grid-cols-[6rem_1fr] gap-4 border-t border-[#DCE9FF] py-4 first:border-t-0">
                     <dt className="font-mono text-xs font-semibold uppercase tracking-[0.12em] text-[#155EEF]">
@@ -177,7 +181,19 @@ export default function AIMLPage() {
                             className="grid gap-2 border-t border-[#DCE9FF] px-4 py-5 first:border-t-0 sm:grid-cols-[minmax(12rem,0.75fr)_minmax(0,1.25fr)] sm:gap-8 sm:px-5"
                           >
                             <h3 className="text-sm font-semibold leading-6 text-[#0A1533]">{technology.name}</h3>
-                            <p className="text-sm leading-6 text-[#526078]">{technology.desc}</p>
+                            <div>
+                              <p className="text-sm leading-6 text-[#526078]">{technology.desc}</p>
+                              <a
+                                href={technology.sourceUrl}
+                                target="_blank"
+                                rel="noreferrer"
+                                className="mt-3 inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-[#155EEF] underline decoration-[#A9C7FF] underline-offset-4 hover:text-[#0A1533] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF]"
+                              >
+                                {technology.sourceLabel}
+                                <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                                <span className="sr-only">, opens in a new tab</span>
+                              </a>
+                            </div>
                           </li>
                         ))}
                       </ul>

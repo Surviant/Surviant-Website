@@ -1,17 +1,20 @@
 "use client"
 
-import { useRef } from "react"
-import { motion, useInView, easeInOut, AnimatePresence } from "framer-motion"
+import { useEffect, useRef, useState, type FocusEvent } from "react"
+import { motion, useInView, useReducedMotion, easeInOut, AnimatePresence } from "framer-motion"
 import { ExternalLink, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { useState, useEffect } from "react"
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
+import { ChevronLeftIcon, ChevronRightIcon, PauseIcon, PlayIcon } from "lucide-react"
 import TechIcon from "@/components/ui/tech-icon"
 
 export default function PortfolioPreviewSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [direction, setDirection] = useState(0)
-  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  const [isAutoplayPaused, setIsAutoplayPaused] = useState(false)
+  const [isPointerOver, setIsPointerOver] = useState(false)
+  const [hasKeyboardFocus, setHasKeyboardFocus] = useState(false)
+  const shouldReduceMotion = useReducedMotion()
+  const mobileDotsRef = useRef<HTMLDivElement>(null)
 
   const nextSlide = () => {
     setDirection(1)
@@ -22,28 +25,6 @@ export default function PortfolioPreviewSection() {
     setDirection(-1)
     setCurrentIndex((prevIndex) => (prevIndex - 1 + projects.length) % projects.length)
   }
-
-  useEffect(() => {
-    startAutoplay()
-    return () => stopAutoplay()
-  }, [])
-
-  const startAutoplay = () => {
-    stopAutoplay()
-    intervalRef.current = setInterval(() => {
-      nextSlide()
-    }, 5000)
-  }
-
-  const stopAutoplay = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-      intervalRef.current = null
-    }
-  }
-
-  const handleMouseEnter = () => stopAutoplay()
-  const handleMouseLeave = () => startAutoplay()
 
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
@@ -294,6 +275,42 @@ export default function PortfolioPreviewSection() {
     },
   ]
 
+  const shouldAutoplay = !shouldReduceMotion && !isAutoplayPaused && !isPointerOver && !hasKeyboardFocus
+
+  useEffect(() => {
+    if (!shouldAutoplay) return
+
+    const interval = window.setInterval(() => {
+      setDirection(1)
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % projects.length)
+    }, 5000)
+
+    return () => window.clearInterval(interval)
+  }, [projects.length, shouldAutoplay])
+
+  useEffect(() => {
+    const dots = mobileDotsRef.current
+    const activeDot = dots?.querySelector<HTMLElement>("[aria-current='true']")
+    if (!dots || !activeDot) return
+
+    dots.scrollTo({
+      left: Math.max(0, activeDot.offsetLeft - (dots.clientWidth - activeDot.offsetWidth) / 2),
+      behavior: shouldReduceMotion ? "auto" : "smooth",
+    })
+  }, [currentIndex, shouldReduceMotion])
+
+  const handleFocusCapture = (event: FocusEvent<HTMLDivElement>) => {
+    if ((event.target as HTMLElement).matches(":focus-visible")) {
+      setHasKeyboardFocus(true)
+    }
+  }
+
+  const handleBlurCapture = (event: FocusEvent<HTMLDivElement>) => {
+    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+      setHasKeyboardFocus(false)
+    }
+  }
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -332,9 +349,9 @@ export default function PortfolioPreviewSection() {
     <div className="min-h-[100dvh] min-h-screen py-12 sm:py-16 md:py-20 px-3 sm:px-4 md:px-6" ref={ref}>
       <div className="container mx-auto max-w-7xl">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.6 }}
           className="text-center mb-8 sm:mb-12 md:mb-16"
         >
           <span className="inline-block py-1 px-3 border border-blue-500/30 rounded-full text-blue-600 text-xs tracking-wider mb-3 sm:mb-4">
@@ -354,8 +371,13 @@ export default function PortfolioPreviewSection() {
 
         <div
           className="relative overflow-hidden"
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
+          role="region"
+          aria-label="Project portfolio"
+          aria-roledescription="carousel"
+          onPointerEnter={() => setIsPointerOver(true)}
+          onPointerLeave={() => setIsPointerOver(false)}
+          onFocusCapture={handleFocusCapture}
+          onBlurCapture={handleBlurCapture}
         >
           <div className="carousel-container relative h-[550px] sm:h-[580px] md:h-[600px]">
             <AnimatePresence initial={false} custom={direction}>
@@ -363,15 +385,15 @@ export default function PortfolioPreviewSection() {
                 key={currentIndex}
                 custom={direction}
                 variants={carouselVariants}
-                initial="enter"
+                initial={shouldReduceMotion ? false : "enter"}
                 animate="center"
-                exit="exit"
-                transition={{ duration: 0.5, ease: easeInOut }}
+                exit={shouldReduceMotion ? undefined : "exit"}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.5, ease: easeInOut }}
                 className="absolute inset-0 w-full h-full flex flex-col"
               >
                 <div className="flex flex-col md:flex-row h-full overflow-hidden rounded-xl border border-slate-200 shadow-lg bg-white">
                   {/* Project information */}
-                  <div className="flex-1 p-4 sm:p-5 md:p-6 flex flex-col rounded-xl w-full overflow-y-auto">
+                  <div className="flex-1 p-4 sm:p-5 sm:pb-28 md:p-6 md:pb-28 lg:pb-20 flex flex-col rounded-xl w-full overflow-y-auto">
                     <div className="mb-2 sm:mb-3 md:mb-4">
                       <h3 className="text-lg sm:text-xl md:text-2xl font-bold">{projects[currentIndex].title}</h3>
                       <p className="text-xs sm:text-sm text-slate-500">
@@ -389,19 +411,23 @@ export default function PortfolioPreviewSection() {
                         <motion.div
                           className="flex gap-2 sm:gap-3 absolute whitespace-nowrap"
                           animate={{
-                            x: [
-                              0,
-                              -1200 * (Math.ceil(projects[currentIndex].technologies.length / 6) - 1)
-                            ],
+                            x: shouldReduceMotion
+                              ? 0
+                              : [
+                                  0,
+                                  -1200 * (Math.ceil(projects[currentIndex].technologies.length / 6) - 1),
+                                ],
                           }}
-                          transition={{
-                            x: {
-                              repeat: Infinity,
-                              repeatType: "reverse",
-                              duration: 25,
-                              ease: "linear",
-                            },
-                          }}
+                          transition={shouldReduceMotion
+                            ? { duration: 0 }
+                            : {
+                                x: {
+                                  repeat: Infinity,
+                                  repeatType: "reverse",
+                                  duration: 25,
+                                  ease: "linear",
+                                },
+                              }}
                         >
                           {[...projects[currentIndex].technologies, ...projects[currentIndex].technologies].map((tech, i) => (
                             <div
@@ -512,61 +538,122 @@ export default function PortfolioPreviewSection() {
               </button>
             </div>
 
-            {/* Pagination dots - hidden on mobile */}
-            <div className="absolute bottom-3 sm:bottom-6 left-0 right-0 hidden sm:flex justify-center gap-1.5 sm:gap-2 md:gap-3 z-10 flex-wrap max-w-full px-4">
+            {/* Pagination controls - hidden on mobile */}
+            <div
+              className="absolute bottom-2 md:bottom-4 left-0 right-0 hidden sm:flex justify-center gap-0 z-10 flex-wrap max-w-full px-4"
+              aria-label="Choose a portfolio project"
+            >
+              {!shouldReduceMotion && (
+                <button
+                  type="button"
+                  onClick={() => setIsAutoplayPaused((isPaused) => !isPaused)}
+                  className="h-11 w-11 shrink-0 rounded-full bg-white/90 text-slate-700 shadow-sm border border-slate-200 transition-colors hover:bg-blue-50 hover:text-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 flex items-center justify-center"
+                  aria-label={isAutoplayPaused ? "Resume automatic project rotation" : "Pause automatic project rotation"}
+                  aria-pressed={isAutoplayPaused}
+                >
+                  {isAutoplayPaused ? <PlayIcon className="h-4 w-4" /> : <PauseIcon className="h-4 w-4" />}
+                </button>
+              )}
               {projects.map((_, index) => (
                 <button
+                  type="button"
                   key={index}
                   onClick={() => {
                     setDirection(index > currentIndex ? 1 : -1);
                     setCurrentIndex(index);
                   }}
-                  className={`w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full transition-all min-h-[20px] min-w-[20px] flex items-center justify-center ${
-                    index === currentIndex
-                      ? 'bg-blue-500 scale-110 shadow-md shadow-blue-500/20'
-                      : 'bg-slate-300 hover:bg-slate-400'
-                  }`}
+                  className="h-11 w-11 shrink-0 rounded-full transition-colors flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
                   aria-label={`Go to project ${index + 1}`}
+                  aria-current={index === currentIndex ? "true" : undefined}
                 >
-                  <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${index === currentIndex ? 'bg-blue-500' : 'bg-slate-400'}`} />
+                  <span
+                    className={`h-2.5 w-2.5 rounded-full transition-all ${
+                      index === currentIndex
+                        ? "bg-blue-500 scale-110 shadow-md shadow-blue-500/20"
+                        : "bg-slate-300 hover:bg-slate-400"
+                    }`}
+                  />
                 </button>
               ))}
             </div>
           </div>
 
+          <p
+            className="sr-only"
+            aria-live={shouldAutoplay ? "off" : "polite"}
+            aria-atomic="true"
+          >
+            Project {currentIndex + 1} of {projects.length}: {projects[currentIndex].title}
+          </p>
+
           {/* Mobile Navigation - Below the card */}
-          <div className="flex sm:hidden justify-center items-center gap-4 mt-4">
-            <button
-              onClick={prevSlide}
-              className="bg-white hover:bg-blue-500 text-slate-900 hover:text-white rounded-full p-2 transition-all shadow-md border border-slate-200"
-              aria-label="Previous project"
-            >
-              <ChevronLeftIcon className="h-5 w-5" />
-            </button>
-            
-            <div className="flex gap-2">
-              {projects.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => {
-                    setDirection(index > currentIndex ? 1 : -1);
-                    setCurrentIndex(index);
-                  }}
-                  className={`w-2 h-2 rounded-full transition-all ${
-                    index === currentIndex ? 'bg-blue-500' : 'bg-slate-300'
-                  }`}
-                  aria-label={`Go to project ${index + 1}`}
-                />
-              ))}
+          <div className="sm:hidden mt-4 w-full">
+            <div className="grid w-full grid-cols-[44px_minmax(0,1fr)_44px] items-center gap-2">
+              <button
+                type="button"
+                onClick={prevSlide}
+                className="h-11 w-11 justify-self-start bg-white hover:bg-blue-500 text-slate-900 hover:text-white rounded-full transition-colors shadow-md border border-slate-200 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                aria-label="Previous project"
+              >
+                <ChevronLeftIcon className="h-5 w-5" />
+              </button>
+
+              <div
+                ref={mobileDotsRef}
+                className="min-w-0 overflow-x-auto overscroll-x-contain [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                aria-label="Choose a portfolio project"
+              >
+                <div className="flex w-max">
+                  {projects.map((_, index) => (
+                    <button
+                      type="button"
+                      key={index}
+                      onClick={() => {
+                        setDirection(index > currentIndex ? 1 : -1)
+                        setCurrentIndex(index)
+                      }}
+                      className="h-11 w-11 shrink-0 rounded-full transition-colors flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-inset"
+                      aria-label={`Go to project ${index + 1}`}
+                      aria-current={index === currentIndex ? "true" : undefined}
+                    >
+                      <span
+                        className={`h-2.5 w-2.5 rounded-full transition-all ${
+                          index === currentIndex ? "bg-blue-500 scale-110" : "bg-slate-300"
+                        }`}
+                      />
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={nextSlide}
+                className="h-11 w-11 justify-self-end bg-white hover:bg-blue-500 text-slate-900 hover:text-white rounded-full transition-colors shadow-md border border-slate-200 flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                aria-label="Next project"
+              >
+                <ChevronRightIcon className="h-5 w-5" />
+              </button>
             </div>
-            
-            <button
-              onClick={nextSlide}
-              className="bg-white hover:bg-blue-500 text-slate-900 hover:text-white rounded-full p-2 transition-all shadow-md border border-slate-200"
-              aria-label="Next project"
-            >
-              <ChevronRightIcon className="h-5 w-5" />
-            </button>
+
+            <div className="mt-2 flex min-h-11 items-center justify-center gap-3 text-xs text-slate-600">
+              <span aria-hidden="true">
+                Project {currentIndex + 1} of {projects.length}
+              </span>
+              {!shouldReduceMotion && (
+                <button
+                  type="button"
+                  onClick={() => setIsAutoplayPaused((isPaused) => !isPaused)}
+                  className="h-11 min-w-11 rounded-sm px-3 text-blue-700 transition-colors hover:bg-blue-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 inline-flex items-center justify-center gap-2"
+                  aria-label={isAutoplayPaused ? "Resume automatic project rotation" : "Pause automatic project rotation"}
+                  aria-pressed={isAutoplayPaused}
+                >
+                  {isAutoplayPaused ? <PlayIcon className="h-4 w-4" /> : <PauseIcon className="h-4 w-4" />}
+                  <span>{isAutoplayPaused ? "Resume" : "Pause"}</span>
+                </button>
+              )}
+              {shouldReduceMotion && <span>Automatic rotation off</span>}
+            </div>
           </div>
         </div>
 
