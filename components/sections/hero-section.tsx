@@ -35,20 +35,20 @@ export function HeroSection() {
         <div className="grid gap-10 lg:grid-cols-[minmax(0,1.28fr)_minmax(19rem,0.72fr)] lg:items-end">
           <div>
             <p className="font-mono text-xs font-semibold uppercase tracking-[0.16em] text-[#155EEF]">
-              Surviant / Software, AI, and systems
+              Software / AI / Systems
             </p>
             <h1
               id="hero-heading"
-              className="mt-6 max-w-5xl text-balance text-[clamp(3rem,7.2vw,6.7rem)] font-semibold leading-[0.91] tracking-[-0.06em] text-[#0A1533]"
+              className="mt-6 max-w-5xl text-balance text-[clamp(2.65rem,6vw,5.5rem)] font-semibold leading-[0.94] tracking-[-0.055em] text-[#0A1533]"
             >
-              We build the whole thing: the software, the AI inside it, and the systems it runs on.
+              Software, AI, and systems, built as one.
             </h1>
           </div>
 
           <div className="border-l-2 border-[#155EEF] pl-5 sm:pl-7">
             <p className="text-pretty text-lg leading-8 text-[#526078]">
-              Surviant helps established teams modernize operations, build missing software, and put practical AI to
-              work. We also help founders take new products from a hard decision to a dependable release.
+              We help established teams modernize operations and build dependable products, adding AI where it
+              creates real value.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
               <Link
