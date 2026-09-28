@@ -77,6 +77,12 @@
   }
 }
 
+@media (min-width: 1024px) {
+  html {
+    scroll-padding-top: 8.25rem;
+  }
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

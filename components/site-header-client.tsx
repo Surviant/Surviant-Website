@@ -20,6 +20,11 @@ const navigation = [
   { label: "Research", href: "/research/ai-ml" },
 ]
 
+const portalNavigation: Array<{ label: string; href: string | null }> = [
+  { label: "For Employees", href: null },
+  { label: "For Clients", href: null },
+]
+
 export default function SiteHeaderClient({ serviceGroups }: { serviceGroups: ServiceGroup[] }) {
   const pathname = usePathname()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -74,6 +79,28 @@ export default function SiteHeaderClient({ serviceGroups }: { serviceGroups: Ser
       </a>
 
       <header className="sticky top-0 z-50 border-b border-[#DCE9FF] bg-white/95 backdrop-blur-md">
+        <div className="hidden border-b border-[#DCE9FF] bg-[#F2F6FC] lg:block">
+          <div className="mx-auto flex h-11 max-w-7xl items-stretch justify-end px-8">
+            <p className="mr-4 flex items-center font-mono text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-[#526078]">
+              Portal access <span className="ml-2 text-[#155EEF]">coming soon</span>
+            </p>
+            <div className="flex items-stretch" role="group" aria-label="Portal access">
+              {portalNavigation.map((item) =>
+                item.href ? (
+                  <Link key={item.label} href={item.href} className="inline-flex items-center border-l border-[#DCE9FF] bg-white px-4 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[#526078] transition-colors last:border-r hover:text-[#155EEF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#155EEF]">
+                    {item.label}
+                  </Link>
+                ) : (
+                  <span key={item.label} aria-disabled="true" className="inline-flex items-center border-l border-[#DCE9FF] bg-white/70 px-4 text-[0.68rem] font-semibold uppercase tracking-[0.08em] text-[#526078]/70 last:border-r">
+                    {item.label}
+                    <span className="sr-only">, destination coming soon</span>
+                  </span>
+                ),
+              )}
+            </div>
+          </div>
+        </div>
+
         <div className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <Link href="/" className="inline-flex min-h-11 items-center gap-3 rounded-[3px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] focus-visible:ring-offset-4" aria-label="Surviant home">
             <Image src="/surviant-logo.jpg" alt="" width={48} height={48} className="h-10 w-10 rounded-[3px] object-cover ring-1 ring-[#DCE9FF]" priority />
@@ -91,7 +118,7 @@ export default function SiteHeaderClient({ serviceGroups }: { serviceGroups: Ser
               </button>
 
               {servicesOpen ? (
-                <div id="desktop-services-menu" className="fixed left-1/2 top-[4.7rem] w-[min(72rem,calc(100vw-3rem))] -translate-x-1/2 rounded-[4px] border border-[#DCE9FF] bg-white p-6 shadow-[0_24px_60px_rgba(10,21,51,0.14)]">
+                <div id="desktop-services-menu" className="fixed left-1/2 top-[7.45rem] max-h-[calc(100dvh-7.7rem)] w-[min(72rem,calc(100vw-3rem))] -translate-x-1/2 overflow-y-auto overscroll-contain rounded-[4px] border border-[#DCE9FF] bg-white p-6 shadow-[0_24px_60px_rgba(10,21,51,0.14)]">
                   <div className="flex items-center justify-between border-b border-[#DCE9FF] pb-4">
                     <div>
                       <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[#155EEF]">Service directory</p>
@@ -200,7 +227,25 @@ export default function SiteHeaderClient({ serviceGroups }: { serviceGroups: Ser
                   </nav>
 
                   <div className="border-t border-[#DCE9FF] pt-5">
-                    <Link href="/contact" onClick={() => setMenuOpen(false)} className="inline-flex w-full items-center justify-center gap-2 rounded-[4px] bg-[#155EEF] px-5 py-3 text-base font-semibold text-white hover:bg-[#0A1533] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] focus-visible:ring-offset-2">
+                    <div className="flex items-center justify-between gap-4">
+                      <p className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-[#526078]">Portal access</p>
+                      <p className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.12em] text-[#155EEF]">Coming soon</p>
+                    </div>
+                    <div className="mt-3 grid grid-cols-2 gap-2" role="group" aria-label="Portal access">
+                      {portalNavigation.map((item) =>
+                        item.href ? (
+                          <Link key={item.label} href={item.href} onClick={() => setMenuOpen(false)} className="inline-flex min-h-11 items-center justify-center rounded-[3px] border border-[#DCE9FF] bg-[#F2F6FC] px-3 py-2 text-center text-xs font-semibold text-[#0A1533] hover:border-[#155EEF] hover:text-[#155EEF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF]">
+                            {item.label}
+                          </Link>
+                        ) : (
+                          <span key={item.label} aria-disabled="true" className="inline-flex min-h-11 items-center justify-center rounded-[3px] border border-[#DCE9FF] bg-[#F2F6FC]/70 px-3 py-2 text-center text-xs font-semibold text-[#526078]/70">
+                            {item.label}
+                            <span className="sr-only">, destination coming soon</span>
+                          </span>
+                        ),
+                      )}
+                    </div>
+                    <Link href="/contact" onClick={() => setMenuOpen(false)} className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-[4px] bg-[#155EEF] px-5 py-3 text-base font-semibold text-white hover:bg-[#0A1533] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#155EEF] focus-visible:ring-offset-2">
                       Start a project
                       <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
                     </Link>
